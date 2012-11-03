@@ -1,0 +1,62 @@
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+img {
+    border: none;
+}
+
+th {
+    text-align: left;
+    padding-right: 10pt;
+    background-color: lightgrey;
+}
+
+
+tfoot {
+    text-align: left;
+    font-weight: bold;
+    padding-right: 10pt;
+    background-color: lightgrey;
+}
+
+.message {
+    /* don't know why it's not working...*/
+    border: 3px #045491;
+    background: no-repeat left center;
+    padding-top: 1px;
+    padding-left: 20px;
+    margin-left: 3px;
+}
+
+.message tr.info {
+    color: blue;
+}
+
+.message tr.warn {
+    color: lightsalmon;
+}
+
+.message tr.error {
+    color: red;
+}
+
+.error {
+    color: red;
+}

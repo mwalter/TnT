@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title><h:outputText value="#{texts.title}"/></title>
+    <h:outputStylesheet library="css" name="default.css" />
+    <h:outputStylesheet library="css" name="cssLayout.css" />
+</h:head>
+
+<h:body>
+
+    <h1><h:outputText value="#{texts.titlePageCreateTask}"/></h1>
+    <p/>
+
+    <h:form id="createTask">
+        <table>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskName}"/></td>
+                <td><h:inputText id="taskName" value="#{taskBean.task.name}" size="40"/></td>
+                <td><h:message for="taskName" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskDescription}"/></td>
+                <td><h:inputText id="taskDescription" value="#{taskBean.task.description}" size="40"/></td>
+                <td><h:message for="taskDescription" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskPriority}"/></td>
+                <td>
+                    <h:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}">
+                        <f:selectItems value="#{taskBean.priorities}"/>
+                    </h:selectOneMenu>
+                </td>
+                <td><h:message for="taskPriority" styleClass="error"/></td>
+            </tr>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskOwner}"/></td>
+                <td>
+                    <h:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}">
+                        <f:converter converterId="ownerConverter"/>
+                        <f:selectItems value="#{taskBean.owners}"/>
+                    </h:selectOneMenu>
+                </td>
+                <td><h:message for="taskOwner" styleClass="error"/></td>
+            </tr>
+        </table>
+        <p/>
+        <h:commandButton value="#{texts.buttonSaveTask}" action="#{taskBean.saveTask}"/>
+        <h:commandButton value="#{texts.buttonCancel}" action="default.xhtml"/>
+    </h:form>
+
+</h:body>
+
+</html>
