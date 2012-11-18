@@ -142,6 +142,10 @@ public class Task {
         this.status = status;
     }
 
+    public boolean isOpen() {
+        return Status.OPEN.equals(status);
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
