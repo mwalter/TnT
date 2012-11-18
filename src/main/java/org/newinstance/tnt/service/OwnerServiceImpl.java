@@ -22,6 +22,8 @@ package org.newinstance.tnt.service;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.persistence.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ import java.util.logging.Logger;
  *
  * @author mwalter
  */
+@Transactional
 public class OwnerServiceImpl implements OwnerService {
 
     private static final Logger LOG = Logger.getLogger(OwnerServiceImpl.class.getName());
@@ -49,11 +52,13 @@ public class OwnerServiceImpl implements OwnerService {
         genericDao.save(owner);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Owner> searchAllOwner() {
         LOG.log(Level.INFO, "Searching all owner.");
         return genericDao.findByNamedQuery("SEARCH_ALL_OWNER", Owner.class);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Owner searchOwnerById(final Long ownerId) {
         LOG.log(Level.INFO, "Searching owner by id " + ownerId);
         return genericDao.find(Owner.class, ownerId);
