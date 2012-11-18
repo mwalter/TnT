@@ -50,4 +50,11 @@ public interface TaskService {
      * @return all tasks
      */
     List<Task> searchAllTask();
+
+    /**
+     * Updates the task.
+     *
+     * @param task the task to update
+     */
+    void updateTask(final Task task);
 }
