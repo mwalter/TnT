@@ -19,8 +19,9 @@
 
 package org.newinstance.tnt.service;
 
-import org.hibernate.SessionFactory;
 import org.newinstance.tnt.model.Owner;
+import org.newinstance.tnt.persistence.GenericDao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -35,30 +36,26 @@ public class OwnerServiceImpl implements OwnerService {
 
     private static final Logger LOG = Logger.getLogger(OwnerServiceImpl.class.getName());
 
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(final SessionFactory sessionFactory) {
-        LOG.log(Level.INFO, "Injecting SessionFactory.");
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private GenericDao genericDao;
 
     public void deleteOwner(final Owner owner) {
         LOG.log(Level.INFO, "Deleting owner: {0}", owner.toString());
-        sessionFactory.openSession().delete(owner);
+        genericDao.delete(owner);
     }
 
     public void saveOwner(final Owner owner) {
         LOG.log(Level.INFO, "Saving task: {0}", owner.toString());
-        sessionFactory.openSession().saveOrUpdate(owner);
+        genericDao.save(owner);
     }
 
     public List<Owner> searchAllOwner() {
         LOG.log(Level.INFO, "Searching all owner.");
-        return sessionFactory.openSession().getNamedQuery("SEARCH_ALL_OWNER").list();
+        return genericDao.findByNamedQuery("SEARCH_ALL_OWNER", Owner.class);
     }
 
     public Owner searchOwnerById(final Long ownerId) {
         LOG.log(Level.INFO, "Searching owner by id " + ownerId);
-        return (Owner) sessionFactory.openSession().load(Owner.class, ownerId);
+        return genericDao.find(Owner.class, ownerId);
     }
 }

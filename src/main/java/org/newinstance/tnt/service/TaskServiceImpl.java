@@ -19,8 +19,11 @@
 
 package org.newinstance.tnt.service;
 
-import org.hibernate.SessionFactory;
 import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.persistence.GenericDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -31,29 +34,32 @@ import java.util.logging.Logger;
  *
  * @author mwalter
  */
+@Transactional
 public class TaskServiceImpl implements TaskService {
 
     private static final Logger LOG = Logger.getLogger(TaskServiceImpl.class.getName());
 
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(final SessionFactory sessionFactory) {
-        LOG.log(Level.INFO, "Injecting SessionFactory.");
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private GenericDao genericDao;
 
     public void deleteTask(final Task task) {
         LOG.log(Level.INFO, "Deleting task: {0}", task.toString());
-        sessionFactory.openSession().delete(task);
+        genericDao.delete(task);
     }
 
     public void saveTask(final Task task) {
         LOG.log(Level.INFO, "Saving task: {0}", task.toString());
-        sessionFactory.openSession().saveOrUpdate(task);
+        genericDao.save(task);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
-        return sessionFactory.openSession().getNamedQuery("SEARCH_ALL_TASK").list();
+        return genericDao.findByNamedQuery("SEARCH_ALL_TASK", Task.class);
+    }
+
+    public void updateTask(final Task task) {
+        LOG.log(Level.INFO, "Updating task: {0}", task.toString());
+        genericDao.update(task);
     }
 }
