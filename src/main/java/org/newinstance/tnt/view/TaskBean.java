@@ -120,6 +120,36 @@ public class TaskBean implements Serializable {
     }
 
     /**
+     * Deletes the task.
+     *
+     * @param task the task to delete
+     * @return the tasks view
+     */
+    public String deleteTask(final Task task) {
+        LOGGER.log(Level.INFO, "Deleting task: " + task.toString());
+        taskService.deleteTask(task);
+        // reload tasks to update task list
+        tasks = taskService.searchAllTask();
+        return "showTasks";
+    }
+
+    /**
+     * Updates the task.
+     *
+     * @param task the task to update
+     * @return the tasks view
+     */
+    public String finishTask(final Task task) {
+        LOGGER.log(Level.INFO, "Finishing task: " + task.toString());
+        task.setStatus(Status.DONE);
+        // task.setDueDate(Calendar.getInstance());
+        taskService.updateTask(task);
+        // reload tasks to update task list
+        tasks = taskService.searchAllTask();
+        return "showTasks";
+    }
+
+    /**
      * Returns the list of priorities.
      *
      * @return the list of priorities
