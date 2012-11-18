@@ -19,40 +19,56 @@
 
 package org.newinstance.tnt.persistence;
 
-import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * TODO document me
+ * Provides methods to CRUD services managed by JPA.
  *
  * @author mwalter
  */
-@Repository("genericDao")
-public class GenericDao {
+public interface GenericDao {
 
-    @PersistenceContext
-    private EntityManager em;
+    /**
+     * Removes an entity from the database.
+     *
+     * @param entity the entity to remove
+     * @param <T> the type of the entity
+     */
+    <T> void delete(final T entity);
 
-    public <T> void save(final T entity) {
-        em.persist(entity);
-    }
+    /**
+     * Finds an entity by primary key.
+     *
+     * @param entity the entity type to find
+     * @param id the primary key
+     * @param <T> the type of the entity
+     * @return the found entity
+     */
+    <T> T find(final Class entity, long id);
 
-    public <T> T find(final Class entity, long id) {
-        return (T) em.find(entity, id);
-    }
+    /**
+     * Finds entities by a named query.
+     *
+     * @param queryName the named query
+     * @param entity the entity type to find
+     * @param <T> he type of the entity
+     * @return the list of found entities
+     */
+    <T> List<T> findByNamedQuery(final String queryName, final Class entity);
 
-    public <T> void delete(final T entity) {
-        em.remove(entity);
-    }
+    /**
+     * Persists an entity to the database.
+     *
+     * @param entity the entity to persist
+     * @param <T> the type of the entity
+     */
+    <T> void save(final T entity);
 
-    public <T> List<T> findByNamedQuery(final String queryName, final Class entity) {
-        return em.createNamedQuery(queryName, entity).getResultList();
-    }
-
-    public <T> void update(T entity) {
-        em.merge(entity);
-    }
+    /**
+     * Updates an entity.
+     *
+     * @param entity the entity to update
+     * @param <T> the type of the entity
+     */
+    <T> void update(T entity);
 }

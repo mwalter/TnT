@@ -43,6 +43,6 @@
     <!-- Business Beans -->
     <bean id="ownerService" class="org.newinstance.tnt.service.OwnerServiceImpl"/>
     <bean id="taskService" class="org.newinstance.tnt.service.TaskServiceImpl"/>
-    <bean id="genericDao" class="org.newinstance.tnt.persistence.GenericDao"/>
+    <bean id="genericDao" class="org.newinstance.tnt.persistence.GenericDaoImpl"/>
 
 </beans>
