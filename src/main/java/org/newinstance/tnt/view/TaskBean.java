@@ -56,7 +56,7 @@ public class TaskBean implements Serializable {
 
     private List<Owner> owners;
     private List<Task> tasks;
-    private Task newTask;
+    private Task task;
     private Long selectedOwnerId;
 
     /**
@@ -65,16 +65,7 @@ public class TaskBean implements Serializable {
      * @return the task
      */
     public Task getTask() {
-        return newTask;
-    }
-
-    public Long getSelectedOwnerId() {
-        return selectedOwnerId;
-    }
-
-    public void setSelectedOwnerId(final Long selectedOwnerId) {
-        LOGGER.log(Level.INFO, "Setting owner " + selectedOwnerId);
-        this.selectedOwnerId = selectedOwnerId;
+        return task;
     }
 
     /**
@@ -90,33 +81,23 @@ public class TaskBean implements Serializable {
         return tasks;
     }
 
-    /**
-     * Shows the create task view.
-     *
-     * @return the create task view
-     */
-    public String showCreateTask() {
-        LOGGER.log(Level.INFO, "Initialising new task...");
-        newTask = new Task();
-        newTask.setCreationDate(Calendar.getInstance());
-        newTask.setStatus(Status.OPEN);
-        newTask.setPriority(Priority.MEDIUM);
-        return "showCreateTask";
+    public void setSelectedOwnerId(final Long selectedOwnerId) {
+        LOGGER.log(Level.INFO, "Setting owner " + selectedOwnerId);
+        this.selectedOwnerId = selectedOwnerId;
     }
 
     /**
-     * Saves the task to the database.
+     * Create a new task.
      *
-     * @return the tasks view
+     * @return the edit task view
      */
-    public String saveTask() {
-        newTask.setOwner(ownerService.searchOwnerById(getSelectedOwnerId()));
-        LOGGER.log(Level.INFO, "Saving task: " + newTask.toString());
-        taskService.saveTask(newTask);
-        // reload tasks to update task list
-        tasks = taskService.searchAllTask();
-
-        return "showTasks";
+    public String createTask() {
+        LOGGER.log(Level.INFO, "Initialising new task...");
+        task = new Task();
+        task.setCreationDate(Calendar.getInstance());
+        task.setStatus(Status.OPEN);
+        task.setPriority(Priority.MEDIUM);
+        return "showEditTask";
     }
 
     /**
@@ -134,9 +115,21 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * Updates the task.
+     * Edit a task.
+     * @param task the task to edit
+     * @return the edit task view
+     */
+    public String editTask(final Task task) {
+        LOGGER.log(Level.INFO, "Editing task: " + task.toString());
+        System.out.println(task.toString());
+        this.task = task;
+        return "showEditTask";
+    }
+
+    /**
+     * Finish the task by setting status to done.
      *
-     * @param task the task to update
+     * @param task the task to finish
      * @return the tasks view
      */
     public String finishTask(final Task task) {
@@ -147,6 +140,28 @@ public class TaskBean implements Serializable {
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
         return "showTasks";
+    }
+
+    /**
+     * Returns the list of owners.
+     *
+     * @return the list of owners
+     */
+    public List<SelectItem> getOwners() {
+        if (owners == null) {
+            LOGGER.log(Level.INFO, "Loading all owners.");
+            owners = ownerService.searchAllOwner();
+        }
+        final List<SelectItem> ownerList = new ArrayList<SelectItem>();
+
+        for (final Owner owner : owners) {
+            // create select item for every owner
+            final SelectItem item = new SelectItem();
+            item.setLabel(owner.getName());
+            item.setValue(owner.getId());
+            ownerList.add(item);
+        }
+        return ownerList;
     }
 
     /**
@@ -174,24 +189,20 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * Returns the list of owners.
+     * Saves the task to the database.
      *
-     * @return the list of owners
+     * @return the tasks view
      */
-    public List<SelectItem> getOwners() {
-        if (owners == null) {
-            LOGGER.log(Level.INFO, "Loading all owners.");
-            owners = ownerService.searchAllOwner();
-        }
-        final List<SelectItem> ownerList = new ArrayList<SelectItem>();
+    public String saveTask() {
+        task.setOwner(ownerService.searchOwnerById(getSelectedOwnerId()));
+        LOGGER.log(Level.INFO, "Saving task: " + task.toString());
+        taskService.saveTask(task);
+        // reload tasks to update task list
+        tasks = taskService.searchAllTask();
+        return "showTasks";
+    }
 
-        for (final Owner owner : owners) {
-            // create select item for every owner
-            final SelectItem item = new SelectItem();
-            item.setLabel(owner.getName());
-            item.setValue(owner.getId());
-            ownerList.add(item);
-        }
-        return ownerList;
+    public Long getSelectedOwnerId() {
+        return selectedOwnerId;
     }
 }

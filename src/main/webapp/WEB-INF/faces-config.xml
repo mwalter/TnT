@@ -23,29 +23,34 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
     <navigation-rule>
-        <from-view-id>/default.xhtml</from-view-id>
+        <from-view-id>/tasks.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{taskBean.showCreateTask}</from-action>
-            <from-outcome>showCreateTask</from-outcome>
-            <to-view-id>/createTask.xhtml</to-view-id>
+            <from-action>#{taskBean.createTask}</from-action>
+            <from-outcome>showEditTask</from-outcome>
+            <to-view-id>/editTask.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{taskBean.deleteTask(task)}</from-action>
             <from-outcome>showTasks</from-outcome>
-            <to-view-id>/default.xhtml</to-view-id>
+            <to-view-id>/tasks.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{taskBean.editTask(task)}</from-action>
+            <from-outcome>showEditTask</from-outcome>
+            <to-view-id>/editTask.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{taskBean.finishTask(task)}</from-action>
             <from-outcome>showTasks</from-outcome>
-            <to-view-id>/default.xhtml</to-view-id>
+            <to-view-id>/tasks.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/createTask.xhtml</from-view-id>
+        <from-view-id>/editTask.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{taskBean.saveTask}</from-action>
             <from-outcome>showTasks</from-outcome>
-            <to-view-id>/default.xhtml</to-view-id>
+            <to-view-id>/tasks.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

@@ -16,7 +16,7 @@
     <h:messages errorClass="error" />
     <h:form id="tasks">
 
-    <h:commandButton alt="#{texts.buttonAddTask}" action="#{taskBean.showCreateTask}" image="#{resource['images:create.png']}"/>
+    <h:commandButton alt="#{texts.buttonAddTask}" action="#{taskBean.createTask}" image="#{resource['images:create.png']}"/>
     <p/>
 
     <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty taskBean.tasks}"/>
@@ -89,7 +89,7 @@
             <f:facet name="header">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-            <h:commandButton alt="#{texts.buttonEditTask}" action="#{taskBean.showCreateTask}" image="#{resource['images:modify.png']}"/>&nbsp;
+            <h:commandButton alt="#{texts.buttonEditTask}" action="#{taskBean.editTask(task)}" image="#{resource['images:modify.png']}"/>&nbsp;
             <h:commandButton alt="#{texts.buttonDeleteTask}" action="#{taskBean.deleteTask(task)}" image="#{resource['images:delete.png']}"/>&nbsp;
             <h:commandButton alt="#{texts.buttonFinishTask}" action="#{taskBean.finishTask(task)}" rendered="#{task.open}"
                              image="#{resource['images:apply.png']}"/>

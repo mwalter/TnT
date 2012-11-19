@@ -4,20 +4,23 @@
 
 <h:head>
     <title><h:outputText value="#{texts.title}"/></title>
-    <h:outputStylesheet library="css" name="default.css" />
-    <h:outputStylesheet library="css" name="cssLayout.css" />
+    <h:outputStylesheet library="css" name="default.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
 </h:head>
 
 <h:body>
 
-    <h1><h:outputText value="#{texts.titlePageCreateTask}"/></h1>
+    <h1>
+        <h:outputText value="#{texts.titlePageCreateTask}" rendered="#{empty taskBean.task.name}"/>
+        <h:outputText value="#{taskBean.task.name}" rendered="#{not empty taskBean.task.name}"/>
+    </h1>
     <p/>
 
-    <h:form id="createTask">
+    <h:form id="editTask">
         <table>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskName}"/></td>
-                <td><h:inputText id="taskName" value="#{taskBean.task.name}" size="40"/></td>
+                <td><h:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
                 <td><h:message for="taskName" styleClass="error"/></td>
             </tr>
             <tr>
@@ -44,10 +47,19 @@
                 </td>
                 <td><h:message for="taskOwner" styleClass="error"/></td>
             </tr>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskDueDate}"/></td>
+                <td>
+                    <h:inputText id="taskDueDate" value="#{taskBean.task.dueDate}" size="40">
+                        <f:converter converterId="calendarConverter"/>
+                    </h:inputText>
+                </td>
+                <td><h:message for="taskDueDate" styleClass="error"/></td>
+            </tr>
         </table>
         <p/>
-        <h:commandButton value="#{texts.buttonSaveTask}" action="#{taskBean.saveTask}"/>
-        <h:commandButton value="#{texts.buttonCancel}" action="default.xhtml"/>
+        <h:commandButton value="#{texts.buttonSaveTask}" action="#{taskBean.saveTask}" image="#{resource['images:apply.png']}"/>&nbsp;
+        <h:commandButton value="#{texts.buttonCancel}" action="tasks.xhtml" image="#{resource['images:cancel.png']}"/>
     </h:form>
 
 </h:body>
