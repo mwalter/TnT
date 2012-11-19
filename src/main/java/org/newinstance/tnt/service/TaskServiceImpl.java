@@ -43,8 +43,9 @@ public class TaskServiceImpl implements TaskService {
     private GenericDao genericDao;
 
     public void deleteTask(final Task task) {
-        LOG.log(Level.INFO, "Deleting task: {0}", task.toString());
-        genericDao.delete(task);
+        final Task taskToDelete = genericDao.find(Task.class, task.getId());
+        LOG.log(Level.INFO, "Deleting task: {0}", taskToDelete.toString());
+        genericDao.delete(taskToDelete);
     }
 
     public void saveTask(final Task task) {
