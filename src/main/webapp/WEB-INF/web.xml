@@ -36,7 +36,7 @@
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>default.jsf</welcome-file>
+        <welcome-file>tasks.jsf</welcome-file>
     </welcome-file-list>
 
     <!-- JSF Mapping -->
