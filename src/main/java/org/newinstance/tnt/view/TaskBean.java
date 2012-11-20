@@ -116,12 +116,12 @@ public class TaskBean implements Serializable {
 
     /**
      * Edit a task.
+     *
      * @param task the task to edit
      * @return the edit task view
      */
     public String editTask(final Task task) {
         LOGGER.log(Level.INFO, "Editing task: " + task.toString());
-        System.out.println(task.toString());
         this.task = task;
         return "showEditTask";
     }
@@ -189,14 +189,19 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * Saves the task to the database.
+     * Saves the new task to the database or updates an existing one.
      *
      * @return the tasks view
      */
     public String saveTask() {
         task.setOwner(ownerService.searchOwnerById(getSelectedOwnerId()));
         LOGGER.log(Level.INFO, "Saving task: " + task.toString());
-        taskService.saveTask(task);
+        if (task.getId() == null) {
+            // no primary key so it's a new task
+            taskService.saveTask(task);
+        } else {
+            taskService.updateTask(task);
+        }
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
         return "showTasks";
