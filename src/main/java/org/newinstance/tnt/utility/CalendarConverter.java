@@ -40,20 +40,17 @@ public final class CalendarConverter implements Converter {
             return null;
         }
 
-        if (value.matches("(0[1-9]|[12][0-9]|3[01])[ \\.-](0[1-9]|1[012])[ \\.-](19|20|)\\d\\d")) {
-            final StringTokenizer tokenizer = new StringTokenizer(value, ".");
-            final Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tokenizer.nextToken()));
-            calendar.set(Calendar.MONTH, Integer.parseInt(tokenizer.nextToken()));
-            calendar.set(Calendar.YEAR, Integer.parseInt(tokenizer.nextToken()));
-            calendar.set(Calendar.HOUR, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            return calendar;
-        }
-
-        return null;
+        final StringTokenizer tokenizer = new StringTokenizer(value, ".");
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tokenizer.nextToken()));
+        // month starts with index 0
+        calendar.set(Calendar.MONTH, Integer.parseInt(tokenizer.nextToken()) - 1);
+        calendar.set(Calendar.YEAR, Integer.parseInt(tokenizer.nextToken()));
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
     }
 
     public String getAsString(final FacesContext facesContext, final UIComponent uiComponent, final Object value) {

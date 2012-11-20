@@ -36,12 +36,12 @@ public class CalendarConverterTest {
         final CalendarConverter converter = new CalendarConverter();
         Calendar calendar = (Calendar) converter.getAsObject(null, null, "21.11.2012");
         Assert.assertEquals(21, calendar.get(Calendar.DAY_OF_MONTH));
-        Assert.assertEquals(11, calendar.get(Calendar.MONTH));
+        Assert.assertEquals(10, calendar.get(Calendar.MONTH));
         Assert.assertEquals(2012, calendar.get(Calendar.YEAR));
 
         calendar = (Calendar) converter.getAsObject(null, null, "01.01.1970");
         Assert.assertEquals(1, calendar.get(Calendar.DAY_OF_MONTH));
-        Assert.assertEquals(1, calendar.get(Calendar.MONTH));
+        Assert.assertEquals(0, calendar.get(Calendar.MONTH));
         Assert.assertEquals(1970, calendar.get(Calendar.YEAR));
     }
 
