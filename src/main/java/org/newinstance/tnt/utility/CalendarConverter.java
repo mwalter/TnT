@@ -25,7 +25,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.StringTokenizer;
 
 /**
  * Converts a calendar object to string value and vice versa.
@@ -36,16 +35,16 @@ import java.util.StringTokenizer;
 public final class CalendarConverter implements Converter {
 
     public Object getAsObject(final FacesContext facesContext, final UIComponent uiComponent, final String value) {
-        if (value == null && value.isEmpty()) {
+        if (value == null || value.isEmpty()) {
             return null;
         }
 
-        final StringTokenizer tokenizer = new StringTokenizer(value, ".");
+        final String[] date = value.split(".");
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tokenizer.nextToken()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[0]));
         // month starts with index 0
-        calendar.set(Calendar.MONTH, Integer.parseInt(tokenizer.nextToken()) - 1);
-        calendar.set(Calendar.YEAR, Integer.parseInt(tokenizer.nextToken()));
+        calendar.set(Calendar.MONTH, Integer.parseInt(date[1]) - 1);
+        calendar.set(Calendar.YEAR, Integer.parseInt(date[2]));
         calendar.set(Calendar.HOUR, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
