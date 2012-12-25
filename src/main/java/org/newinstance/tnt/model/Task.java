@@ -41,7 +41,7 @@ import java.util.Calendar;
  * @author mwalter
  */
 @Entity
-@NamedQuery(name="SEARCH_ALL_TASK", query="from Task")
+@NamedQuery(name="SEARCH_ALL_TASK", query="SELECT t FROM Task t")
 public class Task {
 
     @Id

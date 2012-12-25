@@ -34,7 +34,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-@NamedQuery(name="SEARCH_ALL_OWNER", query="from Owner")
+@NamedQuery(name="SEARCH_ALL_OWNER", query="SELECT o FROM Owner o")
 public class Owner {
 
     @Id
