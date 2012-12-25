@@ -74,11 +74,7 @@ public class Task {
         return creationDate;
     }
 
-    public String getCreationDateFormatted() {
-        return DateHelper.formatDate(creationDate);
-    }
-
-    public String getDescription() {
+   public String getDescription() {
         return description;
     }
 
@@ -86,11 +82,7 @@ public class Task {
         return dueDate;
     }
 
-    public String getDueDateFormatted() {
-        return DateHelper.formatDate(dueDate);
-    }
-
-    public Long getId() {
+   public Long getId() {
         return id;
     }
 

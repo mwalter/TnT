@@ -52,7 +52,9 @@
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskCreationDate}"/>
             </f:facet>
-            <h:outputText value="#{task.creationDateFormatted}"/>
+            <h:outputText value="#{task.creationDate}">
+                <f:converter converterId="calendarConverter"/>
+            </h:outputText>
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
@@ -61,7 +63,9 @@
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskDueDate}"/>
             </f:facet>
-            <h:outputText value="#{task.dueDateFormatted}"/>
+            <h:outputText value="#{task.dueDate}">
+                <f:converter converterId="calendarConverter"/>
+            </h:outputText>
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
