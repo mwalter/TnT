@@ -58,7 +58,7 @@
 {
     float: left;
     width: 100%;
-    background: #FFF url(#{resource['images:background.gif']}) repeat-y 68% 0;
+    /*background: #FFF url(#{resource['images:background.gif']}) repeat-y 68% 0;*/
 }
 
 #content
