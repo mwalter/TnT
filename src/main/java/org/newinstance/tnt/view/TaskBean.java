@@ -173,10 +173,7 @@ public class TaskBean implements Serializable {
         final List<SelectItem> priorityList = new ArrayList<SelectItem>();
 
         // get all priorities
-        final Priority[] priorities = Priority.values();
-        for (int i = 0; i < priorities.length; i++) {
-            final Priority priority = priorities[i];
-
+        for (final Priority priority : Priority.values()) {
             // create select item for every priority
             final SelectItem item = new SelectItem();
             item.setLabel(priority.name());
