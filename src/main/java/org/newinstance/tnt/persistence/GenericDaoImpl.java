@@ -37,10 +37,12 @@ public class GenericDaoImpl implements GenericDao {
         em.remove(entity);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T find(final Class entity, long id) {
         return (T) em.find(entity, id);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> List<T> findByNamedQuery(final String queryName, final Class entity) {
         return em.createNamedQuery(queryName, entity).getResultList();
     }
