@@ -58,7 +58,7 @@
         </table>
         <p/>
         <h:commandButton value="#{texts.buttonSaveTask}" action="#{taskBean.saveTask}" image="#{resource['images:apply.png']}"/>&nbsp;
-        <h:commandButton value="#{texts.buttonCancel}" action="tasks.xhtml" image="#{resource['images:cancel.png']}"/>
+        <h:commandButton value="#{texts.buttonCancel}" action="tasks.xhtml" immediate="true" image="#{resource['images:cancel.png']}"/>
     </h:form>
 
 </h:body>
