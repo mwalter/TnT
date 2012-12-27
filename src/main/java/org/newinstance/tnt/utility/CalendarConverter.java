@@ -39,7 +39,7 @@ public final class CalendarConverter implements Converter {
             return null;
         }
 
-        final String[] date = value.split(".");
+        final String[] date = value.split("\\.");
         final Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[0]));
         // month starts with index 0
