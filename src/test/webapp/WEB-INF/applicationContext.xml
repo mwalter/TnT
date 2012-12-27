@@ -12,10 +12,10 @@
     <context:component-scan base-package="org.newinstance.tnt.view"/>
 
     <!-- H2 DataSource -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="org.h2.Driver"/>
-        <property name="jdbcUrl" value="jdbc:h2:mem:tnt"/>
-        <property name="user" value="tnt"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="dbc:h2:mem:tnt"/>
+        <property name="username" value="tnt"/>
         <property name="password" value="tnt"/>
     </bean>
 

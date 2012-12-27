@@ -55,6 +55,15 @@
             <version>2.1.14</version>
         </dependency>
 
+        <!-- PrimeFaces -->
+        <!--
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        -->
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -91,11 +100,6 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.1.7.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-c3p0</artifactId>
-            <version>4.1.7.Final</version>
-        </dependency>
 
         <!-- MySQL Connector -->
         <dependency>
@@ -108,7 +112,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -119,4 +123,12 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>
