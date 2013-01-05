@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title><h:outputText value="#{texts.title}"/></title>
@@ -19,46 +19,43 @@
         <table>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskName}"/></td>
-                <td><h:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
-                <td><h:message for="taskName" styleClass="error"/></td>
+                <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
+                <td><p:message for="taskName" showDetail="false"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDescription}"/></td>
-                <td><h:inputText id="taskDescription" value="#{taskBean.task.description}" size="40"/></td>
-                <td><h:message for="taskDescription" styleClass="error"/></td>
+                <td><p:inputText id="taskDescription" value="#{taskBean.task.description}" size="40"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskPriority}"/></td>
                 <td>
-                    <h:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}">
+                    <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}">
                         <f:selectItems value="#{taskBean.priorities}"/>
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                 </td>
-                <td><h:message for="taskPriority" styleClass="error"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskOwner}"/></td>
                 <td>
-                    <h:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}">
+                    <p:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}">
                         <f:converter converterId="ownerConverter"/>
                         <f:selectItems value="#{taskBean.owners}"/>
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                 </td>
-                <td><h:message for="taskOwner" styleClass="error"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}"/></td>
                 <td>
-                    <h:inputText id="taskDueDate" value="#{taskBean.task.dueDate}" size="40">
+                    <p:inputText id="taskDueDate" value="#{taskBean.task.dueDate}" size="40">
                         <f:converter converterId="calendarConverter"/>
-                    </h:inputText>
+                    </p:inputText>
                 </td>
-                <td><h:message for="taskDueDate" styleClass="error"/></td>
+                <td><p:message for="taskDueDate" showDetail="false"/></td>
             </tr>
         </table>
         <p/>
-        <h:commandButton value="#{texts.buttonSaveTask}" action="#{taskBean.saveTask}" image="#{resource['images:apply.png']}"/>&nbsp;
-        <h:commandButton value="#{texts.buttonCancel}" action="tasks.xhtml" immediate="true" image="#{resource['images:cancel.png']}"/>
+        <p:commandButton action="#{taskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
+        <p:commandButton action="tasks.xhtml" icon="ui-icon-close" immediate="true" title="#{texts.buttonCancel}" ajax="false"/>
     </h:form>
 
 </h:body>

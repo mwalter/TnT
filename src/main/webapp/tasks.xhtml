@@ -12,16 +12,15 @@
     <h1><h:outputText value="#{texts.titlePageTasks}"/></h1>
     <p/>
 
-    <h:messages errorClass="error" />
     <h:form id="tasks">
 
-    <p:commandButton action="#{taskBean.createTask}" icon="img-create" title="#{texts.buttonAddTask}"/>
+    <p:commandButton action="#{taskBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"/>
     <p/>
 
     <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty taskBean.tasks}"/>
 
-    <h:dataTable var="task" value="#{taskBean.tasks}" rendered="#{not empty taskBean.tasks}" width="100%">
-        <h:column>
+    <p:dataTable var="task" value="#{taskBean.tasks}" rendered="#{not empty taskBean.tasks}" width="100%">
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskPriority}"/>
             </f:facet>
@@ -29,8 +28,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column sortBy="#{task.name}">
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskName}"/>
             </f:facet>
@@ -38,8 +37,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskDescription}"/>
             </f:facet>
@@ -47,8 +46,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskCreationDate}"/>
             </f:facet>
@@ -58,8 +57,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskDueDate}"/>
             </f:facet>
@@ -69,8 +68,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskOwner}"/>
             </f:facet>
@@ -78,8 +77,8 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="#{texts.labelTaskStatus}"/>
             </f:facet>
@@ -87,20 +86,20 @@
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-            <h:commandButton alt="#{texts.buttonEditTask}" action="#{taskBean.editTask(task)}" image="#{resource['images:modify.png']}"/>&nbsp;
-            <h:commandButton alt="#{texts.buttonDeleteTask}" action="#{taskBean.deleteTask(task)}" image="#{resource['images:delete.png']}"/>&nbsp;
-            <h:commandButton alt="#{texts.buttonFinishTask}" action="#{taskBean.finishTask(task)}" rendered="#{task.open}"
-                             image="#{resource['images:apply.png']}"/>
+            <p:commandButton action="#{taskBean.editTask(task)}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>&nbsp;
+            <p:commandButton action="#{taskBean.deleteTask(task)}" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}" ajax="false"/>&nbsp;
+            <p:commandButton action="#{taskBean.finishTask(task)}" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}"
+                             ajax="false"/>
             <f:facet name="footer">
                 <h:outputText value="&nbsp;"/>
             </f:facet>
-        </h:column>
-    </h:dataTable>
+        </p:column>
+    </p:dataTable>
     </h:form>
 
 </h:body>
