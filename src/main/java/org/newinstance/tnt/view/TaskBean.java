@@ -25,6 +25,7 @@ import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.service.OwnerService;
 import org.newinstance.tnt.service.TaskService;
+import org.newinstance.tnt.utility.ResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
@@ -176,13 +177,34 @@ public class TaskBean implements Serializable {
         for (final Priority priority : Priority.values()) {
             // create select item for every priority
             final SelectItem item = new SelectItem();
-            item.setLabel(priority.name());
+            item.setLabel(ResourceLoader.getResource("priority." + priority.name()));
             item.setValue(priority);
 
             // add item to list
             priorityList.add(item);
         }
         return priorityList;
+    }
+
+    /**
+     * Returns the list of status.
+     *
+     * @return the list of status
+     */
+    public List<SelectItem> getStatus() {
+        final List<SelectItem> statusList = new ArrayList<SelectItem>();
+
+        // get all status
+        for (final Status status : Status.values()) {
+            // create select item for every status
+            final SelectItem item = new SelectItem();
+            item.setLabel(ResourceLoader.getResource("status." + status.name()));
+            item.setValue(status);
+
+            // add item to list
+            statusList.add(item);
+        }
+        return statusList;
     }
 
     /**
