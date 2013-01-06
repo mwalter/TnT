@@ -4,7 +4,7 @@
 
 <h:head>
     <title><h:outputText value="#{texts.title}"/></title>
-    <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputStylesheet library="css" name="default.css"/>
 </h:head>
 
 <h:body>
@@ -29,7 +29,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskPriority}"/></td>
                 <td>
-                    <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}">
+                    <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}" style="width: 200px;">
                         <f:selectItems value="#{taskBean.priorities}"/>
                     </p:selectOneMenu>
                 </td>
@@ -37,7 +37,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskOwner}"/></td>
                 <td>
-                    <p:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}">
+                    <p:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}" style="width: 200px;">
                         <f:converter converterId="ownerConverter"/>
                         <f:selectItems value="#{taskBean.owners}"/>
                     </p:selectOneMenu>
@@ -51,6 +51,14 @@
                     </p:inputText>
                 </td>
                 <td><p:message for="taskDueDate" showDetail="false"/></td>
+            </tr>
+            <tr>
+                <td><h:outputText value="#{texts.labelTaskStatus}"/></td>
+                <td>
+                    <p:selectOneMenu id="taskStatus" value="#{taskBean.task.status}" style="width: 200px;">
+                        <f:selectItems value="#{taskBean.status}"/>
+                    </p:selectOneMenu>
+                </td>
             </tr>
         </table>
         <p/>
