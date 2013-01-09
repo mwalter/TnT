@@ -1,19 +1,5 @@
-.img-apply {
-    background-image: url("#{resource['images/apply.png']}") !important;
-}
-
-.img-cancel {
-    background-image: url("#{resource['images/cancel.png']}") !important;
-}
-
-.img-create {
-    background-image: url("#{resource['images/create.png']}") !important;
-}
-
-.img-delete {
-    background-image: url("#{resource['images/delete.png']}") !important;
-}
-
-.img-modify {
-    background-image: url("#{resource['images/modify.png']}") !important;
+body {
+    margin: 20px;
+    font-family: Arial;
+    color: #616161;
 }

@@ -4,16 +4,10 @@
 
 <h:head>
     <title><h:outputText value="#{texts.title}"/></title>
-    <h:outputStylesheet library="css" name="default.css"/>
+    <h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 
 <h:body>
-
-    <h1>
-        <h:outputText value="#{texts.titlePageCreateTask}" rendered="#{empty taskBean.task.name}"/>
-        <h:outputText value="#{taskBean.task.name}" rendered="#{not empty taskBean.task.name}"/>
-    </h1>
-    <p/>
 
     <h:form id="editTask">
         <table>
