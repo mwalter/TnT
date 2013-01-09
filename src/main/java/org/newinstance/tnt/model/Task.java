@@ -20,6 +20,7 @@
 package org.newinstance.tnt.model;
 
 import org.newinstance.tnt.utility.DateHelper;
+import org.newinstance.tnt.utility.ResourceLoader;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -98,8 +99,16 @@ public class Task {
         return priority;
     }
 
+    public String getPriorityLocalized() {
+        return ResourceLoader.getResource("priority." + priority.name());
+    }
+
     public Status getStatus() {
         return status;
+    }
+
+    public String getStatusLocalized() {
+        return ResourceLoader.getResource("status." + status.name());
     }
 
     public void setCreationDate(final Calendar creationDate) {
