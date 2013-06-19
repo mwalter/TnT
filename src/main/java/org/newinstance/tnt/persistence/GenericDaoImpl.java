@@ -20,8 +20,11 @@
 package org.newinstance.tnt.persistence;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Implements methods to CRUD services managed by JPA.
@@ -45,6 +48,21 @@ public class GenericDaoImpl implements GenericDao {
     @SuppressWarnings("unchecked")
     public <T> List<T> findByNamedQuery(final String queryName, final Class entity) {
         return em.createNamedQuery(queryName, entity).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T findUniqueByNamedQuery(final String queryName, final Class entity, final Map<String, Object> params) {
+        final TypedQuery<T> query = em.createNamedQuery(queryName, entity);
+        for (final Map.Entry<String, Object> entry : params.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        // catch ResultException and return null instead
+        try {
+            return (T) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     public <T> void save(final T entity) {

@@ -20,6 +20,7 @@
 package org.newinstance.tnt.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides methods to CRUD services managed by JPA.
@@ -55,6 +56,17 @@ public interface GenericDao {
      * @return the list of found entities
      */
     <T> List<T> findByNamedQuery(final String queryName, final Class entity);
+
+    /**
+     * Finds an entity by a named query and parameters.
+     *
+     * @param queryName the named query
+     * @param entity the entity type to find
+     * @param params some search parameters
+     * @param <T> the type of the entity
+     * @return the found entity
+     */
+    <T> T findUniqueByNamedQuery(final String queryName, final Class entity, final Map<String, Object> params);
 
     /**
      * Persists an entity to the database.
