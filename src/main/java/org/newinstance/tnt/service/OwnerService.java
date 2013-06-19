@@ -58,4 +58,12 @@ public interface OwnerService {
      * @return the owner
      */
     Owner searchOwnerById(final Long ownerId);
+
+    /**
+     * Searches an owner by a name.
+     *
+     * @param name the name of the owner
+     * @return the owner
+     */
+    Owner searchOwnerByName(final String name);
 }

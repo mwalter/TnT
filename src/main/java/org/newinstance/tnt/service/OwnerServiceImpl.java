@@ -25,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,5 +64,13 @@ public class OwnerServiceImpl implements OwnerService {
     public Owner searchOwnerById(final Long ownerId) {
         LOG.log(Level.INFO, "Searching owner by id " + ownerId);
         return genericDao.find(Owner.class, ownerId);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public Owner searchOwnerByName(final String name) {
+        final Map<String, Object> params = new HashMap<String, Object>();
+        params.put("name", name);
+        LOG.log(Level.INFO, "Searching owner by name " + name);
+        return genericDao.findUniqueByNamedQuery("SEARCH_BY_NAME", Owner.class, params);
     }
 }
