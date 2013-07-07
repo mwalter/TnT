@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public License v3 (GPLv3)
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -93,7 +93,7 @@ public class TaskBean implements Serializable {
     public String createTask() {
         LOG.log(Level.INFO, "Initialising new task...");
         task = new Task();
-        task.setCreationDate(Calendar.getInstance());
+        task.setCreationDate(new Date());
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.MEDIUM);
         return "showCreateTask";
