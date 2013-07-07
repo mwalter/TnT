@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public License v3 (GPLv3)
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ public class Task {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date")
-    private Calendar creationDate;
+    private Date creationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
@@ -72,7 +72,7 @@ public class Task {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    public Calendar getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
@@ -112,7 +112,7 @@ public class Task {
         return ResourceLoader.getResource("status." + status.name());
     }
 
-    public void setCreationDate(final Calendar creationDate) {
+    public void setCreationDate(final Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -155,7 +155,7 @@ public class Task {
         builder.append("id=").append(id).append(", ");
         builder.append("name=").append(name).append(", ");
         builder.append("description=").append(description).append(", ");
-        builder.append("creationDate=").append(DateHelper.formatDate(creationDate)).append(", ");
+        builder.append("creationDate=").append(creationDate).append(", ");
         builder.append("dueDate=").append(dueDate).append(", ");
         builder.append("status=").append(status.name()).append(", ");
         builder.append("priority=").append(priority.name()).append(", ");
