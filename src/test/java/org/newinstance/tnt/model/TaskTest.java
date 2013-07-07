@@ -19,7 +19,7 @@ public class TaskTest {
 
         final Task task = new Task();
         task.setCreationDate(Calendar.getInstance());
-        task.setDueDate(task.getCreationDate());
+        task.setDueDate(task.getCreationDate().getTime());
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.LOW);

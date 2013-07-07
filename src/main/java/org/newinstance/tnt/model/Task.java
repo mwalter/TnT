@@ -35,6 +35,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A task to do.
@@ -65,7 +66,7 @@ public class Task {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
-    private Calendar dueDate;
+    private Date dueDate;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -79,7 +80,7 @@ public class Task {
         return description;
     }
 
-    public Calendar getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
@@ -119,7 +120,7 @@ public class Task {
         this.description = description;
     }
 
-    public void setDueDate(final Calendar dueDate) {
+    public void setDueDate(final Date dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -155,7 +156,7 @@ public class Task {
         builder.append("name=").append(name).append(", ");
         builder.append("description=").append(description).append(", ");
         builder.append("creationDate=").append(DateHelper.formatDate(creationDate)).append(", ");
-        builder.append("dueDate=").append(DateHelper.formatDate(dueDate)).append(", ");
+        builder.append("dueDate=").append(dueDate).append(", ");
         builder.append("status=").append(status.name()).append(", ");
         builder.append("priority=").append(priority.name()).append(", ");
         builder.append("owner=").append(owner.getName());
