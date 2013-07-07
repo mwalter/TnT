@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 @Scope("session")
 public class TaskBean implements Serializable {
 
-    private static final Logger LOGGER = Logger.getLogger(TaskBean.class.getName());
+    private static final Logger LOG = Logger.getLogger(TaskBean.class.getName());
 
     @Autowired
     private OwnerService ownerService;
@@ -56,9 +56,12 @@ public class TaskBean implements Serializable {
     private TaskService taskService;
 
     private List<Owner> owners;
+
     private List<Task> tasks;
+
     private Task task;
-    private Long selectedOwnerId;
+
+    private String ownerName;
 
     /**
      * Returns the task.
@@ -76,15 +79,10 @@ public class TaskBean implements Serializable {
      */
     public List<Task> getTasks() {
         if (tasks == null) {
-            LOGGER.log(Level.INFO, "Loading all tasks.");
+            LOG.log(Level.INFO, "Loading all tasks.");
             tasks = taskService.searchAllTask();
         }
         return tasks;
-    }
-
-    public void setSelectedOwnerId(final Long selectedOwnerId) {
-        LOGGER.log(Level.INFO, "Setting owner " + selectedOwnerId);
-        this.selectedOwnerId = selectedOwnerId;
     }
 
     /**
@@ -93,12 +91,12 @@ public class TaskBean implements Serializable {
      * @return the edit task view
      */
     public String createTask() {
-        LOGGER.log(Level.INFO, "Initialising new task...");
+        LOG.log(Level.INFO, "Initialising new task...");
         task = new Task();
         task.setCreationDate(Calendar.getInstance());
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.MEDIUM);
-        return "showEditTask";
+        return "showCreateTask";
     }
 
     /**
@@ -108,7 +106,7 @@ public class TaskBean implements Serializable {
      * @return the tasks view
      */
     public String deleteTask(final Task task) {
-        LOGGER.log(Level.INFO, "Deleting task: " + task.toString());
+        LOG.log(Level.INFO, "Deleting task: " + task.toString());
         taskService.deleteTask(task);
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
@@ -122,7 +120,7 @@ public class TaskBean implements Serializable {
      * @return the edit task view
      */
     public String editTask(final Task task) {
-        LOGGER.log(Level.INFO, "Editing task: " + task.toString());
+        LOG.log(Level.INFO, "Editing task: " + task.toString());
         this.task = task;
         return "showEditTask";
     }
@@ -134,9 +132,8 @@ public class TaskBean implements Serializable {
      * @return the tasks view
      */
     public String finishTask(final Task task) {
-        LOGGER.log(Level.INFO, "Finishing task: " + task.toString());
+        LOG.log(Level.INFO, "Finishing task: " + task.toString());
         task.setStatus(Status.DONE);
-        // task.setDueDate(Calendar.getInstance());
         taskService.updateTask(task);
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
@@ -150,7 +147,7 @@ public class TaskBean implements Serializable {
      */
     public List<SelectItem> getOwners() {
         if (owners == null) {
-            LOGGER.log(Level.INFO, "Loading all owners.");
+            LOG.log(Level.INFO, "Loading all owners.");
             owners = ownerService.searchAllOwner();
         }
         final List<SelectItem> ownerList = new ArrayList<SelectItem>();
@@ -213,8 +210,18 @@ public class TaskBean implements Serializable {
      * @return the tasks view
      */
     public String saveTask() {
-        task.setOwner(ownerService.searchOwnerById(getSelectedOwnerId()));
-        LOGGER.log(Level.INFO, "Saving task: " + task.toString());
+        // initialize owner
+        if (task.getOwner() == null) {
+            final String ownerName = getOwnerName();
+            LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
+            final Owner owner = new Owner();
+            owner.setName(ownerName);
+            // persist new owner
+            ownerService.saveOwner(owner);
+            task.setOwner(owner);
+        }
+
+        LOG.log(Level.INFO, "Saving task: " + task.toString());
         if (task.getId() == null) {
             // no primary key so it's a new task
             taskService.saveTask(task);
@@ -226,7 +233,11 @@ public class TaskBean implements Serializable {
         return "showTasks";
     }
 
-    public Long getSelectedOwnerId() {
-        return selectedOwnerId;
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(final String name) {
+        ownerName = name;
     }
 }
