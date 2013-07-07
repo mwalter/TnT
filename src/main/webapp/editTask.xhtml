@@ -18,7 +18,8 @@
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
-                <td><p:inputText id="taskDescription" value="#{taskBean.task.description}" size="40"/></td>
+                <td><p:inputTextarea rows="5" cols="40" value="#{taskBean.task.description}"/></td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskPriority}" styleClass="ui-inputtext ui-widget"/></td>
@@ -27,32 +28,24 @@
                         <f:selectItems value="#{taskBean.priorities}"/>
                     </p:selectOneMenu>
                 </td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
-                <td>
-                    <p:selectOneMenu id="taskOwner" value="#{taskBean.selectedOwnerId}" style="width: 200px;">
-                        <f:converter converterId="ownerConverter"/>
-                        <f:selectItems value="#{taskBean.owners}"/>
-                    </p:selectOneMenu>
-                </td>
+                <td><h:outputText value="#{taskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:inputText id="taskDueDate" value="#{taskBean.task.dueDate}" size="40">
-                        <f:converter converterId="calendarConverter"/>
-                    </p:inputText>
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button"/>
                 </td>
                 <td><p:message for="taskDueDate" showDetail="false"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskStatus}" styleClass="ui-inputtext ui-widget"/></td>
-                <td>
-                    <p:selectOneMenu id="taskStatus" value="#{taskBean.task.status}" style="width: 200px;">
-                        <f:selectItems value="#{taskBean.status}"/>
-                    </p:selectOneMenu>
-                </td>
+                <td><h:outputText value="#{taskBean.task.statusLocalized}" styleClass="ui-inputtext ui-widget"/></td>
+                <td/>
             </tr>
         </table>
         <p/>
