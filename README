@@ -1,9 +1,0 @@
-TnT - Things and tasks to do
-Licenced under General Public Licence v3 (GPLv3)
-newInstance.org, 2012
-
-== About TnT ==
-A simple web task list.
-
-== Technologies ==
-TnT is implemented in Java and uses JSF, Spring, Hibernate and a MySQL database.
