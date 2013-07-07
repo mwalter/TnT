@@ -49,7 +49,7 @@
                     <h:outputText value="#{texts.labelTaskCreationDate}"/>
                 </f:facet>
                 <h:outputText value="#{task.creationDate}">
-                    <f:converter converterId="calendarConverter"/>
+                    <f:convertDateTime type="date" dateStyle="short"/>
                 </h:outputText>
                 <f:facet name="footer">
                     <h:outputText value="&nbsp;"/>
@@ -60,7 +60,7 @@
                     <h:outputText value="#{texts.labelTaskDueDate}"/>
                 </f:facet>
                 <h:outputText value="#{task.dueDate}">
-                    <f:converter converterId="calendarConverter"/>
+                    <f:convertDateTime type="date" dateStyle="short"/>
                 </h:outputText>
                 <f:facet name="footer">
                     <h:outputText value="&nbsp;"/>
