@@ -88,8 +88,8 @@
                 <f:facet name="header">
                     <h:outputText value="&nbsp;"/>
                 </f:facet>
-                <p:commandButton action="#{taskBean.editTask(task)}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>&nbsp;
-                <p:commandButton action="#{taskBean.deleteTask(task)}" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}" ajax="false"/>&nbsp;
+                <p:commandButton action="#{taskBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>
+                <p:commandButton action="#{taskBean.deleteTask(task)}" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}" ajax="false"/>
                 <p:commandButton action="#{taskBean.finishTask(task)}" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}"
                                  ajax="false"/>
                 <f:facet name="footer">
