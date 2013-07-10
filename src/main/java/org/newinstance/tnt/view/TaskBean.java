@@ -61,6 +61,7 @@ public class TaskBean implements Serializable {
 
     private Task task;
 
+    /** Holds the new owner. */
     private String ownerName;
 
     /**
@@ -219,6 +220,8 @@ public class TaskBean implements Serializable {
             // persist new owner
             ownerService.saveOwner(owner);
             task.setOwner(owner);
+            // remove owner name
+            setOwnerName(null);
         }
 
         LOG.log(Level.INFO, "Saving task: " + task.toString());
