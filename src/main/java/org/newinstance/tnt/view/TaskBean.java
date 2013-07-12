@@ -224,7 +224,7 @@ public class TaskBean implements Serializable {
             setOwnerName(null);
         }
 
-        LOG.log(Level.INFO, "Saving task: " + task.toString());
+        LOG.log(Level.INFO, "Creating new task with name: " + task.getName());
         if (task.getId() == null) {
             // no primary key so it's a new task
             taskService.saveTask(task);
