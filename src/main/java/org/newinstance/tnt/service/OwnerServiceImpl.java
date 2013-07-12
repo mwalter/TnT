@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public License v3 (GPLv3)
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     public void saveOwner(final Owner owner) {
-        LOG.log(Level.INFO, "Saving task: {0}", owner.toString());
+        LOG.log(Level.INFO, "Saving owner: {0}", owner.toString());
         genericDao.save(owner);
     }
 
