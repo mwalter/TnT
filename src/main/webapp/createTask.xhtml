@@ -56,7 +56,9 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button"/>
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button">
+                        <f:convertDateTime type="date" dateStyle="medium"/>
+                    </p:calendar>
                 </td>
             </tr>
         </table>
