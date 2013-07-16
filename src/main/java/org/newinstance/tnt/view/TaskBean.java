@@ -185,34 +185,15 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * Returns the list of status.
-     *
-     * @return the list of status
-     */
-    public List<SelectItem> getStatus() {
-        final List<SelectItem> statusList = new ArrayList<SelectItem>();
-
-        // get all status
-        for (final Status status : Status.values()) {
-            // create select item for every status
-            final SelectItem item = new SelectItem();
-            item.setLabel(ResourceLoader.getResource("status." + status.name()));
-            item.setValue(status);
-
-            // add item to list
-            statusList.add(item);
-        }
-        return statusList;
-    }
-
-    /**
      * Saves the new task to the database or updates an existing one.
      *
      * @return the tasks view
      */
     public String saveTask() {
-        // initialize owner
-        if (task.getOwner() == null) {
+        final Owner existingOwner = ownerService.searchOwnerByName(getOwnerName());
+
+        // create new owner if name does not exist in database yet
+        if (task.getOwner() == null && getOwnerName() != null && existingOwner == null) {
             final String ownerName = getOwnerName();
             LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
             final Owner owner = new Owner();
@@ -220,9 +201,12 @@ public class TaskBean implements Serializable {
             // persist new owner
             ownerService.saveOwner(owner);
             task.setOwner(owner);
-            // remove owner name
-            setOwnerName(null);
+        } else if (task.getOwner() == null && getOwnerName() != null && existingOwner != null) {
+            task.setOwner(existingOwner);
         }
+
+        // reset owner name
+        setOwnerName(null);
 
         LOG.log(Level.INFO, "Creating new task with name: " + task.getName());
         if (task.getId() == null) {
