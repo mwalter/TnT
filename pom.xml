@@ -41,7 +41,6 @@
                             <Built-By>mwalter</Built-By>
                         </manifestEntries>
                     </archive>
-                    <warName>${project.name}-${project.version}</warName>
                 </configuration>
             </plugin>
             <plugin>
