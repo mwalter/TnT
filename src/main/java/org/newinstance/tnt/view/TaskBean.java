@@ -147,10 +147,9 @@ public class TaskBean implements Serializable {
      * @return the list of owners
      */
     public List<SelectItem> getOwners() {
-        if (owners == null) {
-            LOG.log(Level.INFO, "Loading all owners.");
-            owners = ownerService.searchAllOwner();
-        }
+        LOG.log(Level.INFO, "Loading all owners.");
+        // always fetch all owners to make sure to list newly created ones as well
+        owners = ownerService.searchAllOwner();
         final List<SelectItem> ownerList = new ArrayList<SelectItem>();
 
         for (final Owner owner : owners) {
