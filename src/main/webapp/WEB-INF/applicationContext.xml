@@ -28,7 +28,7 @@
 
     <!-- Needed for Autowiring -->
     <context:annotation-config/>
-    <context:component-scan base-package="org.newinstance.tnt.view"/>
+    <context:component-scan base-package="org.newinstance.tnt"/>
 
     <!-- MySQL DataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -58,10 +58,5 @@
 
     <!-- Annotation driven transaction management -->
     <tx:annotation-driven/>
-
-    <!-- Business Beans -->
-    <bean id="ownerService" class="org.newinstance.tnt.service.OwnerServiceImpl"/>
-    <bean id="taskService" class="org.newinstance.tnt.service.TaskServiceImpl"/>
-    <bean id="genericDao" class="org.newinstance.tnt.persistence.GenericDaoImpl"/>
 
 </beans>

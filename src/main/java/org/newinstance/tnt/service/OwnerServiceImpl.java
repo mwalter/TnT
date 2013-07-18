@@ -22,6 +22,7 @@ package org.newinstance.tnt.service;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.persistence.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ import java.util.logging.Logger;
  *
  * @author mwalter
  */
+@Service
 @Transactional
 public class OwnerServiceImpl implements OwnerService {
 

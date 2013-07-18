@@ -19,6 +19,8 @@
 
 package org.newinstance.tnt.persistence;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -31,6 +33,7 @@ import java.util.Map;
  *
  * @author mwalter
  */
+@Service
 public class GenericDaoImpl implements GenericDao {
 
     @PersistenceContext
