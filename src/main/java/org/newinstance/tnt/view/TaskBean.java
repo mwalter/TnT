@@ -28,9 +28,9 @@ import org.newinstance.tnt.service.TaskService;
 import org.newinstance.tnt.utility.ResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.faces.model.SelectItem;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,8 +43,8 @@ import java.util.logging.Logger;
  *
  * @author mwalter
  */
-@Named
-@Scope("session")
+@Component
+@Scope(value = "session")
 public class TaskBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(TaskBean.class.getName());
