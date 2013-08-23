@@ -33,7 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author mwalter
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"/applicationContext-test.xml"})
+@ContextConfiguration(locations = {"/applicationContext-test.xml", "/scopes.xml"})
 public abstract class BaseTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     protected static final String JUNIT = "JUnit";
