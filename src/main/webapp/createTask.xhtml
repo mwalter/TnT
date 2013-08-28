@@ -27,6 +27,8 @@
 
 <h:body>
 
+    <h:outputScript name="javascript/calendar_de.js"/>
+
     <h:form id="createTask">
         <table>
             <tr>
@@ -56,7 +58,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button"/>
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" locale="#{taskBean.locale}" showOn="button"/>
                 </td>
             </tr>
         </table>

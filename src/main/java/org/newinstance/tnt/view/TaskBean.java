@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -225,5 +226,14 @@ public class TaskBean implements Serializable {
 
     public void setOwnerName(final String name) {
         ownerName = name;
+    }
+
+    /**
+     * Returns the client's locale language.
+     *
+     * @return the client's locale language
+     */
+    public String getLocale() {
+        return FacesContext.getCurrentInstance().getViewRoot().getLocale().getLanguage();
     }
 }

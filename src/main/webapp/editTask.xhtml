@@ -26,6 +26,8 @@
 
 <h:body>
 
+    <h:outputScript name="javascript/calendar_de.js"/>
+
     <h:form id="editTask">
         <table>
             <tr>
@@ -55,9 +57,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button">
-                        <f:convertDateTime type="date" dateStyle="medium"/>
-                    </p:calendar>
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button"/>
                 </td>
                 <td><p:message for="taskDueDate" showDetail="false"/></td>
             </tr>
@@ -71,6 +71,11 @@
         <p:commandButton action="#{taskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
         <p:button outcome="tasks.xhtml" icon="ui-icon-close" title="#{texts.buttonCancel}"/>
     </h:form>
+
+    <!-- set default input focus -->
+    <script type="text/javascript">
+        document.getElementById('editTask:taskName').focus();
+    </script>
 
 </h:body>
 
