@@ -19,7 +19,6 @@
 
 package org.newinstance.tnt.model;
 
-import org.newinstance.tnt.utility.DateHelper;
 import org.newinstance.tnt.utility.ResourceLoader;
 
 import javax.persistence.Column;
@@ -34,7 +33,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -146,6 +144,10 @@ public class Task {
 
     public boolean isOpen() {
         return Status.OPEN.equals(status);
+    }
+
+    public boolean isOverdue() {
+        return new Date().after(dueDate);
     }
 
     @Override

@@ -22,6 +22,7 @@ package org.newinstance.tnt.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -51,5 +52,28 @@ public class TaskTest {
         Assert.assertTrue(result.contains("OPEN"));
         Assert.assertTrue(result.contains("LOW"));
         Assert.assertTrue(result.contains("John"));
+    }
+
+    @Test
+    public void overdueTest() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+
+        final Owner owner = new Owner();
+        owner.setName("John");
+
+        final Task task = new Task();
+        task.setCreationDate(cal.getTime());
+        task.setDueDate(cal.getTime());
+        task.setDescription("A description");
+        task.setStatus(Status.OPEN);
+        task.setPriority(Priority.LOW);
+        task.setName("Task");
+        task.setOwner(owner);
+
+        Assert.assertTrue(task.isOverdue());
+
+        task.setDueDate(new Date());
+        Assert.assertFalse(task.isOverdue());
     }
 }
