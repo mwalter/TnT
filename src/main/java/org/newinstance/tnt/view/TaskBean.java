@@ -56,8 +56,6 @@ public class TaskBean implements Serializable {
     @Autowired
     private TaskService taskService;
 
-    private List<Owner> owners;
-
     private List<Task> tasks;
 
     private Task task;
@@ -150,7 +148,7 @@ public class TaskBean implements Serializable {
     public List<SelectItem> getOwners() {
         LOG.log(Level.INFO, "Loading all owners.");
         // always fetch all owners to make sure to list newly created ones as well
-        owners = ownerService.searchAllOwner();
+        final List<Owner> owners = ownerService.searchAllOwner();
         final List<SelectItem> ownerList = new ArrayList<SelectItem>();
 
         for (final Owner owner : owners) {
@@ -201,7 +199,7 @@ public class TaskBean implements Serializable {
             // persist new owner
             ownerService.saveOwner(owner);
             task.setOwner(owner);
-        } else if (task.getOwner() == null && getOwnerName() != null && existingOwner != null) {
+        } else if (task.getOwner() == null && getOwnerName() != null) {
             task.setOwner(existingOwner);
         }
 
