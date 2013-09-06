@@ -31,11 +31,25 @@ import java.util.List;
 public interface TaskService {
 
     /**
+     * Creates a new task.
+     *
+     * @return the new task
+     */
+    Task createTask();
+
+    /**
      * Deletes a task.
      *
      * @param task the task to delete.
      */
     void deleteTask(final Task task);
+
+    /**
+     * Finishes a task.
+     *
+     * @param task the task to finish
+     */
+    void finishTask(final Task task);
 
     /**
      * Saves a task.

@@ -21,7 +21,6 @@ package org.newinstance.tnt.view;
 
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
-import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.service.OwnerService;
 import org.newinstance.tnt.service.TaskService;
@@ -34,7 +33,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,10 +90,7 @@ public class TaskBean implements Serializable {
      */
     public String createTask() {
         LOG.log(Level.INFO, "Initialising new task...");
-        task = new Task();
-        task.setCreationDate(new Date());
-        task.setStatus(Status.OPEN);
-        task.setPriority(Priority.MEDIUM);
+        task = taskService.createTask();
         return "showCreateTask";
     }
 
@@ -133,8 +128,7 @@ public class TaskBean implements Serializable {
      */
     public String finishTask(final Task task) {
         LOG.log(Level.INFO, "Finishing task: " + task.toString());
-        task.setStatus(Status.DONE);
-        taskService.updateTask(task);
+        taskService.finishTask(task);
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
         return "showTasks";

@@ -19,6 +19,8 @@
 
 package org.newinstance.tnt.service;
 
+import org.newinstance.tnt.model.Priority;
+import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.persistence.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,10 +47,23 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private GenericDao genericDao;
 
+    public Task createTask() {
+        final Task task = new Task();
+        task.setCreationDate(new Date());
+        task.setStatus(Status.OPEN);
+        task.setPriority(Priority.MEDIUM);
+        return task;
+    }
+
     public void deleteTask(final Task task) {
         final Task taskToDelete = genericDao.find(Task.class, task.getId());
         LOG.log(Level.INFO, "Deleting task: {0}", taskToDelete.toString());
         genericDao.delete(taskToDelete);
+    }
+
+    public void finishTask(final Task task) {
+        task.setStatus(Status.DONE);
+        updateTask(task);
     }
 
     public void saveTask(final Task task) {
