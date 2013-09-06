@@ -71,12 +71,20 @@ public class TaskServiceTest extends BaseTest {
         taskService.updateTask(taskToUpdate);
 
         result = taskService.searchAllTask();
-        final Task taskToDelete = result.get(0);
-        Assert.assertNotEquals(JUNIT, taskToDelete.getDescription());
-        Assert.assertEquals(Status.IN_PROGRESS, taskToDelete.getStatus());
+        final Task updatedTask = result.get(0);
+        Assert.assertNotEquals(JUNIT, updatedTask.getDescription());
+        Assert.assertEquals(Status.IN_PROGRESS, updatedTask.getStatus());
+
+        // finish
+        taskService.finishTask(updatedTask);
+
+        result = taskService.searchAllTask();
+        final Task finishedTask = result.get(0);
+        Assert.assertFalse(finishedTask.isOpen());
+        Assert.assertEquals(Status.DONE, finishedTask.getStatus());
 
         // delete
-        taskService.deleteTask(taskToDelete);
+        taskService.deleteTask(updatedTask);
         result = taskService.searchAllTask();
         Assert.assertTrue(result.isEmpty());
     }
