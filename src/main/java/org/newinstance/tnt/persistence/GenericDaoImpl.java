@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ public class GenericDaoImpl implements GenericDao {
 
         // catch ResultException and return null instead
         try {
-            return (T) query.getSingleResult();
+            return query.getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
