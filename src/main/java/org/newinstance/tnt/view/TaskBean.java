@@ -182,33 +182,14 @@ public class TaskBean implements Serializable {
      * @return the tasks view
      */
     public String saveTask() {
-        final Owner existingOwner = ownerService.searchOwnerByName(getOwnerName());
+        // save task
+        taskService.saveTask(task, getOwnerName());
 
-        // create new owner if name does not exist in database yet
-        if (task.getOwner() == null && getOwnerName() != null && existingOwner == null) {
-            final String ownerName = getOwnerName();
-            LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
-            final Owner owner = new Owner();
-            owner.setName(ownerName);
-            // persist new owner
-            ownerService.saveOwner(owner);
-            task.setOwner(owner);
-        } else if (task.getOwner() == null && getOwnerName() != null) {
-            task.setOwner(existingOwner);
-        }
-
-        // reset owner name
-        setOwnerName(null);
-
-        LOG.log(Level.INFO, "Creating new task with name: " + task.getName());
-        if (task.getId() == null) {
-            // no primary key so it's a new task
-            taskService.saveTask(task);
-        } else {
-            taskService.updateTask(task);
-        }
         // reload tasks to update task list
         tasks = taskService.searchAllTask();
+        // reset owner name to prevent old owner name being shown next time
+        setOwnerName(null);
+
         return "showTasks";
     }
 

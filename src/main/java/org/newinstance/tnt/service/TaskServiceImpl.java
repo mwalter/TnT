@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 
 package org.newinstance.tnt.service;
 
+import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
@@ -47,6 +48,9 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private GenericDao genericDao;
 
+    @Autowired
+    private OwnerService ownerService;
+
     public Task createTask() {
         final Task task = new Task();
         task.setCreationDate(new Date());
@@ -64,6 +68,31 @@ public class TaskServiceImpl implements TaskService {
     public void finishTask(final Task task) {
         task.setStatus(Status.DONE);
         updateTask(task);
+    }
+
+    @Override
+    public void saveTask(final Task task, final String ownerName) {
+        final Owner existingOwner = ownerService.searchOwnerByName(ownerName);
+
+        // create new owner if name does not exist in database yet
+        if (existingOwner == null) {
+            LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
+            final Owner owner = new Owner();
+            owner.setName(ownerName);
+            // persist new owner
+            ownerService.saveOwner(owner);
+            task.setOwner(owner);
+        } else {
+            task.setOwner(existingOwner);
+        }
+
+        LOG.log(Level.INFO, "Creating new task with name: " + task.getName());
+        if (task.isNew()) {
+            // no primary key so it's a new task
+            saveTask(task);
+        } else {
+            updateTask(task);
+        }
     }
 
     public void saveTask(final Task task) {

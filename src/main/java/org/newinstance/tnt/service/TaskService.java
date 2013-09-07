@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * newInstance.org, 2012-2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ public interface TaskService {
     /**
      * Deletes a task.
      *
-     * @param task the task to delete.
+     * @param task the task to delete
      */
     void deleteTask(final Task task);
 
@@ -57,6 +57,14 @@ public interface TaskService {
      * @param task the task to save.
      */
     void saveTask(final Task task);
+
+    /**
+     * Saves a task.
+     *
+     * @param task the task to save
+     * @param ownerName the name of the new owner
+     */
+    void saveTask(final Task task, String ownerName);
 
     /**
      * Searches all tasks.
