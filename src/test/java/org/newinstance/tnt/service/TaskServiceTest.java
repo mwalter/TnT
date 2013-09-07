@@ -49,9 +49,11 @@ public class TaskServiceTest extends BaseTest {
         newTask.setPriority(Priority.LOW);
         newTask.setStatus(Status.OPEN);
         newTask.setOwner(newOwner);
+        Assert.assertTrue(newTask.isNew());
 
         // create
         taskService.saveTask(newTask);
+        Assert.assertFalse(newTask.isNew());
 
         // read
         List<Task> result = taskService.searchAllTask();

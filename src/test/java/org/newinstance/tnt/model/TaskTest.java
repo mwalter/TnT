@@ -71,9 +71,29 @@ public class TaskTest {
         task.setName("Task");
         task.setOwner(owner);
 
+        Assert.assertTrue(task.isOpen());
         Assert.assertTrue(task.isOverdue());
 
         task.setDueDate(new Date());
         Assert.assertFalse(task.isOverdue());
+    }
+
+    @Test
+    public void newTest() {
+        final Calendar cal = Calendar.getInstance();
+
+        final Owner owner = new Owner();
+        owner.setName("John");
+
+        final Task task = new Task();
+        task.setCreationDate(cal.getTime());
+        task.setDueDate(cal.getTime());
+        task.setDescription("A description");
+        task.setStatus(Status.OPEN);
+        task.setPriority(Priority.LOW);
+        task.setName("Task");
+        task.setOwner(owner);
+
+        Assert.assertTrue(task.isNew());
     }
 }

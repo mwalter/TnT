@@ -142,6 +142,13 @@ public class Task {
         this.status = status;
     }
 
+    public boolean isNew() {
+        if (id == null) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean isOpen() {
         return Status.OPEN.equals(status);
     }
