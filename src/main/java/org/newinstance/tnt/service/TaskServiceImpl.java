@@ -23,12 +23,15 @@ import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
-import org.newinstance.tnt.persistence.GenericDao;
+import org.newinstance.tnt.persistence.OwnerRepository;
+import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,10 +49,10 @@ public class TaskServiceImpl implements TaskService {
     private static final Logger LOG = Logger.getLogger(TaskServiceImpl.class.getName());
 
     @Autowired
-    private GenericDao genericDao;
+    private OwnerRepository ownerRepository;
 
     @Autowired
-    private OwnerService ownerService;
+    private TaskRepository taskRepository;
 
     public Task createTask() {
         final Task task = new Task();
@@ -60,9 +63,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public void deleteTask(final Task task) {
-        final Task taskToDelete = genericDao.find(Task.class, task.getId());
+        final Task taskToDelete = taskRepository.findOne(task.getId());
         LOG.log(Level.INFO, "Deleting task: {0}", taskToDelete.toString());
-        genericDao.delete(taskToDelete);
+        taskRepository.delete(taskToDelete);
     }
 
     public void finishTask(final Task task) {
@@ -72,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void saveTask(final Task task, final String ownerName) {
-        final Owner existingOwner = ownerService.searchOwnerByName(ownerName);
+        final Owner existingOwner = ownerRepository.findByName(ownerName);
 
         // create new owner if name does not exist in database yet
         if (existingOwner == null) {
@@ -80,7 +83,7 @@ public class TaskServiceImpl implements TaskService {
             final Owner owner = new Owner();
             owner.setName(ownerName);
             // persist new owner
-            ownerService.saveOwner(owner);
+            ownerRepository.save(owner);
             task.setOwner(owner);
         } else {
             task.setOwner(existingOwner);
@@ -97,17 +100,22 @@ public class TaskServiceImpl implements TaskService {
 
     public void saveTask(final Task task) {
         LOG.log(Level.INFO, "Saving task: {0}", task.toString());
-        genericDao.save(task);
+        taskRepository.save(task);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
-        return genericDao.findByNamedQuery("SEARCH_ALL_TASK", Task.class);
+        final List<Task> taskList = new ArrayList<>();
+        final Iterable<Task> result = taskRepository.findAll();
+        for (final Task task : result) {
+            taskList.add(task);
+        }
+        return taskList;
     }
 
     public void updateTask(final Task task) {
         LOG.log(Level.INFO, "Updating task: {0}", task.toString());
-        genericDao.update(task);
+        taskRepository.save(task);
     }
 }

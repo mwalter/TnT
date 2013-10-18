@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * newInstance.org, 2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,47 +17,19 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.service;
+package org.newinstance.tnt.persistence;
 
 import org.newinstance.tnt.model.Owner;
-
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * Provides services related to {@link Owner}.
+ * Provides CRUD repository methods related to entity {@link Owner}.
  *
  * @author mwalter
  */
-public interface OwnerService {
-
-    /**
-     * Deletes an owner from the database.
-     *
-     * @param owner the owner to delete
-     */
-    void deleteOwner(final Owner owner);
-
-    /**
-     * Saves an owner to the database.
-     *
-     * @param owner the owner to save
-     */
-    void saveOwner(final Owner owner);
-
-    /**
-     * Searches all owners.
-     *
-     * @return all owners
-     */
-    List<Owner> searchAllOwner();
-
-    /**
-     * Searches an owner by primary key.
-     *
-     * @param ownerId the primary key
-     * @return the owner
-     */
-    Owner searchOwnerById(final Long ownerId);
+@Repository
+public interface OwnerRepository extends CrudRepository<Owner, Long> {
 
     /**
      * Searches an owner by a name.
@@ -65,5 +37,5 @@ public interface OwnerService {
      * @param name the name of the owner
      * @return the owner
      */
-    Owner searchOwnerByName(final String name);
+    Owner findByName(final String name);
 }

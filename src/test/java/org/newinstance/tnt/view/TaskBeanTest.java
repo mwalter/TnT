@@ -55,16 +55,16 @@ public class TaskBeanTest extends BaseTest {
             taskService.deleteTask(task);
         }
 
-        final List<Owner> owners = ownerService.searchAllOwner();
+        final Iterable<Owner> owners = ownerRepository.findAll();
         for (final Owner owner : owners) {
-            ownerService.deleteOwner(owner);
+            ownerRepository.delete(owner);
         }
     }
 
     private void addTasks() {
         final Owner owner = new Owner();
         owner.setName("John");
-        ownerService.saveOwner(owner);
+        ownerRepository.save(owner);
 
         final Task task = new Task();
         task.setCreationDate(new Date());

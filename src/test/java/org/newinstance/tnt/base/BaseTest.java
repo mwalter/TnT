@@ -20,7 +20,7 @@
 package org.newinstance.tnt.base;
 
 import org.junit.runner.RunWith;
-import org.newinstance.tnt.service.OwnerService;
+import org.newinstance.tnt.persistence.OwnerRepository;
 import org.newinstance.tnt.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -39,7 +39,7 @@ public abstract class BaseTest extends AbstractTransactionalJUnit4SpringContextT
     protected static final String JUNIT = "JUnit";
 
     @Autowired
-    protected OwnerService ownerService;
+    protected OwnerRepository ownerRepository;
 
     @Autowired
     protected TaskService taskService;

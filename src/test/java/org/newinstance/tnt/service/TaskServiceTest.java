@@ -41,13 +41,12 @@ public class TaskServiceTest extends BaseTest {
         final Owner newOwner = new Owner();
         newOwner.setName(JUNIT);
 
-        ownerService.saveOwner(newOwner);
+        ownerRepository.save(newOwner);
 
-        final Task newTask = new Task();
+        final Task newTask = taskService.createTask();
         newTask.setName(JUNIT);
         newTask.setDescription(JUNIT);
         newTask.setPriority(Priority.LOW);
-        newTask.setStatus(Status.OPEN);
         newTask.setOwner(newOwner);
         Assert.assertTrue(newTask.isNew());
 
@@ -93,13 +92,12 @@ public class TaskServiceTest extends BaseTest {
 
     @Test
     public void saveTaskWithNewOwner() {
-        final Task newTask = new Task();
+        final Task newTask = taskService.createTask();
         newTask.setName(JUNIT);
         newTask.setDescription(JUNIT);
         newTask.setPriority(Priority.HIGH);
-        newTask.setStatus(Status.OPEN);
 
-        // create
+        // save task with owner
         taskService.saveTask(newTask, JUNIT);
 
         List<Task> result = taskService.searchAllTask();
