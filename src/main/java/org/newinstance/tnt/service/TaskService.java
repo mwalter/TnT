@@ -31,7 +31,7 @@ import java.util.List;
 public interface TaskService {
 
     /**
-     * Creates a new task.
+     * Creates a new task. Sets the creation date to now, status to open and priority to medium.
      *
      * @return the new task
      */

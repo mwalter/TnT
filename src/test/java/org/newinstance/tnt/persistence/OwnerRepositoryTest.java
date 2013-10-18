@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * newInstance.org, 2013
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,34 +17,46 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.service;
+package org.newinstance.tnt.persistence;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
 import org.newinstance.tnt.model.Owner;
 
-import java.util.List;
-
 /**
- * Tests methods of the {@link OwnerService}.
+ * Tests methods of the {@link OwnerRepository}.
  *
  * @author mwalter
  */
-public class OwnerServiceTest extends BaseTest {
+public class OwnerRepositoryTest extends BaseTest {
 
     @Test
-    public void saveAndSearchOwner() {
+    public void findAll() {
+        final Owner tom = new Owner();
+        tom.setName("Tom");
+        final Owner jerry = new Owner();
+        jerry.setName("Jerry");
+
+        ownerRepository.save(tom);
+        ownerRepository.save(jerry);
+
+        final Iterable<Owner> result = ownerRepository.findAll();
+        for (final Owner owner : result) {
+            Assert.assertTrue(owner.getName().equals(tom.getName()) || owner.getName().equals(jerry.getName()));
+        }
+    }
+
+    @Test
+    public void saveAndFindOwnerByName() {
         final Owner newOwner = new Owner();
         newOwner.setName(JUNIT);
 
-        ownerService.saveOwner(newOwner);
+        ownerRepository.save(newOwner);
 
-        final List<Owner> result = ownerService.searchAllOwner();
-        Assert.assertFalse(result.isEmpty());
-        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(1, ownerRepository.count());
 
-        final Owner foundOwner = ownerService.searchOwnerById(result.get(0).getId());
+        final Owner foundOwner = ownerRepository.findByName(JUNIT);
         Assert.assertEquals(newOwner.getName(), foundOwner.getName());
     }
 }

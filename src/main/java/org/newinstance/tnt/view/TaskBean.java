@@ -22,7 +22,7 @@ package org.newinstance.tnt.view;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Task;
-import org.newinstance.tnt.service.OwnerService;
+import org.newinstance.tnt.persistence.OwnerRepository;
 import org.newinstance.tnt.service.TaskService;
 import org.newinstance.tnt.utility.ResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class TaskBean implements Serializable {
     private static final Logger LOG = Logger.getLogger(TaskBean.class.getName());
 
     @Autowired
-    private OwnerService ownerService;
+    private OwnerRepository ownerRepository;
 
     @Autowired
     private TaskService taskService;
@@ -142,7 +142,7 @@ public class TaskBean implements Serializable {
     public List<SelectItem> getOwners() {
         LOG.log(Level.INFO, "Loading all owners.");
         // always fetch all owners to make sure to list newly created ones as well
-        final List<Owner> owners = ownerService.searchAllOwner();
+        final Iterable<Owner> owners = ownerRepository.findAll();
         final List<SelectItem> ownerList = new ArrayList<SelectItem>();
 
         for (final Owner owner : owners) {
