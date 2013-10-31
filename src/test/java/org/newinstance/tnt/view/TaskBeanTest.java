@@ -73,7 +73,7 @@ public class TaskBeanTest extends BaseTest {
         task.setPriority(Priority.LOW);
         task.setStatus(Status.OPEN);
 
-        taskService.saveTask(task);
+        taskRepository.save(task);
     }
 
     @Test

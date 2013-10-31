@@ -54,13 +54,6 @@ public interface TaskService {
     /**
      * Saves a task.
      *
-     * @param task the task to save.
-     */
-    void saveTask(final Task task);
-
-    /**
-     * Saves a task.
-     *
      * @param task the task to save
      * @param ownerName the name of the new owner
      */
@@ -73,10 +66,4 @@ public interface TaskService {
      */
     List<Task> searchAllTask();
 
-    /**
-     * Updates the task.
-     *
-     * @param task the task to update
-     */
-    void updateTask(final Task task);
 }

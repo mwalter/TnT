@@ -21,6 +21,7 @@ package org.newinstance.tnt.base;
 
 import org.junit.runner.RunWith;
 import org.newinstance.tnt.persistence.OwnerRepository;
+import org.newinstance.tnt.persistence.TaskRepository;
 import org.newinstance.tnt.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,6 +41,9 @@ public abstract class BaseTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Autowired
     protected OwnerRepository ownerRepository;
+
+    @Autowired
+    protected TaskRepository taskRepository;
 
     @Autowired
     protected TaskService taskService;

@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,7 +69,7 @@ public class TaskServiceImpl implements TaskService {
 
     public void finishTask(final Task task) {
         task.setStatus(Status.DONE);
-        updateTask(task);
+        taskRepository.save(task);
     }
 
     @Override
@@ -89,23 +88,13 @@ public class TaskServiceImpl implements TaskService {
             task.setOwner(existingOwner);
         }
 
-        LOG.log(Level.INFO, "Creating new task with name: " + task.getName());
-        if (task.isNew()) {
-            // no primary key so it's a new task
-            saveTask(task);
-        } else {
-            updateTask(task);
-        }
-    }
-
-    public void saveTask(final Task task) {
-        LOG.log(Level.INFO, "Saving task: {0}", task.toString());
         taskRepository.save(task);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
+        // convert Iterable to something more useful
         final List<Task> taskList = new ArrayList<>();
         final Iterable<Task> result = taskRepository.findAll();
         for (final Task task : result) {
@@ -114,8 +103,4 @@ public class TaskServiceImpl implements TaskService {
         return taskList;
     }
 
-    public void updateTask(final Task task) {
-        LOG.log(Level.INFO, "Updating task: {0}", task.toString());
-        taskRepository.save(task);
-    }
 }

@@ -52,8 +52,8 @@ public class TaskRepositoryTest extends BaseTest {
         Assert.assertTrue(task2.isNew());
 
         // create
-        taskService.saveTask(task1);
-        taskService.saveTask(task2);
+        taskRepository.save(task1);
+        taskRepository.save(task2);
         Assert.assertFalse(task1.isNew());
         Assert.assertFalse(task2.isNew());
 

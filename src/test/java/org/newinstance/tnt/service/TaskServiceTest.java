@@ -51,7 +51,7 @@ public class TaskServiceTest extends BaseTest {
         Assert.assertTrue(newTask.isNew());
 
         // create
-        taskService.saveTask(newTask);
+        taskRepository.save(newTask);
         Assert.assertFalse(newTask.isNew());
 
         // read
@@ -69,7 +69,7 @@ public class TaskServiceTest extends BaseTest {
         taskToUpdate.setStatus(Status.IN_PROGRESS);
 
         // update
-        taskService.updateTask(taskToUpdate);
+        taskRepository.save(taskToUpdate);
 
         result = taskService.searchAllTask();
         final Task updatedTask = result.get(0);
