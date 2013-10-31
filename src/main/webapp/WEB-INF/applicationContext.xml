@@ -31,16 +31,17 @@
     <!-- Needed for Autowiring -->
     <context:annotation-config/>
     <context:component-scan base-package="org.newinstance.tnt"/>
+    <context:property-placeholder location="classpath:database-config.properties"/>
 
     <!-- Spring Data Repositories -->
     <jpa:repositories base-package="org.newinstance.tnt.persistence"/>
 
-    <!-- MySQL DataSource -->
+    <!-- DataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/tntdb"/>
-        <property name="username" value="tntuser"/>
-        <property name="password" value="newinstance"/>
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
     </bean>
 
     <!-- JPA EntityManager Factory -->
