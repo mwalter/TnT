@@ -143,7 +143,7 @@ public class TaskBean implements Serializable {
         LOG.log(Level.INFO, "Loading all owners.");
         // always fetch all owners to make sure to list newly created ones as well
         final Iterable<Owner> owners = ownerRepository.findAll();
-        final List<SelectItem> ownerList = new ArrayList<SelectItem>();
+        final List<SelectItem> ownerList = new ArrayList<>();
 
         for (final Owner owner : owners) {
             // create select item for every owner
@@ -161,7 +161,7 @@ public class TaskBean implements Serializable {
      * @return the list of priorities
      */
     public List<SelectItem> getPriorities() {
-        final List<SelectItem> priorityList = new ArrayList<SelectItem>();
+        final List<SelectItem> priorityList = new ArrayList<>();
 
         // get all priorities
         for (final Priority priority : Priority.values()) {
