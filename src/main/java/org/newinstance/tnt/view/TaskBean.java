@@ -182,8 +182,8 @@ public class TaskBean implements Serializable {
      * @return the tasks view
      */
     public String saveTask() {
-        // save task
-        taskService.saveTask(task, getOwnerName());
+        // save task (if task is new get owner from view, else don't change the owner)
+        taskService.saveTask(task, task.isNew() ? getOwnerName() : task.getOwner().getName());
 
         // reload tasks to update task list
         tasks = taskService.searchAllTask();

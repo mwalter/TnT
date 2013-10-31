@@ -45,7 +45,7 @@ public class TaskBeanTest extends BaseTest {
 
     @Before
     public void setUp() throws Exception {
-        addTasks();
+        addTask();
     }
 
     @After
@@ -61,7 +61,7 @@ public class TaskBeanTest extends BaseTest {
         }
     }
 
-    private void addTasks() {
+    private void addTask() {
         final Owner owner = new Owner();
         owner.setName("John");
         ownerRepository.save(owner);
@@ -81,5 +81,17 @@ public class TaskBeanTest extends BaseTest {
         final List<Task> tasks = taskBean.getTasks();
         Assert.assertNotNull(tasks);
         Assert.assertTrue(tasks.size() == 1);
+    }
+
+    @Test
+    public void editTask() {
+        // change a task
+        final Task task = taskBean.getTasks().get(0);
+        task.setDescription("something very important");
+        // convenience method call to set task into task bean
+        taskBean.editTask(task);
+        taskBean.saveTask();
+        // verify that the owner hasn't changed
+        Assert.assertNotNull(taskService.searchAllTask().get(0).getOwner());
     }
 }
