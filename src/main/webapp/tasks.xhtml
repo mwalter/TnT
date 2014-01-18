@@ -113,6 +113,10 @@
                 </f:facet>
             </p:column>
         </p:dataTable>
+        <h:outputFormat value="#{texts.infoNumberOfComponents}" styleClass="ui-inputtext ui-widget" style="float: right">
+            <f:param value="#{infoBean.numberOfComponentsInTree}" />
+        </h:outputFormat>
+
     </h:form>
 
 </h:body>
