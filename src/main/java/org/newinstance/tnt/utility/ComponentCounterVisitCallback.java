@@ -19,6 +19,8 @@
 
 package org.newinstance.tnt.utility;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.component.visit.VisitCallback;
 import javax.faces.component.visit.VisitContext;
@@ -34,9 +36,13 @@ public class ComponentCounterVisitCallback implements VisitCallback {
     /** Counter for components. */
     private int counter = 0;
 
+    /** List of all components. */
+    private List<String> componentList = new ArrayList<>();
+
     @Override
     public VisitResult visit(final VisitContext context, final UIComponent target) {
         counter++;
+        componentList.add(target.getClientId() + " [" + target.getClass().getSimpleName() + "]");
         return VisitResult.ACCEPT;
     }
 
@@ -49,4 +55,12 @@ public class ComponentCounterVisitCallback implements VisitCallback {
         return counter;
     }
 
+    /**
+     * Return the list with all components.
+     *
+     * @return list of all components
+     */
+    public List<String> getComponentList() {
+        return componentList;
+    }
 }
