@@ -26,6 +26,8 @@
 
 <h:body>
 
+    <f:phaseListener type="org.newinstance.tnt.utility.ComponentCounterListener"/>
+
     <h:form id="tasks">
 
         <p:commandButton action="#{taskBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"/>
