@@ -19,6 +19,14 @@
 
 package org.newinstance.tnt.view;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Task;
@@ -28,14 +36,6 @@ import org.newinstance.tnt.utility.ResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The task managed bean.
