@@ -2,7 +2,7 @@
 <!--
  ~ TnT - Things and tasks to do
  ~ Licensed under General Public License v3 (GPLv3)
- ~ newInstance.org, 2012-2013
+ ~ newInstance.org, 2012-2014
  ~
  ~ This program is free software: you can redistribute it and/or modify
  ~ it under the terms of the GNU General Public License as published by
@@ -23,26 +23,22 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:jee="http://www.springframework.org/schema/jee"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+      http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
     <!-- Needed for Autowiring -->
     <context:annotation-config/>
     <context:component-scan base-package="org.newinstance.tnt"/>
-    <context:property-placeholder location="classpath:database-config.properties"/>
 
     <!-- Spring Data Repositories -->
     <jpa:repositories base-package="org.newinstance.tnt.persistence"/>
 
     <!-- DataSource -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${db.driver}"/>
-        <property name="url" value="${db.url}"/>
-        <property name="username" value="${db.username}"/>
-        <property name="password" value="${db.password}"/>
-    </bean>
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/tntdb" expected-type="javax.sql.DataSource"/>
 
     <!-- JPA EntityManager Factory -->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
