@@ -19,13 +19,14 @@
 
 package org.newinstance.tnt.utility;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.component.visit.VisitContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Logs some information about the component tree before rendering the current view.
@@ -34,7 +35,7 @@ import javax.faces.event.PhaseListener;
  */
 public class ComponentCounterListener implements PhaseListener {
 
-    private static final Logger LOG = Logger.getLogger(ComponentCounterListener.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(ComponentCounterListener.class.getName());
 
     @Override
     public void afterPhase(final PhaseEvent event) {
@@ -49,12 +50,12 @@ public class ComponentCounterListener implements PhaseListener {
         final ComponentCounterVisitCallback callback = new ComponentCounterVisitCallback();
         facesContext.getViewRoot().visitTree(visitContext, callback);
 
-        LOG.log(Level.INFO, ("Number of Components: " + callback.getCount()));
+        LOGGER.info("Number of Components: " + callback.getCount());
 
-        // DebugUtils.printView(facesContext.getViewRoot(), System.out);
-
-        for (final String info : callback.getComponentList()) {
-            LOG.log(Level.FINER, "Component found: " + info);
+        if (LOGGER.isDebugEnabled()) {
+            for (final String info : callback.getComponentList()) {
+                LOGGER.debug("Component found: " + info);
+            }
         }
     }
 
