@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Tnt : Things and tasks to do" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tnt</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mwalter/TnT">View on GitHub</a>
+
+          <h1 id="project_title">Tnt</h1>
+          <h2 id="project_tagline">Things and tasks to do</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mwalter/TnT/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mwalter/TnT/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="tnt---things-and-tasks-to-do" class="anchor" href="#tnt---things-and-tasks-to-do"><span class="octicon octicon-link"></span></a>TnT - Things and tasks to do</h1>
+
+<p>Licensed under General Public License v3 (GPLv3)<br><a href="http://www.newinstance.org">newInstance.org</a>, 2012-2014</p>
+
+<h2>
+<a name="about-tnt" class="anchor" href="#about-tnt"><span class="octicon octicon-link"></span></a>About TnT</h2>
+
+<p>A simple web task list where you can create, edit and delete tasks. Every task belongs to an owner.
+English and German languages are supported.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="setting-up-the-database" class="anchor" href="#setting-up-the-database"><span class="octicon octicon-link"></span></a>Setting up the database</h3>
+
+<p>TnT uses a MySQL database to persist tasks. SO make sure you have a MySQL database service running at standard port 3306. The database is accessed via JNDI lookup so all you need to do is <a href="http://dev.mysql.com/downloads/connector/j/">download a MySQL connector</a> and place it into the <code>lib</code> directory of your Tomcat.
+Next you have to add the database resource to your Tomcat server by editing the <code>context.xml</code> file in the <code>conf</code> directory:</p>
+
+<div class="highlight highlight-XML"><pre><span class="nt">&lt;Resource</span> <span class="na">name=</span><span class="s">"jdbc/tntdb"</span> <span class="na">auth=</span><span class="s">"Container"</span> <span class="na">type=</span><span class="s">"javax.sql.DataSource"</span>
+    <span class="na">maxActive=</span><span class="s">"1"</span> <span class="na">maxIdle=</span><span class="s">"1"</span> <span class="na">maxWait=</span><span class="s">"10000"</span>
+    <span class="na">username=</span><span class="s">"user"</span> <span class="na">password=</span><span class="s">"pass"</span> <span class="na">driverClassName=</span><span class="s">"com.mysql.jdbc.Driver"</span>
+    <span class="na">url=</span><span class="s">"jdbc:mysql://localhost:3306/tntdb"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/Resource&gt;</span>
+</pre></div>
+
+<p>Connect to MySQL and create a new database with the name <code>tntdb</code>.
+Grant the user all CRUD privileges on database <code>tntdb</code>. In order to have the application create all database tables automatically you have to add privileges <code>CREATE, ALTER, INDEX, DROP</code> to the database user as well.</p>
+
+<h3>
+<a name="launching-the-application" class="anchor" href="#launching-the-application"><span class="octicon octicon-link"></span></a>Launching the application</h3>
+
+<p>To create the war file execute <code>mvn clean install</code>. Then start Tomcat and deploy the application.
+Point your browser to <code>localhost:8080</code>.</p>
+
+<h2>
+<a name="technologies" class="anchor" href="#technologies"><span class="octicon octicon-link"></span></a>Technologies</h2>
+
+<p>TnT is implemented in Java and uses JSF (<a href="http://primefaces.org/">PrimeFaces</a>), <a href="http://spring.io/">Spring</a> and JPA (<a href="http://hibernate.org/">Hibernate</a>). The application is built by Maven.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tnt maintained by <a href="https://github.com/mwalter">mwalter</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
