@@ -48,7 +48,7 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:mwalter/TnT.git</developerConnection>
-        <connection>scm:git:git://github.com/mwalter/TnT.git</connection>
+        <connection>scm:git:git@github.com:mwalter/TnT.git</connection>
         <url>http://mwalter.github.io/TnT</url>
     </scm>
 
