@@ -6,7 +6,7 @@
 
     <groupId>org.newinstance.tnt</groupId>
     <artifactId>tnt-faces</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
 
@@ -48,7 +48,7 @@
         <developerConnection>scm:git:git@github.com:mwalter/TnT.git</developerConnection>
         <connection>scm:git:git@github.com:mwalter/TnT.git</connection>
         <url>http://mwalter.github.io/TnT</url>
-      <tag>0.1.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <build>
