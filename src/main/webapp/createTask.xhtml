@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Licensed under General Public License v3 (GPLv3)
-  ~ newInstance.org, 2012-2013
+  ~ newInstance.org, 2012-2014
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -36,10 +36,12 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
                 <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
+                <td><p:message for="taskName" showDetail="false"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
                 <td><p:inputTextarea rows="5" cols="40" value="#{taskBean.task.description}"/></td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskPriority}" styleClass="ui-inputtext ui-widget"/></td>
@@ -48,6 +50,7 @@
                         <f:selectItems value="#{taskBean.priorities}"/>
                     </p:selectOneMenu>
                 </td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
@@ -56,12 +59,16 @@
                         <f:selectItems value="#{taskBean.owners}"/>
                     </p:selectOneMenu>
                 </td>
+                <td/>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" locale="#{taskBean.locale}" showOn="button"/>
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" locale="#{taskBean.locale}" showOn="button">
+                        <f:validator binding="#{dueDateValidator}"/>
+                    </p:calendar>
                 </td>
+                <td><p:message for="taskDueDate" showSummary="true" showDetail="true"/></td>
             </tr>
         </table>
         <p/>
