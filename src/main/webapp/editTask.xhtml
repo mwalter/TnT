@@ -36,7 +36,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
                 <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
-                <td><p:message for="taskName" showDetail="false"/></td>
+                <td><p:message for="taskName" showSummary="true"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
@@ -64,7 +64,7 @@
                         <f:validator binding="#{dueDateValidator}"/>
                     </p:calendar>
                 </td>
-                <td><p:message for="taskDueDate" showSummary="true" showDetail="true"/></td>
+                <td><p:message for="taskDueDate" showSummary="true"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskStatus}" styleClass="ui-inputtext ui-widget"/></td>

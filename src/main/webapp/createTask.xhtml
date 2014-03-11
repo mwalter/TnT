@@ -36,7 +36,7 @@
             <tr>
                 <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
                 <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
-                <td><p:message for="taskName" showDetail="false"/></td>
+                <td><p:message for="taskName" showSummary="true"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
@@ -59,16 +59,16 @@
                         <f:selectItems value="#{taskBean.owners}"/>
                     </p:selectOneMenu>
                 </td>
-                <td/>
+                <td><p:message for="taskOwner" showSummary="true"/></td>
             </tr>
             <tr>
                 <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                 <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" locale="#{taskBean.locale}" showOn="button">
+                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" locale="#{taskBean.locale}" showOn="button" required="true">
                         <f:validator binding="#{dueDateValidator}"/>
                     </p:calendar>
                 </td>
-                <td><p:message for="taskDueDate" showSummary="true" showDetail="true"/></td>
+                <td><p:message for="taskDueDate" showSummary="true"/></td>
             </tr>
         </table>
         <p/>
