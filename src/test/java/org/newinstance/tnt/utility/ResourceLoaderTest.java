@@ -1,7 +1,7 @@
 /*
  * TnT - Things and tasks to do
  * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2013
+ * newInstance.org, 2013-2014
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,11 +32,9 @@ public class ResourceLoaderTest {
 
     @Test
     public void loadMessage() {
-        final String message = ResourceLoader.getMessage("errorQuantityOutOfRange", 10, 100);
+        final String message = ResourceLoader.getMessage("errorDueDateInvalidSummary");
         Assert.assertNotNull(message);
         Assert.assertFalse(message.isEmpty());
-        Assert.assertTrue(message.contains("10"));
-        Assert.assertTrue(message.contains("100"));
     }
 
     @Test
