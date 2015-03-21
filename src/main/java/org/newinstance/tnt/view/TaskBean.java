@@ -84,7 +84,7 @@ public class TaskBean implements Serializable {
     }
 
     /**
-     * Create a new task.
+     * Creates a new task.
      *
      * @return the edit task view
      */
