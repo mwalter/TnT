@@ -18,69 +18,66 @@
 ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <title><h:outputText value="#{texts.title}"/></title>
-</h:head>
+<ui:composition template="WEB-INF/templates/layout.xhtml">
 
-<h:body>
+    <ui:define name="content">
 
-    <f:phaseListener type="org.newinstance.tnt.utility.ComponentCounterListener"/>
+        <h:form id="editTask">
+            <table>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
+                    <td><p:message for="taskName" showSummary="true"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><p:inputTextarea rows="5" cols="40" value="#{taskBean.task.description}"/></td>
+                    <td/>
+                </tr>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskPriority}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td>
+                        <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}" style="width: 200px;">
+                            <f:selectItems value="#{taskBean.priorities}"/>
+                        </p:selectOneMenu>
+                    </td>
+                    <td/>
+                </tr>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><h:outputText value="#{taskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td/>
+                </tr>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td>
+                        <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button">
+                            <f:validator binding="#{dueDateValidator}"/>
+                        </p:calendar>
+                    </td>
+                    <td><p:message for="taskDueDate" showSummary="true"/></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="#{texts.labelTaskStatus}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><h:outputText value="#{taskBean.task.statusLocalized}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td/>
+                </tr>
+            </table>
+            <p/>
+            <p:commandButton action="#{taskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
+            <p:button outcome="tasks.xhtml" icon="ui-icon-close" title="#{texts.buttonCancel}"/>
+        </h:form>
 
-    <h:outputScript name="javascript/calendar_de.js"/>
+        <!-- set default input focus -->
+        <script type="text/javascript">
+            document.getElementById('editTask:taskName').focus();
+        </script>
 
-    <h:form id="editTask">
-        <table>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
-                <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
-                <td><p:message for="taskName" showSummary="true"/></td>
-            </tr>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
-                <td><p:inputTextarea rows="5" cols="40" value="#{taskBean.task.description}"/></td>
-                <td/>
-            </tr>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskPriority}" styleClass="ui-inputtext ui-widget"/></td>
-                <td>
-                    <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}" style="width: 200px;">
-                        <f:selectItems value="#{taskBean.priorities}"/>
-                    </p:selectOneMenu>
-                </td>
-                <td/>
-            </tr>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
-                <td><h:outputText value="#{taskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
-                <td/>
-            </tr>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
-                <td>
-                    <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button">
-                        <f:validator binding="#{dueDateValidator}"/>
-                    </p:calendar>
-                </td>
-                <td><p:message for="taskDueDate" showSummary="true"/></td>
-            </tr>
-            <tr>
-                <td><h:outputText value="#{texts.labelTaskStatus}" styleClass="ui-inputtext ui-widget"/></td>
-                <td><h:outputText value="#{taskBean.task.statusLocalized}" styleClass="ui-inputtext ui-widget"/></td>
-                <td/>
-            </tr>
-        </table>
-        <p/>
-        <p:commandButton action="#{taskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
-        <p:button outcome="tasks.xhtml" icon="ui-icon-close" title="#{texts.buttonCancel}"/>
-    </h:form>
+    </ui:define>
 
-    <!-- set default input focus -->
-    <script type="text/javascript">
-        document.getElementById('editTask:taskName').focus();
-    </script>
-
-</h:body>
+</ui:composition>
 
 </html>
