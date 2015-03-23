@@ -21,52 +21,6 @@
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <navigation-rule>
-        <from-view-id>/tasks.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{taskBean.createTask}</from-action>
-            <from-outcome>showCreateTask</from-outcome>
-            <to-view-id>/createTask.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{taskBean.deleteTask(task)}</from-action>
-            <from-outcome>showTasks</from-outcome>
-            <to-view-id>/tasks.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{taskBean.editTask(task)}</from-action>
-            <from-outcome>showEditTask</from-outcome>
-            <to-view-id>/editTask.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{taskBean.finishTask(task)}</from-action>
-            <from-outcome>showTasks</from-outcome>
-            <to-view-id>/tasks.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/createTask.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{taskBean.saveTask}</from-action>
-            <from-outcome>showTasks</from-outcome>
-            <to-view-id>/tasks.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/editTask.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{taskBean.saveTask}</from-action>
-            <from-outcome>showTasks</from-outcome>
-            <to-view-id>/tasks.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
         <locale-config>
