@@ -19,15 +19,20 @@
 
 package org.newinstance.tnt.service;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
-
-import java.util.List;
 
 /**
  * Tests methods of the {@link TaskService}.
@@ -48,22 +53,22 @@ public class TaskServiceTest extends BaseTest {
         newTask.setDescription(JUNIT);
         newTask.setPriority(Priority.LOW);
         newTask.setOwner(newOwner);
-        Assert.assertTrue(newTask.isNew());
+        assertTrue(newTask.isNew());
 
         // create
         taskRepository.save(newTask);
-        Assert.assertFalse(newTask.isNew());
+        assertFalse(newTask.isNew());
 
         // read
         List<Task> result = taskService.searchAllTask();
-        Assert.assertFalse(result.isEmpty());
-        Assert.assertEquals(1, result.size());
+        assertFalse(result.isEmpty());
+        assertEquals(1, result.size());
 
         final Task taskToUpdate = result.get(0);
 
-        Assert.assertEquals(JUNIT, taskToUpdate.getDescription());
-        Assert.assertEquals(Priority.LOW, taskToUpdate.getPriority());
-        Assert.assertEquals(Status.OPEN, taskToUpdate.getStatus());
+        assertEquals(JUNIT, taskToUpdate.getDescription());
+        assertEquals(Priority.LOW, taskToUpdate.getPriority());
+        assertEquals(Status.OPEN, taskToUpdate.getStatus());
 
         taskToUpdate.setDescription("Something different");
         taskToUpdate.setStatus(Status.IN_PROGRESS);
@@ -73,21 +78,21 @@ public class TaskServiceTest extends BaseTest {
 
         result = taskService.searchAllTask();
         final Task updatedTask = result.get(0);
-        Assert.assertNotEquals(JUNIT, updatedTask.getDescription());
-        Assert.assertEquals(Status.IN_PROGRESS, updatedTask.getStatus());
+        assertNotEquals(JUNIT, updatedTask.getDescription());
+        assertEquals(Status.IN_PROGRESS, updatedTask.getStatus());
 
         // finish
         taskService.finishTask(updatedTask);
 
         result = taskService.searchAllTask();
         final Task finishedTask = result.get(0);
-        Assert.assertFalse(finishedTask.isOpen());
-        Assert.assertEquals(Status.DONE, finishedTask.getStatus());
+        assertFalse(finishedTask.isOpen());
+        assertEquals(Status.DONE, finishedTask.getStatus());
 
         // delete
         taskService.deleteTask(updatedTask);
         result = taskService.searchAllTask();
-        Assert.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -103,7 +108,12 @@ public class TaskServiceTest extends BaseTest {
         List<Task> result = taskService.searchAllTask();
         final Task task = result.get(0);
 
-        Assert.assertNotNull(task.getOwner());
-        Assert.assertEquals(JUNIT, task.getOwner().getName());
+        assertNotNull(task.getOwner());
+        assertEquals(JUNIT, task.getOwner().getName());
+    }
+
+    @Test
+    public void findAllNothing() {
+        assertTrue(taskService.searchAllTask().isEmpty());
     }
 }

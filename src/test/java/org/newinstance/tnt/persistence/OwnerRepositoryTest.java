@@ -19,7 +19,9 @@
 
 package org.newinstance.tnt.persistence;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
 import org.newinstance.tnt.model.Owner;
@@ -43,7 +45,7 @@ public class OwnerRepositoryTest extends BaseTest {
 
         final Iterable<Owner> result = ownerRepository.findAll();
         for (final Owner owner : result) {
-            Assert.assertTrue(owner.getName().equals(tom.getName()) || owner.getName().equals(jerry.getName()));
+            assertTrue(owner.getName().equals(tom.getName()) || owner.getName().equals(jerry.getName()));
         }
     }
 
@@ -54,9 +56,9 @@ public class OwnerRepositoryTest extends BaseTest {
 
         ownerRepository.save(newOwner);
 
-        Assert.assertEquals(1, ownerRepository.count());
+        assertEquals(1, ownerRepository.count());
 
         final Owner foundOwner = ownerRepository.findByName(JUNIT);
-        Assert.assertEquals(newOwner.getName(), foundOwner.getName());
+        assertEquals(newOwner.getName(), foundOwner.getName());
     }
 }

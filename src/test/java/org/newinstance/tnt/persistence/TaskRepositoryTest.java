@@ -19,13 +19,16 @@
 
 package org.newinstance.tnt.persistence;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Task;
-
-import java.util.List;
 
 /**
  * Tests methods of the {@link TaskRepository}.
@@ -44,21 +47,21 @@ public class TaskRepositoryTest extends BaseTest {
         final Task task1 = taskService.createTask();
         task1.setName("Buy milk");
         task1.setOwner(newOwner);
-        Assert.assertTrue(task1.isNew());
+        assertTrue(task1.isNew());
 
         final Task task2 = taskService.createTask();
         task2.setName("Write blog");
         task2.setOwner(newOwner);
-        Assert.assertTrue(task2.isNew());
+        assertTrue(task2.isNew());
 
         // create
         taskRepository.save(task1);
         taskRepository.save(task2);
-        Assert.assertFalse(task1.isNew());
-        Assert.assertFalse(task2.isNew());
+        assertFalse(task1.isNew());
+        assertFalse(task2.isNew());
 
         // fetch all tasks
         final List<Task> result = taskService.searchAllTask();
-        Assert.assertEquals(2, result.size());
+        assertEquals(2, result.size());
     }
 }
