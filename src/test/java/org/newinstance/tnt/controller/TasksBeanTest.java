@@ -17,7 +17,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.view;
+package org.newinstance.tnt.controller;
+
+import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -30,18 +33,15 @@ import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
-import java.util.List;
-
 /**
- * Tests methods of class {@link TaskBean}.
+ * Tests methods of class {@link TasksBean}.
  *
  * @author mwalter
  */
-public class TaskBeanTest extends BaseTest {
+public class TasksBeanTest extends BaseTest {
 
     @Autowired
-    private TaskBean taskBean;
+    private TasksBean tasksBean;
 
     @Before
     public void setUp() throws Exception {
@@ -78,20 +78,20 @@ public class TaskBeanTest extends BaseTest {
 
     @Test
     public void getTasks() {
-        final List<Task> tasks = taskBean.getTasks();
+        final List<Task> tasks = tasksBean.getTasks();
         Assert.assertNotNull(tasks);
         Assert.assertTrue(tasks.size() == 1);
     }
 
-    @Test
-    public void editTask() {
-        // change a task
-        final Task task = taskBean.getTasks().get(0);
-        task.setDescription("something very important");
-        // convenience method call to set task into task bean
-        taskBean.editTask(task);
-        taskBean.saveTask();
-        // verify that the owner hasn't changed
-        Assert.assertNotNull(taskService.searchAllTask().get(0).getOwner());
-    }
+//    @Test
+//    public void editTask() {
+//        // change a task
+//        final Task task = tasksBean.getTasks().get(0);
+//        task.setDescription("something very important");
+//        // convenience method call to set task into task bean
+//        tasksBean.editTask(task);
+//        tasksBean.saveTask();
+//        // verify that the owner hasn't changed
+//        Assert.assertNotNull(taskService.searchAllTask().get(0).getOwner());
+//    }
 }

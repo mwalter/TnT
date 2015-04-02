@@ -26,12 +26,12 @@
     <ui:define name="content">
         <h:form id="tasks">
 
-            <p:commandButton action="#{taskBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"/>
+            <p:commandButton action="createTask" icon="ui-icon-plus" title="#{texts.buttonAddTask}"/>
             <p/>
 
-            <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty taskBean.tasks}" styleClass="ui-inputtext ui-widget"/>
+            <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty tasksBean.tasks}" styleClass="ui-inputtext ui-widget"/>
 
-            <p:dataTable var="task" value="#{taskBean.tasks}" rendered="#{not empty taskBean.tasks}" width="100%">
+            <p:dataTable id="taskDataTable" var="task" value="#{tasksBean.tasks}" rendered="#{not empty tasksBean.tasks}" width="100%">
                 <p:column width="100" sortBy="#{task.priorityLocalized}">
                     <f:facet name="header">
                         <h:outputText value="#{texts.labelTaskPriority}"/>
@@ -103,9 +103,9 @@
                     <f:facet name="header">
                         <h:outputText value="&nbsp;"/>
                     </f:facet>
-                    <p:commandButton action="#{taskBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>
-                    <p:commandButton action="#{taskBean.deleteTask(task)}" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}" ajax="false"/>
-                    <p:commandButton action="#{taskBean.finishTask(task)}" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}" ajax="false"/>
+                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}"/>
+                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}"/>
+                    <p:commandButton action="#{tasksBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
                     <f:facet name="footer">
                         <h:outputText value="&nbsp;"/>
                     </f:facet>

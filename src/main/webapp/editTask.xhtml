@@ -29,32 +29,32 @@
             <table>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><p:inputText id="taskName" value="#{taskBean.task.name}" size="40" required="true"/></td>
+                    <td><p:inputText id="taskName" value="#{editTaskBean.task.name}" size="40" required="true"/></td>
                     <td><p:message for="taskName" showSummary="true"/></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><p:inputTextarea rows="5" cols="40" value="#{taskBean.task.description}"/></td>
+                    <td><p:inputTextarea rows="5" cols="40" value="#{editTaskBean.task.description}"/></td>
                     <td/>
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskPriority}" styleClass="ui-inputtext ui-widget"/></td>
                     <td>
-                        <p:selectOneMenu id="taskPriority" value="#{taskBean.task.priority}" style="width: 200px;">
-                            <f:selectItems value="#{taskBean.priorities}"/>
+                        <p:selectOneMenu id="taskPriority" value="#{editTaskBean.task.priority}" style="width: 200px;">
+                            <f:selectItems value="#{editTaskBean.priorities}"/>
                         </p:selectOneMenu>
                     </td>
                     <td/>
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><h:outputText value="#{taskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><h:outputText value="#{editTaskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
                     <td/>
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                     <td>
-                        <p:calendar id="taskDueDate" value="#{taskBean.task.dueDate}" showOn="button">
+                        <p:calendar id="taskDueDate" value="#{editTaskBean.task.dueDate}" showOn="button">
                             <f:validator binding="#{dueDateValidator}"/>
                         </p:calendar>
                     </td>
@@ -62,12 +62,12 @@
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskStatus}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><h:outputText value="#{taskBean.task.statusLocalized}" styleClass="ui-inputtext ui-widget"/></td>
+                    <td><h:outputText value="#{editTaskBean.task.statusLocalized}" styleClass="ui-inputtext ui-widget"/></td>
                     <td/>
                 </tr>
             </table>
             <p/>
-            <p:commandButton action="#{taskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
+            <p:commandButton action="#{editTaskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
             <p:button outcome="tasks.xhtml" icon="ui-icon-close" title="#{texts.buttonCancel}"/>
         </h:form>
 
