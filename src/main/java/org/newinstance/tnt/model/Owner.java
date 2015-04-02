@@ -23,8 +23,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,8 +33,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-@NamedQueries({@NamedQuery(name = "SEARCH_ALL_OWNER", query = "SELECT o FROM Owner o"),
-        @NamedQuery(name = "SEARCH_BY_NAME", query = "SELECT o FROM Owner o WHERE o.name = :name")})
 public class Owner {
 
     @Id

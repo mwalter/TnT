@@ -19,8 +19,7 @@
 
 package org.newinstance.tnt.model;
 
-import org.newinstance.tnt.utility.ResourceLoader;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,10 +29,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.util.Date;
+
+import org.newinstance.tnt.utility.ResourceLoader;
 
 /**
  * A task to do.
@@ -41,7 +40,6 @@ import java.util.Date;
  * @author mwalter
  */
 @Entity
-@NamedQuery(name="SEARCH_ALL_TASK", query="SELECT t FROM Task t")
 public class Task {
 
     @Id
