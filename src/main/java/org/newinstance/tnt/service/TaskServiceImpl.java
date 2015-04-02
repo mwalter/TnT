@@ -19,12 +19,12 @@
 
 package org.newinstance.tnt.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections4.IteratorUtils;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
@@ -94,13 +94,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
-        // convert Iterable to something more useful
-        final List<Task> taskList = new ArrayList<>();
-        final Iterable<Task> result = taskRepository.findAll();
-        for (final Task task : result) {
-            taskList.add(task);
-        }
-        return taskList;
+        return IteratorUtils.toList(taskRepository.findAll().iterator());
     }
 
 }

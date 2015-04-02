@@ -18,11 +18,11 @@
 
 package org.newinstance.tnt.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.collections4.IteratorUtils;
 import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.persistence.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +44,6 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public List<Owner> searchAllOwner() {
         LOG.log(Level.INFO, "Searching all owners.");
-        // convert Iterable to something more useful
-        final List<Owner> ownerList = new ArrayList<>();
-        final Iterable<Owner> result = ownerRepository.findAll();
-        for (final Owner owner : result) {
-            ownerList.add(owner);
-        }
-        return ownerList;
+        return IteratorUtils.toList(ownerRepository.findAll().iterator());
     }
 }
