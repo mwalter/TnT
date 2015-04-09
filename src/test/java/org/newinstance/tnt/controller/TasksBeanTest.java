@@ -19,11 +19,13 @@
 
 package org.newinstance.tnt.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
@@ -44,12 +46,12 @@ public class TasksBeanTest extends BaseTest {
     private TasksBean tasksBean;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         addTask();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         final List<Task> tasks = taskService.searchAllTask();
         for (final Task task : tasks) {
             taskService.deleteTask(task);
@@ -59,6 +61,25 @@ public class TasksBeanTest extends BaseTest {
         for (final Owner owner : owners) {
             ownerRepository.delete(owner);
         }
+    }
+
+    @Test
+    public void getTasks() {
+        final List<Task> tasks = tasksBean.getTasks();
+        assertNotNull(tasks);
+        assertEquals(1, tasks.size());
+    }
+
+    @Test
+    public void editTask() {
+        // change a task
+        final Task task = tasksBean.getTasks().get(0);
+        task.setDescription("something very important");
+        // convenience method call to set task into task bean
+        tasksBean.editTask(task);
+        taskRepository.save(task);
+        // verify that the owner hasn't changed
+        assertNotNull(taskService.searchAllTask().get(0).getOwner());
     }
 
     private void addTask() {
@@ -75,23 +96,4 @@ public class TasksBeanTest extends BaseTest {
 
         taskRepository.save(task);
     }
-
-    @Test
-    public void getTasks() {
-        final List<Task> tasks = tasksBean.getTasks();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() == 1);
-    }
-
-//    @Test
-//    public void editTask() {
-//        // change a task
-//        final Task task = tasksBean.getTasks().get(0);
-//        task.setDescription("something very important");
-//        // convenience method call to set task into task bean
-//        tasksBean.editTask(task);
-//        tasksBean.saveTask();
-//        // verify that the owner hasn't changed
-//        Assert.assertNotNull(taskService.searchAllTask().get(0).getOwner());
-//    }
 }
