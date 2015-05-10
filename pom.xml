@@ -44,6 +44,7 @@
         <junit.version>4.12</junit.version>
         <h2.version>1.4.185</h2.version>
         <collections.version>4.0</collections.version>
+        <lang3.version>3.4</lang3.version>
         <mockito.version>1.10.19</mockito.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
@@ -210,11 +211,16 @@
             <version>${hibernate.entitymanager.version}</version>
         </dependency>
 
-        <!-- Commons Collections -->
+        <!-- Apache Commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${collections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${lang3.version}</version>
         </dependency>
 
         <!-- MySQL Connector -->

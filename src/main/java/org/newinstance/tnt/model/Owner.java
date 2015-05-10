@@ -19,6 +19,8 @@
 
 package org.newinstance.tnt.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,10 +47,6 @@ public class Owner {
         return id;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -59,11 +57,6 @@ public class Owner {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Owner [");
-        builder.append("id=").append(id).append(", ");
-        builder.append("name=").append(name);
-        builder.append("]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -32,6 +32,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.newinstance.tnt.utility.ResourceLoader;
 
 /**
@@ -120,10 +121,6 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
     public void setName(final String name) {
         this.name = name;
     }
@@ -141,10 +138,7 @@ public class Task {
     }
 
     public boolean isNew() {
-        if (id == null) {
-            return true;
-        }
-        return false;
+        return id == null;
     }
 
     public boolean isOpen() {
@@ -157,17 +151,6 @@ public class Task {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Task [");
-        builder.append("id=").append(id).append(", ");
-        builder.append("name=").append(name).append(", ");
-        builder.append("description=").append(description).append(", ");
-        builder.append("creationDate=").append(creationDate).append(", ");
-        builder.append("dueDate=").append(dueDate).append(", ");
-        builder.append("status=").append(status.name()).append(", ");
-        builder.append("priority=").append(priority.name()).append(", ");
-        builder.append("owner=").append(owner.getName());
-        builder.append("]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this);
     }
 }
