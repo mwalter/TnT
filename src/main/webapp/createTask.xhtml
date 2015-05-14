@@ -17,15 +17,12 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-
-<ui:composition template="WEB-INF/templates/layout.xhtml">
+<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
-        <h:form id="createTask">
+        <h:form id="createTaskForm">
             <table>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
@@ -66,17 +63,15 @@
                 </tr>
             </table>
             <p/>
-            <p:commandButton action="#{createTaskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>&nbsp;
+            <p:commandButton action="#{createTaskBean.saveTask}" icon="ui-icon-check" title="#{texts.buttonSaveTask}" ajax="false"/>
             <p:button outcome="tasks.xhtml" icon="ui-icon-close" title="#{texts.buttonCancel}"/>
         </h:form>
 
         <!-- set default input focus -->
         <script type="text/javascript">
-            document.getElementById('createTask:taskName').focus();
+            document.getElementById('createTaskForm:taskName').focus();
         </script>
 
     </ui:define>
 
 </ui:composition>
-
-</html>

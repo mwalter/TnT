@@ -17,98 +17,48 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="WEB-INF/templates/layout.xhtml">
+<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <h:form id="tasks">
+        <h:form id="tasksForm">
 
-            <p:commandButton action="createTask" icon="ui-icon-plus" title="#{texts.buttonAddTask}"/>
+            <p:commandButton action="createTask" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"/>
             <p/>
 
             <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty tasksBean.tasks}" styleClass="ui-inputtext ui-widget"/>
 
             <p:dataTable id="taskDataTable" var="task" value="#{tasksBean.tasks}" rendered="#{not empty tasksBean.tasks}" width="100%">
-                <p:column width="100" sortBy="#{task.priorityLocalized}">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskPriority}"/>
-                    </f:facet>
+                <p:column width="100" sortBy="#{task.priorityLocalized}" headerText="#{texts.labelTaskPriority}">
                     <h:outputText value="#{task.priorityLocalized}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="200" sortBy="#{task.name}">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskName}"/>
-                    </f:facet>
+                <p:column width="200" sortBy="#{task.name}" headerText="#{texts.labelTaskName}">
                     <h:outputText value="#{task.name}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="300">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskDescription}"/>
-                    </f:facet>
+                <p:column width="300" headerText="#{texts.labelTaskDescription}">
                     <h:outputText value="#{task.description}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="100">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskCreationDate}"/>
-                    </f:facet>
+                <p:column width="100" headerText="#{texts.labelTaskCreationDate}">
                     <h:outputText value="#{task.creationDate}">
                         <f:convertDateTime type="date" dateStyle="medium"/>
                     </h:outputText>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:Red' : ''}">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskDueDate}"/>
-                    </f:facet>
+                <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:Red' : ''}" headerText="#{texts.labelTaskDueDate}">
                     <h:outputText value="#{task.dueDate}">
                         <f:convertDateTime type="date" dateStyle="medium"/>
                     </h:outputText>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="100" sortBy="#{task.owner.name}">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskOwner}"/>
-                    </f:facet>
+                <p:column width="100" sortBy="#{task.owner.name}" headerText="#{texts.labelTaskOwner}">
                     <h:outputText value="#{task.owner.name}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
-                <p:column width="100" sortBy="#{task.statusLocalized}">
-                    <f:facet name="header">
-                        <h:outputText value="#{texts.labelTaskStatus}"/>
-                    </f:facet>
+                <p:column width="100" sortBy="#{task.statusLocalized}" headerText="#{texts.labelTaskStatus}">
                     <h:outputText value="#{task.statusLocalized}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
                 <p:column width="200">
-                    <f:facet name="header">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
-                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}"/>
-                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}"/>
+                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>
+                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}"/>
                     <p:commandButton action="#{tasksBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
-                    <f:facet name="footer">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
                 </p:column>
             </p:dataTable>
 
@@ -116,5 +66,3 @@
     </ui:define>
 
 </ui:composition>
-
-</html>
