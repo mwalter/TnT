@@ -69,11 +69,15 @@ public class Task {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @ManyToOne
+    @JoinColumn(name = "task_list_id")
+    private TaskList taskList;
+
     public Date getCreationDate() {
         return creationDate;
     }
 
-   public String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -81,7 +85,7 @@ public class Task {
         return dueDate;
     }
 
-   public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -107,6 +111,10 @@ public class Task {
 
     public String getStatusLocalized() {
         return ResourceLoader.getResource("status." + status.name());
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     public void setCreationDate(final Date creationDate) {
@@ -135,6 +143,10 @@ public class Task {
 
     public void setStatus(final Status status) {
         this.status = status;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public boolean isNew() {
