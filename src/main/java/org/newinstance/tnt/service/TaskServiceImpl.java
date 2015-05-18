@@ -33,8 +33,6 @@ import org.newinstance.tnt.persistence.OwnerRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implements the services related to {@link Task}.
@@ -42,7 +40,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mwalter
  */
 @Service
-@Transactional
 public class TaskServiceImpl implements TaskService {
 
     private static final Logger LOG = Logger.getLogger(TaskServiceImpl.class.getName());
@@ -91,7 +88,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
         return IteratorUtils.toList(taskRepository.findAll().iterator());
