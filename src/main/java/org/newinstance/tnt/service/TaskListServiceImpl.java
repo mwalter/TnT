@@ -18,17 +18,17 @@
 
 package org.newinstance.tnt.service;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.collections4.IteratorUtils;
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.persistence.TaskListRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Implements the services related to {@link TaskList}.

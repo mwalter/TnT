@@ -19,9 +19,9 @@
 
 package org.newinstance.tnt.service;
 
-import org.newinstance.tnt.model.Task;
-
 import java.util.List;
+
+import org.newinstance.tnt.model.Task;
 
 /**
  * Provides services related to {@link Task}.
@@ -62,7 +62,7 @@ public interface TaskService {
     /**
      * Saves a task with owner.
      *
-     * @param task the task to save
+     * @param task      the task to save
      * @param ownerName the name of the new owner
      */
     void saveTask(final Task task, String ownerName);

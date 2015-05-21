@@ -19,12 +19,12 @@
 
 package org.newinstance.tnt.persistence;
 
+import java.util.List;
+
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * Provides CRUD repository methods related to entity {@link Task}.

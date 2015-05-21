@@ -18,9 +18,9 @@
 
 package org.newinstance.tnt.service;
 
-import org.newinstance.tnt.model.TaskList;
-
 import java.util.List;
+
+import org.newinstance.tnt.model.TaskList;
 
 /**
  * Provides services related to {@link TaskList}.

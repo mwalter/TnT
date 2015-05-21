@@ -18,14 +18,14 @@
 
 package org.newinstance.tnt.controller;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.service.TaskListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * The task lists managed bean.
