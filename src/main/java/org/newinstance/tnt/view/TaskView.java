@@ -38,6 +38,8 @@ public class TaskView implements Serializable {
 
     private Task task;
 
+    private String description;
+
     public List<Task> getTasks() {
         return tasks;
     }
@@ -54,4 +56,11 @@ public class TaskView implements Serializable {
         this.task = task;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
