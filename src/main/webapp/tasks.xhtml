@@ -18,13 +18,15 @@
 ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
         <h:form id="tasksForm">
 
-            <p:commandButton action="createTask" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"/>
+            <p:inputText id="createTaskInputText" value="#{taskView.description}" styleClass="inputTextTask" placeholder="#{texts.placeholderCreateNewTask}"/>
+            <p:commandButton action="#{tasksBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"
+                             update="taskDataTable,createTaskInputText,:taskListsForm" styleClass="marginLeft"/>
             <p/>
 
             <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty tasksBean.tasks}" styleClass="ui-inputtext ui-widget"/>
@@ -44,7 +46,8 @@
                         <f:convertDateTime type="date" dateStyle="medium"/>
                     </h:outputText>
                 </p:column>
-                <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:Red' : ''}" headerText="#{texts.labelTaskDueDate}">
+                <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:red' : ''}"
+                          headerText="#{texts.labelTaskDueDate}">
                     <h:outputText value="#{task.dueDate}">
                         <f:convertDateTime type="date" dateStyle="medium"/>
                     </h:outputText>
@@ -56,9 +59,12 @@
                     <h:outputText value="#{task.statusLocalized}"/>
                 </p:column>
                 <p:column width="200">
-                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil" title="#{texts.buttonEditTask}" ajax="false"/>
-                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash" title="#{texts.buttonDeleteTask}"/>
-                    <p:commandButton action="#{tasksBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}" icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
+                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil"
+                                     title="#{texts.buttonEditTask}" ajax="false"/>
+                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash"
+                                     title="#{texts.buttonDeleteTask}"/>
+                    <p:commandButton action="#{tasksBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}"
+                                     icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
                 </p:column>
             </p:dataTable>
 

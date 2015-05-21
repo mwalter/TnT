@@ -17,8 +17,8 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
@@ -46,7 +46,8 @@
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
                     <td>
-                        <p:selectOneMenu id="taskOwner" value="#{createTaskBean.ownerName}" editable="true" required="true" style="width: 200px;">
+                        <p:selectOneMenu id="taskOwner" value="#{createTaskBean.ownerName}" editable="true" required="true"
+                                         style="width: 200px;">
                             <f:selectItems value="#{createTaskBean.owners}"/>
                         </p:selectOneMenu>
                     </td>
@@ -55,7 +56,8 @@
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>
                     <td>
-                        <p:calendar id="taskDueDate" value="#{createTaskBean.task.dueDate}" locale="#{createTaskBean.locale}" showOn="button" required="true">
+                        <p:calendar id="taskDueDate" value="#{createTaskBean.task.dueDate}" locale="#{createTaskBean.locale}"
+                                    showOn="button" required="true">
                             <f:validator binding="#{dueDateValidator}"/>
                         </p:calendar>
                     </td>
