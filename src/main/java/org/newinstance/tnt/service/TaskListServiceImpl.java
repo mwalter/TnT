@@ -21,9 +21,11 @@ package org.newinstance.tnt.service;
 import org.apache.commons.collections4.IteratorUtils;
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.persistence.TaskListRepository;
+import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,11 +41,31 @@ public class TaskListServiceImpl implements TaskListService {
     private static final Logger LOG = Logger.getLogger(TaskListServiceImpl.class.getName());
 
     @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
     private TaskListRepository taskListRepository;
+
+    @PostConstruct
+    private void init() {
+        // TODO move this to DDL init script
+        final TaskList result = taskListRepository.findByName("New");
+        if (result == null) {
+            final TaskList newTaskList = new TaskList();
+            newTaskList.setName("New");
+            LOG.info("Creating task list 'New'.");
+            taskListRepository.save(newTaskList);
+        }
+    }
 
     @Override
     public List<TaskList> searchAllLists() {
         LOG.log(Level.INFO, "Searching all task lists.");
         return IteratorUtils.toList(taskListRepository.findAll().iterator());
+    }
+
+    @Override
+    public int getTasksCount(TaskList taskList) {
+        return taskRepository.findByTaskList(taskList).size();
     }
 }

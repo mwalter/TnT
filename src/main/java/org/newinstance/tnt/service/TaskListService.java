@@ -35,4 +35,12 @@ public interface TaskListService {
      * @return all owners
      */
     List<TaskList> searchAllLists();
+
+    /**
+     * Returns the number of tasks inside the given task list.
+     *
+     * @param taskList the task list
+     * @return the number of tasks
+     */
+    int getTasksCount(TaskList taskList);
 }

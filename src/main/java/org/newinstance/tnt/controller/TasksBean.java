@@ -20,9 +20,8 @@
 package org.newinstance.tnt.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.service.TaskService;
@@ -40,8 +39,6 @@ import org.springframework.stereotype.Component;
 @Scope(value = "request")
 public class TasksBean implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(TasksBean.class.getName());
-
     @Autowired
     private TaskService taskService;
 
@@ -55,10 +52,19 @@ public class TasksBean implements Serializable {
      */
     public List<Task> getTasks() {
         if (taskView.getTasks() == null) {
-            LOG.log(Level.INFO, "Loading all tasks.");
             taskView.setTasks(taskService.searchAllTask());
         }
         return taskView.getTasks();
+    }
+
+    public void createTask() {
+        final Task task = taskService.createTask();
+        task.setDescription(taskView.getDescription());
+        task.setName(taskView.getDescription());
+        task.setDueDate(new Date());
+        taskService.saveTask(task);
+        taskView.setDescription(null);
+        updateTasks();
     }
 
     /**
@@ -67,7 +73,6 @@ public class TasksBean implements Serializable {
      * @param task the task to delete
      */
     public void deleteTask(final Task task) {
-        LOG.log(Level.INFO, "Deleting task: " + task.toString());
         taskService.deleteTask(task);
         updateTasks();
     }
@@ -79,7 +84,6 @@ public class TasksBean implements Serializable {
      * @return the edit task controller
      */
     public String editTask(final Task task) {
-        LOG.log(Level.INFO, "Editing task: " + task.toString());
         // put the task to edit into the view
         taskView.setTask(task);
         return "editTask";
@@ -91,7 +95,6 @@ public class TasksBean implements Serializable {
      * @param task the task to finish
      */
     public void finishTask(final Task task) {
-        LOG.log(Level.INFO, "Finishing task: " + task.toString());
         taskService.finishTask(task);
         updateTasks();
     }

@@ -51,8 +51,16 @@ public interface TaskService {
      */
     void finishTask(final Task task);
 
+
     /**
      * Saves a task.
+     *
+     * @param task the task to save
+     */
+    void saveTask(final Task task);
+
+    /**
+     * Saves a task with owner.
      *
      * @param task the task to save
      * @param ownerName the name of the new owner

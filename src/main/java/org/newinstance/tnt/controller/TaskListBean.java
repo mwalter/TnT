@@ -26,8 +26,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The task lists managed bean.
@@ -38,13 +36,14 @@ import java.util.logging.Logger;
 @Scope(value = "request")
 public class TaskListBean implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(TaskListBean.class.getName());
-
     @Autowired
     private TaskListService taskListService;
 
     public List<TaskList> getTaskLists() {
-        LOG.log(Level.INFO, "Loading all task lists.");
         return taskListService.searchAllLists();
+    }
+
+    public int getTasksCount(TaskList taskList) {
+        return taskListService.getTasksCount(taskList);
     }
 }

@@ -21,8 +21,6 @@ package org.newinstance.tnt.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 
 import org.newinstance.tnt.model.Priority;
@@ -43,8 +41,6 @@ import org.springframework.stereotype.Component;
 @Scope(value = "request")
 public class EditTaskBean implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(EditTaskBean.class.getName());
-
     @Autowired
     private TaskService taskService;
 
@@ -61,7 +57,6 @@ public class EditTaskBean implements Serializable {
      * @return the tasks controller
      */
     public String saveTask() {
-        LOG.log(Level.INFO, "Updating task: " + taskView.getTask().toString());
         // save task
         taskService.saveTask(taskView.getTask(), taskView.getTask().getOwner().getName());
         updateTasks();

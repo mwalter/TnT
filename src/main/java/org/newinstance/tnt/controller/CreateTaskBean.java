@@ -21,9 +21,6 @@ package org.newinstance.tnt.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -47,8 +44,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope(value = "request")
 public class CreateTaskBean implements Serializable {
-
-    private static final Logger LOG = Logger.getLogger(CreateTaskBean.class.getName());
 
     @Autowired
     private OwnerService ownerService;
@@ -77,7 +72,6 @@ public class CreateTaskBean implements Serializable {
      * @return the tasks view
      */
     public String saveTask() {
-        LOG.log(Level.INFO, "Creating new task: " + taskView.getTask().getName());
         // save task
         taskService.saveTask(taskView.getTask(), getOwnerName());
         updateTasks();
@@ -119,7 +113,6 @@ public class CreateTaskBean implements Serializable {
      * @return the list of owners
      */
     public List<SelectItem> getOwners() {
-        LOG.log(Level.INFO, "Loading all owners.");
         // always fetch all owners to make sure to list newly created ones as well
         final Iterable<Owner> owners = ownerService.searchAllOwner();
         final List<SelectItem> ownerList = new ArrayList<>();

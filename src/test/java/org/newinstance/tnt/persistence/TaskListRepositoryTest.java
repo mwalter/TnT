@@ -42,10 +42,10 @@ public class TaskListRepositoryTest extends BaseTest {
         taskListRepository.save(privateList);
         taskListRepository.save(workList);
 
-        final Iterable<TaskList> result = taskListRepository.findAll();
-        for (final TaskList taskList : result) {
-            assertTrue(taskList.getName().equals(privateList.getName()) || taskList.getName().equals(workList.getName()));
-        }
+        TaskList result = taskListRepository.findByName("Private");
+        assertTrue(result.getName().equals(privateList.getName()));
+        result = taskListRepository.findByName("Work");
+        assertTrue(result.getName().equals(workList.getName()));
     }
 
     @Test
@@ -55,7 +55,8 @@ public class TaskListRepositoryTest extends BaseTest {
 
         taskListRepository.save(newTaskList);
 
-        assertEquals(1, taskListRepository.count());
+        // we have 2 task lists here because task list 'new' is always created at startup
+        assertEquals(2, taskListRepository.count());
 
         final TaskList foundTaskList = taskListRepository.findByName(JUNIT);
         assertEquals(newTaskList.getName(), foundTaskList.getName());

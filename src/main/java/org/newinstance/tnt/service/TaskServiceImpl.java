@@ -30,6 +30,7 @@ import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.persistence.OwnerRepository;
+import org.newinstance.tnt.persistence.TaskListRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,11 +51,15 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private TaskListRepository taskListRepository;
+
     public Task createTask() {
         final Task task = new Task();
         task.setCreationDate(new Date());
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.MEDIUM);
+        task.setTaskList(taskListRepository.findByName("New"));
         return task;
     }
 
@@ -66,6 +71,12 @@ public class TaskServiceImpl implements TaskService {
 
     public void finishTask(final Task task) {
         task.setStatus(Status.DONE);
+        taskRepository.save(task);
+    }
+
+    @Override
+    public void saveTask(Task task) {
+        task.setOwner(null);
         taskRepository.save(task);
     }
 

@@ -20,8 +20,11 @@
 package org.newinstance.tnt.persistence;
 
 import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.model.TaskList;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Provides CRUD repository methods related to entity {@link Task}.
@@ -31,4 +34,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
+    /**
+     * Finds all tasks belonging to a specified task list.
+     *
+     * @param taskList the task list
+     * @return all tasks related to this list
+     */
+    List<Task> findByTaskList(TaskList taskList);
 }
