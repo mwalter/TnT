@@ -54,6 +54,7 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskListRepository taskListRepository;
 
+    @Override
     public Task createTask() {
         final Task task = new Task();
         task.setCreationDate(new Date());
@@ -63,12 +64,14 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
 
+    @Override
     public void deleteTask(final Task task) {
         final Task taskToDelete = taskRepository.findOne(task.getId());
         LOG.log(Level.INFO, "Deleting task: {0}", taskToDelete.toString());
         taskRepository.delete(taskToDelete);
     }
 
+    @Override
     public void finishTask(final Task task) {
         task.setStatus(Status.DONE);
         taskRepository.save(task);
@@ -99,9 +102,16 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
+    @Override
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
         return IteratorUtils.toList(taskRepository.findAll().iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTaskWithStatusDone() {
+        LOG.log(Level.INFO, "Searching all tasks with status done.");
+        return IteratorUtils.toList(taskRepository.findByStatus(Status.DONE).iterator());
     }
 
 }

@@ -19,8 +19,9 @@
 
 package org.newinstance.tnt.persistence;
 
-import java.util.List;
+import java.util.Collection;
 
+import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
 import org.springframework.data.repository.CrudRepository;
@@ -40,5 +41,13 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
      * @param taskList the task list
      * @return all tasks related to this list
      */
-    List<Task> findByTaskList(TaskList taskList);
+    Collection<Task> findByTaskList(TaskList taskList);
+
+    /**
+     * Finds all tasks with a specified status.
+     *
+     * @param status the status
+     * @return all tasks with the given status
+     */
+    Collection<Task> findByStatus(Status status);
 }

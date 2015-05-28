@@ -51,7 +51,6 @@ public interface TaskService {
      */
     void finishTask(final Task task);
 
-
     /**
      * Saves a task.
      *
@@ -73,5 +72,12 @@ public interface TaskService {
      * @return all tasks
      */
     List<Task> searchAllTask();
+
+    /**
+     * Searches all tasks which are done.
+     *
+     * @return all tasks with status done
+     */
+    List<Task> searchAllTaskWithStatusDone();
 
 }

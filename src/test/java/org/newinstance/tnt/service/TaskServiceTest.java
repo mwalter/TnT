@@ -71,7 +71,6 @@ public class TaskServiceTest extends BaseTest {
         assertEquals(Status.OPEN, taskToUpdate.getStatus());
 
         taskToUpdate.setDescription("Something different");
-        taskToUpdate.setStatus(Status.IN_PROGRESS);
 
         // update
         taskRepository.save(taskToUpdate);
@@ -79,7 +78,6 @@ public class TaskServiceTest extends BaseTest {
         result = taskService.searchAllTask();
         final Task updatedTask = result.get(0);
         assertNotEquals(JUNIT, updatedTask.getDescription());
-        assertEquals(Status.IN_PROGRESS, updatedTask.getStatus());
 
         // finish
         taskService.finishTask(updatedTask);
