@@ -26,5 +26,5 @@ package org.newinstance.tnt.model;
  */
 public enum Status {
 
-    OPEN, IN_PROGRESS, DONE, OVERDUE
+    OPEN, DONE
 }
