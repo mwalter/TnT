@@ -114,4 +114,26 @@ public class TaskServiceTest extends BaseTest {
     public void findAllNothing() {
         assertTrue(taskService.searchAllTask().isEmpty());
     }
+
+    @Test
+    public void findAllTaskWithStatusDone() {
+        assertTrue(taskService.searchAllTaskWithStatusDone().isEmpty());
+
+        final Owner newOwner = new Owner();
+        newOwner.setName(JUNIT);
+
+        ownerRepository.save(newOwner);
+
+        final Task newTask = taskService.createTask();
+        newTask.setName(JUNIT);
+        newTask.setDescription(JUNIT);
+        newTask.setPriority(Priority.LOW);
+        newTask.setOwner(newOwner);
+        newTask.setStatus(Status.DONE);
+
+        // create
+        taskRepository.save(newTask);
+
+        assertEquals(1, taskService.searchAllTaskWithStatusDone().size());
+    }
 }
