@@ -37,6 +37,10 @@
             </ui:repeat>
         </ui:fragment>
 
+        <br/>
+        <h:outputText value="#{texts.labelTaskListsDone}"/>
+        <h:outputText value="#{taskListBean.tasksCountWithStatusDone}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+
     </h:form>
 
 </ui:composition>

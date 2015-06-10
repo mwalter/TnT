@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.service.TaskListService;
+import org.newinstance.tnt.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,9 @@ import org.springframework.stereotype.Component;
 public class TaskListBean implements Serializable {
 
     @Autowired
+    private TaskService taskService;
+
+    @Autowired
     private TaskListService taskListService;
 
     public List<TaskList> getTaskLists() {
@@ -46,4 +50,9 @@ public class TaskListBean implements Serializable {
     public int getTasksCount(TaskList taskList) {
         return taskListService.getTasksCount(taskList);
     }
+
+    public int getTasksCountWithStatusDone() {
+        return taskService.searchAllTaskWithStatusDone().size();
+    }
+
 }
