@@ -63,7 +63,7 @@
                                      title="#{texts.buttonEditTask}" ajax="false"/>
                     <p:commandButton action="#{taskBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash"
                                      title="#{texts.buttonDeleteTask}"/>
-                    <p:commandButton action="#{taskBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}"
+                    <p:commandButton action="#{taskBean.finishTask(task)}" update="taskDataTable,:taskListsForm" rendered="#{task.open}"
                                      icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
                 </p:column>
             </p:dataTable>

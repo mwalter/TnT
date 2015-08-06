@@ -22,6 +22,7 @@ package org.newinstance.tnt.service;
 import java.util.List;
 
 import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.model.TaskList;
 
 /**
  * Provides services related to {@link Task}.
@@ -80,4 +81,10 @@ public interface TaskService {
      */
     List<Task> searchAllTaskWithStatusDone();
 
+    /**
+     * Searches all tasks by a task list.
+     *
+     * @return all tasks by a task list
+     */
+    List<Task> searchAllTasksBy(TaskList taskList);
 }

@@ -17,29 +17,40 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
     <h:form id="taskListsForm">
 
-        <h:outputText value="#{texts.labelTaskListsAll}"/>
-        <h:outputText value="#{taskView.tasks.size()}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+        <!-- All -->
+        <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showAllTasks()}" styleClass="noUnderscore">
+            <h:outputText value="#{texts.labelTaskListsAll}"/>
+            <h:outputText value="#{taskView.tasks.size()}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+        </p:commandLink>
 
         <ui:fragment rendered="#{not empty taskListBean.taskLists}">
             <br/>
             <ui:repeat value="#{taskListBean.taskLists}" var="taskList">
-                <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists' += taskList.name}">
-                    <h:outputText value="#{texts['labelTaskLists' += taskList.name]}"/>
-                </ui:fragment>
-                <ui:fragment rendered="#{'labelTaskListsNew' ne 'labelTaskLists' += taskList.name}">
-                    <h:outputText value="#{taskList.name}"/>
-                </ui:fragment>
-                <h:outputText value="#{taskListBean.getTasksCount(taskList)}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+                <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showTasksBy(taskList)}" styleClass="noUnderscore">
+                    <!-- New -->
+                    <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists' += taskList.name}">
+                        <h:outputText value="#{texts['labelTaskLists' += taskList.name]}"/>
+                    </ui:fragment>
+                    <!-- Other -->
+                    <ui:fragment rendered="#{'labelTaskListsNew' ne 'labelTaskLists' += taskList.name}">
+                        <h:outputText value="#{taskList.name}"/>
+                    </ui:fragment>
+                    <h:outputText value="#{taskListBean.getTasksCount(taskList)}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+                </p:commandLink>
             </ui:repeat>
         </ui:fragment>
 
         <br/>
-        <h:outputText value="#{texts.labelTaskListsDone}"/>
-        <h:outputText value="#{taskListBean.tasksCountWithStatusDone}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+        <!-- Done -->
+        <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showTasksWithStatusDone()}" styleClass="noUnderscore">
+            <h:outputText value="#{texts.labelTaskListsDone}"/>
+            <h:outputText value="#{taskListBean.tasksCountWithStatusDone}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+        </p:commandLink>
 
     </h:form>
 

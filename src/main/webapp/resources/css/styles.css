@@ -31,3 +31,7 @@
 .inputTextTask {
     width: 500px;
 }
+
+.ui-commandlink.noUnderscore {
+    text-decoration-line: none;
+}

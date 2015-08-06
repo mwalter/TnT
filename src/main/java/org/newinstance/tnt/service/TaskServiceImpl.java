@@ -29,6 +29,7 @@ import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.persistence.OwnerRepository;
 import org.newinstance.tnt.persistence.TaskListRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
@@ -112,6 +113,12 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> searchAllTaskWithStatusDone() {
         LOG.log(Level.INFO, "Searching all tasks with status done.");
         return IteratorUtils.toList(taskRepository.findByStatus(Status.DONE).iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTasksBy(TaskList taskList) {
+        LOG.log(Level.INFO, "Searching all tasks by task list " + taskList.getName());
+        return IteratorUtils.toList(taskRepository.findByTaskList(taskList).iterator());
     }
 
 }

@@ -25,6 +25,7 @@ import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.service.TaskListService;
 import org.newinstance.tnt.service.TaskService;
 import org.newinstance.tnt.view.TaskListView;
+import org.newinstance.tnt.view.TaskView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,9 @@ public class TaskListBean implements Serializable {
 
     @Autowired
     private TaskListService taskListService;
+
+    @Autowired
+    private TaskView taskView;
 
     @Autowired
     private TaskListView taskListView;
@@ -65,6 +69,27 @@ public class TaskListBean implements Serializable {
 
     public int getTasksCountWithStatusDone() {
         return taskService.searchAllTaskWithStatusDone().size();
+    }
+
+    /**
+     * Shows all tasks by a given task list.
+     */
+    public void showTasksBy(final TaskList taskList) {
+        taskView.setTasks(taskService.searchAllTasksBy(taskList));
+    }
+
+    /**
+     * Shows all tasks.
+     */
+    public void showAllTasks() {
+        taskView.setTasks(taskService.searchAllTask());
+    }
+
+    /**
+     * Shows all tasks with status done.
+     */
+    public void showTasksWithStatusDone() {
+        taskView.setTasks(taskService.searchAllTaskWithStatusDone());
     }
 
     /**
