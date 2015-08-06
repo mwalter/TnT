@@ -24,6 +24,7 @@ import java.util.List;
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.service.TaskListService;
 import org.newinstance.tnt.service.TaskService;
+import org.newinstance.tnt.view.TaskListView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -43,8 +44,19 @@ public class TaskListBean implements Serializable {
     @Autowired
     private TaskListService taskListService;
 
+    @Autowired
+    private TaskListView taskListView;
+
+    /**
+     * Retrieves all task lists from the database when the bean is instantiated.
+     *
+     * @return the task lists
+     */
     public List<TaskList> getTaskLists() {
-        return taskListService.searchAllLists();
+        if (taskListView.getTaskLists() == null) {
+            taskListView.setTaskLists(taskListService.searchAllTaskLists());
+        }
+        return taskListView.getTaskLists();
     }
 
     public int getTasksCount(TaskList taskList) {
@@ -55,4 +67,10 @@ public class TaskListBean implements Serializable {
         return taskService.searchAllTaskWithStatusDone().size();
     }
 
+    /**
+     * Updates the task lists in the view.
+     */
+    private void updateTaskLists() {
+        taskListView.setTaskLists(taskListService.searchAllTaskLists());
+    }
 }

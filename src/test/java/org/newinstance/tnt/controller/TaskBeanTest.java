@@ -36,14 +36,14 @@ import org.newinstance.tnt.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Tests methods of class {@link TasksBean}.
+ * Tests methods of class {@link TaskBean}.
  *
  * @author mwalter
  */
-public class TasksBeanTest extends BaseTest {
+public class TaskBeanTest extends BaseTest {
 
     @Autowired
-    private TasksBean tasksBean;
+    private TaskBean taskBean;
 
     @Before
     public void setUp() {
@@ -65,7 +65,7 @@ public class TasksBeanTest extends BaseTest {
 
     @Test
     public void getTasks() {
-        final List<Task> tasks = tasksBean.getTasks();
+        final List<Task> tasks = taskBean.getTasks();
         assertNotNull(tasks);
         assertEquals(1, tasks.size());
     }
@@ -73,10 +73,10 @@ public class TasksBeanTest extends BaseTest {
     @Test
     public void editTask() {
         // change a task
-        final Task task = tasksBean.getTasks().get(0);
+        final Task task = taskBean.getTasks().get(0);
         task.setDescription("something very important");
         // convenience method call to set task into task bean
-        tasksBean.editTask(task);
+        taskBean.editTask(task);
         taskRepository.save(task);
         // verify that the owner hasn't changed
         assertNotNull(taskService.searchAllTask().get(0).getOwner());

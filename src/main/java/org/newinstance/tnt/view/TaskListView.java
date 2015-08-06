@@ -1,5 +1,5 @@
 /*
- * Licensed under General Public Licence v3 (GPLv3)
+ * Licensed under General Public License v3 (GPLv3)
  * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,46 +21,26 @@ package org.newinstance.tnt.view;
 import java.io.Serializable;
 import java.util.List;
 
-import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.model.TaskList;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Provides the {@link Task} model.
+ * Provides the {@link TaskList} model.
  *
  * @author mwalter
  */
 @Component
 @Scope(value = "session")
-public class TaskView implements Serializable {
+public class TaskListView implements Serializable {
 
-    private List<Task> tasks;
+    private List<TaskList> taskLists;
 
-    private Task task;
-
-    private String description;
-
-    public List<Task> getTasks() {
-        return tasks;
+    public List<TaskList> getTaskLists() {
+        return taskLists;
     }
 
-    public void setTasks(final List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(final Task task) {
-        this.task = task;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTaskLists(final List<TaskList> taskLists) {
+        this.taskLists = taskLists;
     }
 }

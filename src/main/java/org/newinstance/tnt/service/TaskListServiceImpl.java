@@ -59,7 +59,7 @@ public class TaskListServiceImpl implements TaskListService {
     }
 
     @Override
-    public List<TaskList> searchAllLists() {
+    public List<TaskList> searchAllTaskLists() {
         LOG.log(Level.INFO, "Searching all task lists.");
         return IteratorUtils.toList(taskListRepository.findAll().iterator());
     }

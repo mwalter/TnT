@@ -25,13 +25,13 @@
         <h:form id="tasksForm">
 
             <p:inputText id="createTaskInputText" value="#{taskView.description}" styleClass="inputTextTask" placeholder="#{texts.placeholderCreateNewTask}"/>
-            <p:commandButton action="#{tasksBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"
+            <p:commandButton action="#{taskBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"
                              update="taskDataTable,createTaskInputText,:taskListsForm" styleClass="marginLeft"/>
             <p/>
 
-            <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty tasksBean.tasks}" styleClass="ui-inputtext ui-widget"/>
+            <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty taskBean.tasks}" styleClass="ui-inputtext ui-widget"/>
 
-            <p:dataTable id="taskDataTable" var="task" value="#{tasksBean.tasks}" rendered="#{not empty tasksBean.tasks}" width="100%">
+            <p:dataTable id="taskDataTable" var="task" value="#{taskBean.tasks}" rendered="#{not empty taskBean.tasks}" width="100%">
                 <p:column width="100" sortBy="#{task.priorityLocalized}" headerText="#{texts.labelTaskPriority}">
                     <h:outputText value="#{task.priorityLocalized}"/>
                 </p:column>
@@ -59,11 +59,11 @@
                     <h:outputText value="#{task.statusLocalized}"/>
                 </p:column>
                 <p:column width="200">
-                    <p:commandButton action="#{tasksBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil"
+                    <p:commandButton action="#{taskBean.editTask(task)}" rendered="#{task.open}" icon="ui-icon-pencil"
                                      title="#{texts.buttonEditTask}" ajax="false"/>
-                    <p:commandButton action="#{tasksBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash"
+                    <p:commandButton action="#{taskBean.deleteTask(task)}" update="taskDataTable,:taskListsForm" icon="ui-icon-trash"
                                      title="#{texts.buttonDeleteTask}"/>
-                    <p:commandButton action="#{tasksBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}"
+                    <p:commandButton action="#{taskBean.finishTask(task)}" update="taskDataTable" rendered="#{task.open}"
                                      icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
                 </p:column>
             </p:dataTable>

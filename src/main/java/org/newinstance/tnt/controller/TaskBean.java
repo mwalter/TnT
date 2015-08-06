@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope(value = "request")
-public class TasksBean implements Serializable {
+public class TaskBean implements Serializable {
 
     @Autowired
     private TaskService taskService;
@@ -46,7 +46,7 @@ public class TasksBean implements Serializable {
     private TaskView taskView;
 
     /**
-     * Retrieves all tasks from the database.
+     * Retrieves all tasks from the database when the bean is instantiated.
      *
      * @return the list of tasks
      */

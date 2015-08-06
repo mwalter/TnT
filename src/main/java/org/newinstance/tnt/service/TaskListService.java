@@ -30,11 +30,11 @@ import org.newinstance.tnt.model.TaskList;
 public interface TaskListService {
 
     /**
-     * Searches all owners.
+     * Searches all task lists.
      *
-     * @return all owners
+     * @return all task lists
      */
-    List<TaskList> searchAllLists();
+    List<TaskList> searchAllTaskLists();
 
     /**
      * Returns the number of tasks inside the given task list.
