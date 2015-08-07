@@ -33,11 +33,11 @@
             <ui:repeat value="#{taskListBean.taskLists}" var="taskList">
                 <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showTasksBy(taskList)}" styleClass="noUnderscore">
                     <!-- New -->
-                    <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists' += taskList.name}">
+                    <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists'.concat(taskList.name)}">
                         <h:outputText value="#{texts['labelTaskLists' += taskList.name]}"/>
                     </ui:fragment>
                     <!-- Other -->
-                    <ui:fragment rendered="#{'labelTaskListsNew' ne 'labelTaskLists' += taskList.name}">
+                    <ui:fragment rendered="#{'labelTaskListsNew' ne 'labelTaskLists'.concat(taskList.name)}">
                         <h:outputText value="#{taskList.name}"/>
                     </ui:fragment>
                     <h:outputText value="#{taskListBean.getTasksCount(taskList)}" converter="javax.faces.Integer" styleClass="taskCounter"/>
