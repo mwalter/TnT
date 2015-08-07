@@ -35,25 +35,14 @@
                 <p:column width="100" sortBy="#{task.priorityLocalized}" headerText="#{texts.labelTaskPriority}">
                     <h:outputText value="#{task.priorityLocalized}"/>
                 </p:column>
-                <p:column width="200" sortBy="#{task.name}" headerText="#{texts.labelTaskName}">
-                    <h:outputText value="#{task.name}"/>
-                </p:column>
                 <p:column width="300" headerText="#{texts.labelTaskDescription}">
                     <h:outputText value="#{task.description}"/>
-                </p:column>
-                <p:column width="100" headerText="#{texts.labelTaskCreationDate}">
-                    <h:outputText value="#{task.creationDate}">
-                        <f:convertDateTime type="date" dateStyle="medium"/>
-                    </h:outputText>
                 </p:column>
                 <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:red' : ''}"
                           headerText="#{texts.labelTaskDueDate}">
                     <h:outputText value="#{task.dueDate}">
                         <f:convertDateTime type="date" dateStyle="medium"/>
                     </h:outputText>
-                </p:column>
-                <p:column width="100" sortBy="#{task.owner.name}" headerText="#{texts.labelTaskOwner}">
-                    <h:outputText value="#{task.owner.name}"/>
                 </p:column>
                 <p:column width="100" sortBy="#{task.statusLocalized}" headerText="#{texts.labelTaskStatus}">
                     <h:outputText value="#{task.statusLocalized}"/>

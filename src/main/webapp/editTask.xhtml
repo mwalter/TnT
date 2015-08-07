@@ -26,11 +26,6 @@
         <h:form id="editTaskForm">
             <table>
                 <tr>
-                    <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><p:inputText id="taskName" value="#{editTaskBean.task.name}" size="40" required="true"/></td>
-                    <td><p:message for="taskName" showSummary="true"/></td>
-                </tr>
-                <tr>
                     <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
                     <td><p:inputTextarea rows="5" cols="40" value="#{editTaskBean.task.description}"/></td>
                     <td/>
@@ -42,11 +37,6 @@
                             <f:selectItems value="#{editTaskBean.priorities}"/>
                         </p:selectOneMenu>
                     </td>
-                    <td/>
-                </tr>
-                <tr>
-                    <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><h:outputText value="#{editTaskBean.task.owner.name}" styleClass="ui-inputtext ui-widget"/></td>
                     <td/>
                 </tr>
                 <tr>

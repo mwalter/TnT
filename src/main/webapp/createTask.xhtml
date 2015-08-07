@@ -25,11 +25,6 @@
         <h:form id="createTaskForm">
             <table>
                 <tr>
-                    <td><h:outputText value="#{texts.labelTaskName}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><p:inputText id="taskName" value="#{createTaskBean.task.name}" size="40" required="true"/></td>
-                    <td><p:message for="taskName" showSummary="true"/></td>
-                </tr>
-                <tr>
                     <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
                     <td><p:inputTextarea rows="5" cols="40" value="#{createTaskBean.task.description}"/></td>
                     <td/>
@@ -42,16 +37,6 @@
                         </p:selectOneMenu>
                     </td>
                     <td/>
-                </tr>
-                <tr>
-                    <td><h:outputText value="#{texts.labelTaskOwner}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td>
-                        <p:selectOneMenu id="taskOwner" value="#{createTaskBean.ownerName}" editable="true" required="true"
-                                         style="width: 200px;">
-                            <f:selectItems value="#{createTaskBean.owners}"/>
-                        </p:selectOneMenu>
-                    </td>
-                    <td><p:message for="taskOwner" showSummary="true"/></td>
                 </tr>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskDueDate}" styleClass="ui-inputtext ui-widget"/></td>

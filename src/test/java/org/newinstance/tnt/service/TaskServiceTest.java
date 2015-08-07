@@ -22,14 +22,12 @@ package org.newinstance.tnt.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
@@ -43,16 +41,9 @@ public class TaskServiceTest extends BaseTest {
 
     @Test
     public void crudTask() {
-        final Owner newOwner = new Owner();
-        newOwner.setName(JUNIT);
-
-        ownerRepository.save(newOwner);
-
         final Task newTask = taskService.createTask();
-        newTask.setName(JUNIT);
         newTask.setDescription(JUNIT);
         newTask.setPriority(Priority.LOW);
-        newTask.setOwner(newOwner);
         assertTrue(newTask.isNew());
 
         // create
@@ -94,23 +85,6 @@ public class TaskServiceTest extends BaseTest {
     }
 
     @Test
-    public void saveTaskWithNewOwner() {
-        final Task newTask = taskService.createTask();
-        newTask.setName(JUNIT);
-        newTask.setDescription(JUNIT);
-        newTask.setPriority(Priority.HIGH);
-
-        // save task with owner
-        taskService.saveTask(newTask, JUNIT);
-
-        List<Task> result = taskService.searchAllTask();
-        final Task task = result.get(0);
-
-        assertNotNull(task.getOwner());
-        assertEquals(JUNIT, task.getOwner().getName());
-    }
-
-    @Test
     public void findAllNothing() {
         assertTrue(taskService.searchAllTask().isEmpty());
     }
@@ -119,16 +93,9 @@ public class TaskServiceTest extends BaseTest {
     public void findAllTaskWithStatusDone() {
         assertTrue(taskService.searchAllTaskWithStatusDone().isEmpty());
 
-        final Owner newOwner = new Owner();
-        newOwner.setName(JUNIT);
-
-        ownerRepository.save(newOwner);
-
         final Task newTask = taskService.createTask();
-        newTask.setName(JUNIT);
         newTask.setDescription(JUNIT);
         newTask.setPriority(Priority.LOW);
-        newTask.setOwner(newOwner);
         newTask.setStatus(Status.DONE);
 
         // create

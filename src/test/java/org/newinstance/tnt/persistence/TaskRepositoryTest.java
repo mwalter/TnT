@@ -27,7 +27,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Task;
 
 /**
@@ -39,19 +38,12 @@ public class TaskRepositoryTest extends BaseTest {
 
     @Test
     public void saveAndFindAllTask() {
-        final Owner newOwner = new Owner();
-        newOwner.setName(JUNIT);
-
-        ownerRepository.save(newOwner);
-
         final Task task1 = taskService.createTask();
-        task1.setName("Buy milk");
-        task1.setOwner(newOwner);
+        task1.setDescription("Buy milk");
         assertTrue(task1.isNew());
 
         final Task task2 = taskService.createTask();
-        task2.setName("Write blog");
-        task2.setOwner(newOwner);
+        task2.setDescription("Write blog");
         assertTrue(task2.isNew());
 
         // create

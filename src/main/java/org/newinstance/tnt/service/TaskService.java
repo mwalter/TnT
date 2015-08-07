@@ -60,19 +60,18 @@ public interface TaskService {
     void saveTask(final Task task);
 
     /**
-     * Saves a task with owner.
-     *
-     * @param task      the task to save
-     * @param ownerName the name of the new owner
-     */
-    void saveTask(final Task task, String ownerName);
-
-    /**
      * Searches all tasks.
      *
      * @return all tasks
      */
     List<Task> searchAllTask();
+
+    /**
+     * Searches all tasks which are open.
+     *
+     * @return all tasks with status open
+     */
+    List<Task> searchAllTaskWithStatusOpen();
 
     /**
      * Searches all tasks which are done.

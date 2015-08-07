@@ -86,6 +86,13 @@ public class TaskListBean implements Serializable {
     }
 
     /**
+     * Shows all tasks with status open.
+     */
+    public void showTasksWithStatusOpen() {
+        taskView.setTasks(taskService.searchAllTaskWithStatusOpen());
+    }
+
+    /**
      * Shows all tasks with status done.
      */
     public void showTasksWithStatusDone() {

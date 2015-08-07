@@ -60,7 +60,6 @@ public class TaskBean implements Serializable {
     public void createTask() {
         final Task task = taskService.createTask();
         task.setDescription(taskView.getDescription());
-        task.setName(taskView.getDescription());
         task.setDueDate(new Date());
         taskService.saveTask(task);
         taskView.setDescription(null);

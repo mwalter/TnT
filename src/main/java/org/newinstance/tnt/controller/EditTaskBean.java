@@ -58,7 +58,7 @@ public class EditTaskBean implements Serializable {
      */
     public String saveTask() {
         // save task
-        taskService.saveTask(taskView.getTask(), taskView.getTask().getOwner().getName());
+        taskService.saveTask(taskView.getTask());
         updateTasks();
         return "tasks";
     }

@@ -21,14 +21,12 @@ package org.newinstance.tnt.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
@@ -59,11 +57,6 @@ public class TaskListBeanTest extends BaseTest {
             taskService.deleteTask(task);
         }
 
-        final Iterable<Owner> owners = ownerRepository.findAll();
-        for (final Owner owner : owners) {
-            ownerRepository.delete(owner);
-        }
-
         final Iterable<TaskList> taskLists = taskListRepository.findAll();
         for (TaskList taskList : taskLists) {
             taskListRepository.delete(taskList);
@@ -88,27 +81,19 @@ public class TaskListBeanTest extends BaseTest {
     }
 
     private void addTaskList() {
-        final Owner owner = new Owner();
-        owner.setName("John");
-        ownerRepository.save(owner);
-
         // there is always a task list named 'new'
         taskList = taskListRepository.findByName("New");
 
         taskListRepository.save(taskList);
 
         final Task task1 = new Task();
-        task1.setCreationDate(new Date());
-        task1.setOwner(owner);
-        task1.setName("Test task 1");
+        task1.setDescription("Test task 1");
         task1.setPriority(Priority.MEDIUM);
         task1.setStatus(Status.DONE);
         task1.setTaskList(taskList);
 
         final Task task2 = new Task();
-        task2.setCreationDate(new Date());
-        task2.setOwner(owner);
-        task2.setName("Test task 2");
+        task2.setDescription("Test task 2");
         task2.setPriority(Priority.LOW);
         task2.setStatus(Status.OPEN);
         task2.setTaskList(taskList);

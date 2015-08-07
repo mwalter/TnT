@@ -47,8 +47,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -58,24 +56,12 @@ public class Task {
     private Priority priority;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creation_date")
-    private Date creationDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
     private Date dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
-
-    @ManyToOne
     @JoinColumn(name = "task_list_id")
     private TaskList taskList;
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
 
     public String getDescription() {
         return description;
@@ -87,14 +73,6 @@ public class Task {
 
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Owner getOwner() {
-        return owner;
     }
 
     public Priority getPriority() {
@@ -117,24 +95,12 @@ public class Task {
         return taskList;
     }
 
-    public void setCreationDate(final Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public void setDescription(final String description) {
         this.description = description;
     }
 
     public void setDueDate(final Date dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setOwner(final Owner owner) {
-        this.owner = owner;
     }
 
     public void setPriority(final Priority priority) {

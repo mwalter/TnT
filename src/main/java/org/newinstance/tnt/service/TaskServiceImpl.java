@@ -25,12 +25,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
-import org.newinstance.tnt.persistence.OwnerRepository;
 import org.newinstance.tnt.persistence.TaskListRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +45,6 @@ public class TaskServiceImpl implements TaskService {
     private static final Logger LOG = Logger.getLogger(TaskServiceImpl.class.getName());
 
     @Autowired
-    private OwnerRepository ownerRepository;
-
-    @Autowired
     private TaskRepository taskRepository;
 
     @Autowired
@@ -58,7 +53,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task createTask() {
         final Task task = new Task();
-        task.setCreationDate(new Date());
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.MEDIUM);
         task.setTaskList(taskListRepository.findByName("New"));
@@ -80,26 +74,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void saveTask(Task task) {
-        task.setOwner(null);
-        taskRepository.save(task);
-    }
-
-    @Override
-    public void saveTask(final Task task, final String ownerName) {
-        final Owner existingOwner = ownerRepository.findByName(ownerName);
-
-        // create new owner if name does not exist in database yet
-        if (existingOwner == null) {
-            LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
-            final Owner owner = new Owner();
-            owner.setName(ownerName);
-            // persist new owner
-            ownerRepository.save(owner);
-            task.setOwner(owner);
-        } else {
-            task.setOwner(existingOwner);
-        }
-
         taskRepository.save(task);
     }
 
@@ -107,6 +81,12 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
         return IteratorUtils.toList(taskRepository.findAll().iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTaskWithStatusOpen() {
+        LOG.log(Level.INFO, "Searching all tasks with status open.");
+        return IteratorUtils.toList(taskRepository.findByStatus(Status.OPEN).iterator());
     }
 
     @Override

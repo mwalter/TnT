@@ -3,7 +3,7 @@ Licensed under General Public License v3 (GPLv3)
 [newInstance.org](http://www.newinstance.org), 2012-2015
 
 ## About TnT ##
-A simple web task list where you can create, edit and delete tasks. Every task belongs to an owner.
+A simple web task list where you can create, edit and delete tasks.
 English and German languages are supported.
 
 ## Usage ##

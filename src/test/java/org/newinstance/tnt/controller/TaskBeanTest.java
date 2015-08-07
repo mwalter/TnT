@@ -22,14 +22,12 @@ package org.newinstance.tnt.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
@@ -56,11 +54,6 @@ public class TaskBeanTest extends BaseTest {
         for (final Task task : tasks) {
             taskService.deleteTask(task);
         }
-
-        final Iterable<Owner> owners = ownerRepository.findAll();
-        for (final Owner owner : owners) {
-            ownerRepository.delete(owner);
-        }
     }
 
     @Test
@@ -78,19 +71,11 @@ public class TaskBeanTest extends BaseTest {
         // convenience method call to set task into task bean
         taskBean.editTask(task);
         taskRepository.save(task);
-        // verify that the owner hasn't changed
-        assertNotNull(taskService.searchAllTask().get(0).getOwner());
     }
 
     private void addTask() {
-        final Owner owner = new Owner();
-        owner.setName("John");
-        ownerRepository.save(owner);
-
         final Task task = new Task();
-        task.setCreationDate(new Date());
-        task.setOwner(owner);
-        task.setName("Test task");
+        task.setDescription("Test task");
         task.setPriority(Priority.LOW);
         task.setStatus(Status.OPEN);
 

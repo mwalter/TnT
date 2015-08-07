@@ -25,10 +25,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Task;
-import org.newinstance.tnt.service.OwnerService;
 import org.newinstance.tnt.service.TaskService;
 import org.newinstance.tnt.utility.ResourceLoader;
 import org.newinstance.tnt.view.TaskView;
@@ -44,9 +42,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope(value = "request")
 public class CreateTaskBean implements Serializable {
-
-    @Autowired
-    private OwnerService ownerService;
 
     @Autowired
     private TaskService taskService;
@@ -73,7 +68,7 @@ public class CreateTaskBean implements Serializable {
      */
     public String saveTask() {
         // save task
-        taskService.saveTask(taskView.getTask(), getOwnerName());
+        taskService.saveTask(taskView.getTask());
         updateTasks();
         return "tasks";
     }
@@ -105,26 +100,6 @@ public class CreateTaskBean implements Serializable {
             priorityList.add(item);
         }
         return priorityList;
-    }
-
-    /**
-     * Returns the list of owners.
-     *
-     * @return the list of owners
-     */
-    public List<SelectItem> getOwners() {
-        // always fetch all owners to make sure to list newly created ones as well
-        final Iterable<Owner> owners = ownerService.searchAllOwner();
-        final List<SelectItem> ownerList = new ArrayList<>();
-
-        for (final Owner owner : owners) {
-            // create select item for every owner
-            final SelectItem item = new SelectItem();
-            item.setLabel(owner.getName());
-            item.setValue(owner.getId());
-            ownerList.add(item);
-        }
-        return ownerList;
     }
 
     /**
