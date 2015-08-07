@@ -34,7 +34,7 @@
                 <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showTasksBy(taskList)}" styleClass="noUnderscore">
                     <!-- New -->
                     <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists'.concat(taskList.name)}">
-                        <h:outputText value="#{texts['labelTaskLists' += taskList.name]}"/>
+                        <h:outputText value="#{texts['labelTaskLists'.concat(taskList.name)]}"/>
                     </ui:fragment>
                     <!-- Other -->
                     <ui:fragment rendered="#{'labelTaskListsNew' ne 'labelTaskLists'.concat(taskList.name)}">
