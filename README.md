@@ -25,4 +25,9 @@ To create the war file execute `mvn clean install`. Then start Tomcat and deploy
 Point your browser to `localhost:8080`.
 
 ## Technologies ##
-TnT is implemented in Java and uses JSF ([PrimeFaces](http://primefaces.org/)), [Spring](http://spring.io/) and JPA ([Hibernate](http://hibernate.org/)). The application is built using Maven.
+TnT is implemented in Java and uses JSF ([PrimeFaces](http://primefaces.org/)), [Spring](http://spring.io/) and JPA ([Hibernate](http://hibernate.org/)).
+
+### Build ###
+The application is built using Maven.
+
+[![Build Status](https://drone.io/github.com/mwalter/TnT/status.png)](https://drone.io/github.com/mwalter/TnT/latest)
