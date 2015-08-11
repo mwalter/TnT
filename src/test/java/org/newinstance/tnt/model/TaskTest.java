@@ -19,11 +19,14 @@
 
 package org.newinstance.tnt.model;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import org.junit.Test;
 
 /**
  * Tests methods of class {@link Task}.
@@ -34,24 +37,16 @@ public class TaskTest {
 
     @Test
     public void toStringTest() {
-        final Owner owner = new Owner();
-        owner.setName("John");
-
         final Task task = new Task();
-        task.setCreationDate(new Date());
-        task.setDueDate(task.getCreationDate());
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.LOW);
-        task.setName("Task");
-        task.setOwner(owner);
 
         final String result = task.toString();
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.contains("Task"));
-        Assert.assertTrue(result.contains("OPEN"));
-        Assert.assertTrue(result.contains("LOW"));
-        Assert.assertTrue(result.contains("John"));
+        assertNotNull(result);
+        assertTrue(result.contains("A description"));
+        assertTrue(result.contains("OPEN"));
+        assertTrue(result.contains("LOW"));
     }
 
     @Test
@@ -59,41 +54,29 @@ public class TaskTest {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -1);
 
-        final Owner owner = new Owner();
-        owner.setName("John");
-
         final Task task = new Task();
-        task.setCreationDate(cal.getTime());
         task.setDueDate(cal.getTime());
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.LOW);
-        task.setName("Task");
-        task.setOwner(owner);
 
-        Assert.assertTrue(task.isOpen());
-        Assert.assertTrue(task.isOverdue());
+        assertTrue(task.isOpen());
+        assertTrue(task.isOverdue());
 
         task.setDueDate(new Date());
-        Assert.assertFalse(task.isOverdue());
+        assertFalse(task.isOverdue());
     }
 
     @Test
     public void newTest() {
         final Calendar cal = Calendar.getInstance();
 
-        final Owner owner = new Owner();
-        owner.setName("John");
-
         final Task task = new Task();
-        task.setCreationDate(cal.getTime());
         task.setDueDate(cal.getTime());
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.LOW);
-        task.setName("Task");
-        task.setOwner(owner);
 
-        Assert.assertTrue(task.isNew());
+        assertTrue(task.isNew());
     }
 }

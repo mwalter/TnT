@@ -19,8 +19,7 @@
 
 package org.newinstance.tnt.model;
 
-import org.newinstance.tnt.utility.ResourceLoader;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,10 +29,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.util.Date;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.newinstance.tnt.utility.ResourceLoader;
 
 /**
  * A task to do.
@@ -41,14 +41,11 @@ import java.util.Date;
  * @author mwalter
  */
 @Entity
-@NamedQuery(name="SEARCH_ALL_TASK", query="SELECT t FROM Task t")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String name;
 
     private String description;
 
@@ -59,22 +56,14 @@ public class Task {
     private Priority priority;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creation_date")
-    private Date creationDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
     private Date dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @JoinColumn(name = "task_list_id")
+    private TaskList taskList;
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-   public String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -82,16 +71,8 @@ public class Task {
         return dueDate;
     }
 
-   public Long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Owner getOwner() {
-        return owner;
     }
 
     public Priority getPriority() {
@@ -110,8 +91,8 @@ public class Task {
         return ResourceLoader.getResource("status." + status.name());
     }
 
-    public void setCreationDate(final Date creationDate) {
-        this.creationDate = creationDate;
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     public void setDescription(final String description) {
@@ -122,18 +103,6 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setOwner(final Owner owner) {
-        this.owner = owner;
-    }
-
     public void setPriority(final Priority priority) {
         this.priority = priority;
     }
@@ -142,11 +111,12 @@ public class Task {
         this.status = status;
     }
 
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
     public boolean isNew() {
-        if (id == null) {
-            return true;
-        }
-        return false;
+        return id == null;
     }
 
     public boolean isOpen() {
@@ -159,17 +129,6 @@ public class Task {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Task [");
-        builder.append("id=").append(id).append(", ");
-        builder.append("name=").append(name).append(", ");
-        builder.append("description=").append(description).append(", ");
-        builder.append("creationDate=").append(creationDate).append(", ");
-        builder.append("dueDate=").append(dueDate).append(", ");
-        builder.append("status=").append(status.name()).append(", ");
-        builder.append("priority=").append(priority.name()).append(", ");
-        builder.append("owner=").append(owner.getName());
-        builder.append("]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this);
     }
 }

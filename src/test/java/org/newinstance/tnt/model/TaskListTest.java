@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2013-2014
+ * Licensed under General Public Licence v3 (GPLv3)
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,30 +16,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.utility;
+package org.newinstance.tnt.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.newinstance.tnt.model.Status;
 
 /**
- * Tests methods of class {@link ResourceLoader}.
+ * Tests methods of class {@link TaskList}.
  *
  * @author mwalter
  */
-public class ResourceLoaderTest {
+public class TaskListTest {
 
     @Test
-    public void loadMessage() {
-        final String message = ResourceLoader.getMessage("errorDueDateInvalidSummary");
-        Assert.assertNotNull(message);
-        Assert.assertFalse(message.isEmpty());
-    }
+    public void toStringTest() {
+        final TaskList taskList = new TaskList();
+        taskList.setName("Private");
 
-    @Test
-    public void loadResource() {
-        final String statusOpen = ResourceLoader.getResource("status." + Status.OPEN.name());
-        Assert.assertNotNull(statusOpen);
-        Assert.assertFalse(statusOpen.isEmpty());
+        final String result = taskList.toString();
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.contains("Private"));
     }
 }

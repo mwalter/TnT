@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
  * Licensed under General Public License v3 (GPLv3)
- * newInstance.org, 2012-2013
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,25 +16,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.model;
+package org.newinstance.tnt.view;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.io.Serializable;
+import java.util.List;
+
+import org.newinstance.tnt.model.TaskList;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
- * Tests methods of class {@link Owner}.
+ * Provides the {@link TaskList} model.
  *
  * @author mwalter
  */
-public class OwnerTest {
+@Component
+@Scope(value = "session")
+public class TaskListView implements Serializable {
 
-    @Test
-    public void toStringTest() {
-        final Owner owner = new Owner();
-        owner.setName("John");
+    private List<TaskList> taskLists;
 
-        final String result = owner.toString();
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.contains("John"));
+    public List<TaskList> getTaskLists() {
+        return taskLists;
+    }
+
+    public void setTaskLists(final List<TaskList> taskLists) {
+        this.taskLists = taskLists;
     }
 }

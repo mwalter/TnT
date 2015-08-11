@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2013
+ * Licensed under General Public Licence v3 (GPLv3)
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +18,23 @@
 
 package org.newinstance.tnt.persistence;
 
-import org.newinstance.tnt.model.Owner;
+import org.newinstance.tnt.model.TaskList;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Provides CRUD repository methods related to entity {@link Owner}.
+ * Provides CRUD repository methods related to entity {@link TaskList}.
  *
  * @author mwalter
  */
 @Repository
-public interface OwnerRepository extends CrudRepository<Owner, Long> {
+public interface TaskListRepository extends CrudRepository<TaskList, Long> {
 
     /**
-     * Searches an owner by a name.
+     * Searches a list of tasks by a name.
      *
-     * @param name the name of the owner
-     * @return the owner
+     * @param name the name of the task list
+     * @return the list
      */
-    Owner findByName(final String name);
+    TaskList findByName(final String name);
 }

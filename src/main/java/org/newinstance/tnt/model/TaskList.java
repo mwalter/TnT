@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public Licence v3 (GPLv3)
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,25 +18,23 @@
 
 package org.newinstance.tnt.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * The owner of one or more tasks.
+ * The list a task belongs to.
  *
  * @author mwalter
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-@NamedQueries({@NamedQuery(name = "SEARCH_ALL_OWNER", query = "SELECT o FROM Owner o"),
-        @NamedQuery(name = "SEARCH_BY_NAME", query = "SELECT o FROM Owner o WHERE o.name = :name")})
-public class Owner {
+public class TaskList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,10 +44,6 @@ public class Owner {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -63,11 +56,6 @@ public class Owner {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Owner [");
-        builder.append("id=").append(id).append(", ");
-        builder.append("name=").append(name);
-        builder.append("]");
-        return builder.toString();
+        return ToStringBuilder.reflectionToString(this);
     }
 }

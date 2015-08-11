@@ -17,21 +17,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.view;
+package org.newinstance.tnt.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Owner;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Tests methods of class {@link TaskBean}.
@@ -44,43 +44,23 @@ public class TaskBeanTest extends BaseTest {
     private TaskBean taskBean;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         addTask();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         final List<Task> tasks = taskService.searchAllTask();
         for (final Task task : tasks) {
             taskService.deleteTask(task);
         }
-
-        final Iterable<Owner> owners = ownerRepository.findAll();
-        for (final Owner owner : owners) {
-            ownerRepository.delete(owner);
-        }
-    }
-
-    private void addTask() {
-        final Owner owner = new Owner();
-        owner.setName("John");
-        ownerRepository.save(owner);
-
-        final Task task = new Task();
-        task.setCreationDate(new Date());
-        task.setOwner(owner);
-        task.setName("Test task");
-        task.setPriority(Priority.LOW);
-        task.setStatus(Status.OPEN);
-
-        taskRepository.save(task);
     }
 
     @Test
     public void getTasks() {
         final List<Task> tasks = taskBean.getTasks();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() == 1);
+        assertNotNull(tasks);
+        assertEquals(1, tasks.size());
     }
 
     @Test
@@ -90,8 +70,15 @@ public class TaskBeanTest extends BaseTest {
         task.setDescription("something very important");
         // convenience method call to set task into task bean
         taskBean.editTask(task);
-        taskBean.saveTask();
-        // verify that the owner hasn't changed
-        Assert.assertNotNull(taskService.searchAllTask().get(0).getOwner());
+        taskRepository.save(task);
+    }
+
+    private void addTask() {
+        final Task task = new Task();
+        task.setDescription("Test task");
+        task.setPriority(Priority.LOW);
+        task.setStatus(Status.OPEN);
+
+        taskRepository.save(task);
     }
 }

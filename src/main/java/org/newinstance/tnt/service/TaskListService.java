@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public Licence v3 (GPLv3)
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +16,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.model;
+package org.newinstance.tnt.service;
+
+import java.util.List;
+
+import org.newinstance.tnt.model.TaskList;
 
 /**
- * The status of the task.
+ * Provides services related to {@link TaskList}.
  *
  * @author mwalter
  */
-public enum Status {
+public interface TaskListService {
 
-    OPEN, DONE
+    /**
+     * Searches all task lists.
+     *
+     * @return all task lists
+     */
+    List<TaskList> searchAllTaskLists();
+
+    /**
+     * Returns the number of tasks inside the given task list.
+     *
+     * @param taskList the task list
+     * @return the number of tasks
+     */
+    int getTasksCount(TaskList taskList);
 }

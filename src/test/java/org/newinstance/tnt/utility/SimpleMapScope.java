@@ -19,11 +19,11 @@
 
 package org.newinstance.tnt.utility;
 
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.config.Scope;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.config.Scope;
 
 /**
  * This simple scope implementation uses an internal {@link Map} to hold objects
@@ -60,7 +60,7 @@ public class SimpleMapScope implements Scope {
      * This map contains for each bean name or ID the created object. The objects
      * are created with a spring object factory.
      */
-    private final Map<String, Object> objectMap = new HashMap<String, Object>();
+    private final Map<String, Object> objectMap = new HashMap<>();
 
     @Override
     public Object get(final String theName, final ObjectFactory theObjectFactory) {

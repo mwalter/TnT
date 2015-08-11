@@ -19,9 +19,10 @@
 
 package org.newinstance.tnt.service;
 
-import org.newinstance.tnt.model.Task;
-
 import java.util.List;
+
+import org.newinstance.tnt.model.Task;
+import org.newinstance.tnt.model.TaskList;
 
 /**
  * Provides services related to {@link Task}.
@@ -55,9 +56,8 @@ public interface TaskService {
      * Saves a task.
      *
      * @param task the task to save
-     * @param ownerName the name of the new owner
      */
-    void saveTask(final Task task, String ownerName);
+    void saveTask(final Task task);
 
     /**
      * Searches all tasks.
@@ -66,4 +66,24 @@ public interface TaskService {
      */
     List<Task> searchAllTask();
 
+    /**
+     * Searches all tasks which are open.
+     *
+     * @return all tasks with status open
+     */
+    List<Task> searchAllTaskWithStatusOpen();
+
+    /**
+     * Searches all tasks which are done.
+     *
+     * @return all tasks with status done
+     */
+    List<Task> searchAllTaskWithStatusDone();
+
+    /**
+     * Searches all tasks by a task list.
+     *
+     * @return all tasks by a task list
+     */
+    List<Task> searchAllTasksBy(TaskList taskList);
 }

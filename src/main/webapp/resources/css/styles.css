@@ -1,7 +1,6 @@
 /*
- * TnT - Things and tasks to do
- * Licenced under General Public Licence v3 (GPLv3)
- * newInstance.org, 2012
+ * Licensed under General Public Licence v3 (GPLv3)
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +16,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.newinstance.tnt.model;
+.layoutUnit {
+    border: none;
+}
 
-/**
- * The status of the task.
- *
- * @author mwalter
- */
-public enum Status {
+.taskCounter {
+    float: right;
+}
 
-    OPEN, DONE
+.marginLeft {
+    margin-left: 10px;
+}
+
+.inputTextTask {
+    width: 500px;
+}
+
+.ui-commandlink.noUnderscore {
+    text-decoration-line: none;
 }

@@ -19,22 +19,20 @@
 
 package org.newinstance.tnt.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.newinstance.tnt.model.Owner;
+import org.apache.commons.collections4.IteratorUtils;
 import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
-import org.newinstance.tnt.persistence.OwnerRepository;
+import org.newinstance.tnt.model.TaskList;
+import org.newinstance.tnt.persistence.TaskListRepository;
 import org.newinstance.tnt.persistence.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implements the services related to {@link Task}.
@@ -42,65 +40,65 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mwalter
  */
 @Service
-@Transactional
 public class TaskServiceImpl implements TaskService {
 
     private static final Logger LOG = Logger.getLogger(TaskServiceImpl.class.getName());
 
     @Autowired
-    private OwnerRepository ownerRepository;
-
-    @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private TaskListRepository taskListRepository;
+
+    @Override
     public Task createTask() {
         final Task task = new Task();
-        task.setCreationDate(new Date());
         task.setStatus(Status.OPEN);
         task.setPriority(Priority.MEDIUM);
+        task.setTaskList(taskListRepository.findByName("New"));
         return task;
     }
 
+    @Override
     public void deleteTask(final Task task) {
         final Task taskToDelete = taskRepository.findOne(task.getId());
         LOG.log(Level.INFO, "Deleting task: {0}", taskToDelete.toString());
         taskRepository.delete(taskToDelete);
     }
 
+    @Override
     public void finishTask(final Task task) {
         task.setStatus(Status.DONE);
         taskRepository.save(task);
     }
 
     @Override
-    public void saveTask(final Task task, final String ownerName) {
-        final Owner existingOwner = ownerRepository.findByName(ownerName);
-
-        // create new owner if name does not exist in database yet
-        if (existingOwner == null) {
-            LOG.log(Level.INFO, "Creating new owner with name: " + ownerName);
-            final Owner owner = new Owner();
-            owner.setName(ownerName);
-            // persist new owner
-            ownerRepository.save(owner);
-            task.setOwner(owner);
-        } else {
-            task.setOwner(existingOwner);
-        }
-
+    public void saveTask(Task task) {
         taskRepository.save(task);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public List<Task> searchAllTask() {
         LOG.log(Level.INFO, "Searching all tasks.");
-        // convert Iterable to something more useful
-        final List<Task> taskList = new ArrayList<>();
-        final Iterable<Task> result = taskRepository.findAll();
-        for (final Task task : result) {
-            taskList.add(task);
-        }
-        return taskList;
+        return IteratorUtils.toList(taskRepository.findAll().iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTaskWithStatusOpen() {
+        LOG.log(Level.INFO, "Searching all tasks with status open.");
+        return IteratorUtils.toList(taskRepository.findByStatus(Status.OPEN).iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTaskWithStatusDone() {
+        LOG.log(Level.INFO, "Searching all tasks with status done.");
+        return IteratorUtils.toList(taskRepository.findByStatus(Status.DONE).iterator());
+    }
+
+    @Override
+    public List<Task> searchAllTasksBy(TaskList taskList) {
+        LOG.log(Level.INFO, "Searching all tasks by task list " + taskList.getName());
+        return IteratorUtils.toList(taskRepository.findByTaskList(taskList).iterator());
     }
 
 }
