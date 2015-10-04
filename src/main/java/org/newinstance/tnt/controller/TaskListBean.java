@@ -71,6 +71,10 @@ public class TaskListBean implements Serializable {
         return taskService.searchAllTaskWithStatusDone().size();
     }
 
+    public int getTasksCountWithStatusOpen() {
+        return taskService.searchAllTaskWithStatusOpen().size();
+    }
+
     /**
      * Shows all tasks by a given task list.
      */
@@ -99,10 +103,4 @@ public class TaskListBean implements Serializable {
         taskView.setTasks(taskService.searchAllTaskWithStatusDone());
     }
 
-    /**
-     * Updates the task lists in the view.
-     */
-    private void updateTaskLists() {
-        taskListView.setTaskLists(taskListService.searchAllTaskLists());
-    }
 }

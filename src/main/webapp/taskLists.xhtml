@@ -35,7 +35,7 @@
                     <ui:fragment rendered="#{'labelTaskListsNew' eq 'labelTaskLists'.concat(taskList.name)}">
                         <p:commandLink update=":tasksForm:taskDataTable" actionListener="#{taskListBean.showTasksWithStatusOpen()}" styleClass="noUnderscore">
                             <h:outputText value="#{texts['labelTaskLists'.concat(taskList.name)]}"/>
-                            <h:outputText value="#{taskListBean.getTasksCount(taskList)}" converter="javax.faces.Integer" styleClass="taskCounter"/>
+                            <h:outputText value="#{taskListBean.tasksCountWithStatusOpen}" converter="javax.faces.Integer" styleClass="taskCounter"/>
                         </p:commandLink>
                     </ui:fragment>
                     <!-- Other -->
