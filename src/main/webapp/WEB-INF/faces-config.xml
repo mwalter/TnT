@@ -35,4 +35,14 @@
         <message-bundle>messages</message-bundle>
     </application>
 
+    <navigation-rule>
+        <from-view-id>/tasks.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{taskBean.editTask(task)}</from-action>
+            <from-outcome>showEditTask</from-outcome>
+            <to-view-id>/editTask.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>

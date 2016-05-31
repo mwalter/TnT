@@ -27,7 +27,7 @@
             <table>
                 <tr>
                     <td><h:outputText value="#{texts.labelTaskDescription}" styleClass="ui-inputtext ui-widget"/></td>
-                    <td><p:inputTextarea rows="5" cols="40" value="#{editTaskBean.task.description}"/></td>
+                    <td><p:inputTextarea id="taskDescription" rows="5" cols="40" value="#{editTaskBean.task.description}"/></td>
                     <td/>
                 </tr>
                 <tr>
@@ -61,7 +61,7 @@
 
         <!-- set default input focus -->
         <script type="text/javascript">
-            document.getElementById('editTaskForm:taskName').focus();
+            document.getElementById('editTaskForm:taskDescription').focus();
         </script>
 
     </ui:define>
