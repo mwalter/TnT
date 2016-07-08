@@ -27,7 +27,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
@@ -88,13 +87,11 @@ public class TaskListBeanTest extends BaseTest {
 
         final Task task1 = new Task();
         task1.setDescription("Test task 1");
-        task1.setPriority(Priority.MEDIUM);
         task1.setStatus(Status.DONE);
         task1.setTaskList(taskList);
 
         final Task task2 = new Task();
         task2.setDescription("Test task 2");
-        task2.setPriority(Priority.LOW);
         task2.setStatus(Status.OPEN);
         task2.setTaskList(taskList);
 

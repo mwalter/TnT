@@ -28,7 +28,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +75,6 @@ public class TaskBeanTest extends BaseTest {
     private void addTask() {
         final Task task = new Task();
         task.setDescription("Test task");
-        task.setPriority(Priority.LOW);
         task.setStatus(Status.OPEN);
 
         taskRepository.save(task);

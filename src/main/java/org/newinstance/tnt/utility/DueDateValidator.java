@@ -18,8 +18,7 @@
 
 package org.newinstance.tnt.utility;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -38,12 +37,9 @@ public class DueDateValidator implements Validator {
 
     @Override
     public void validate(final FacesContext context, final UIComponent component, final Object value) throws ValidatorException {
-        final Date dueDate = (Date) value;
-        final Calendar now = Calendar.getInstance();
-        // reset time to zero
-        resetTime(now);
+        final LocalDate dueDate = (LocalDate) value;
 
-        if (dueDate.before(now.getTime())) {
+        if (dueDate.isBefore(LocalDate.now())) {
             final String summaryMsg = ResourceLoader.getMessage("errorDueDateInvalidSummary");
             final String detailMsg = ResourceLoader.getMessage("errorDueDateInvalidDetail");
             final FacesMessage facesMessage = new FacesMessage(summaryMsg, detailMsg);
@@ -52,15 +48,4 @@ public class DueDateValidator implements Validator {
         }
     }
 
-    /**
-     * Sets the time of the date to zero.
-     *
-     * @param calendar the date to modify
-     */
-    private void resetTime(final Calendar calendar) {
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-    }
 }

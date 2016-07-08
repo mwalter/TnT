@@ -23,8 +23,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -40,30 +40,26 @@ public class TaskTest {
         final Task task = new Task();
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
-        task.setPriority(Priority.LOW);
 
         final String result = task.toString();
         assertNotNull(result);
         assertTrue(result.contains("A description"));
         assertTrue(result.contains("OPEN"));
-        assertTrue(result.contains("LOW"));
     }
 
     @Test
     public void overdueTest() {
-        final Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -1);
+        final LocalDate date = LocalDate.now().minusDays(1);
 
         final Task task = new Task();
-        task.setDueDate(cal.getTime());
+        task.setDueDate(date);
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
-        task.setPriority(Priority.LOW);
 
         assertTrue(task.isOpen());
         assertTrue(task.isOverdue());
 
-        task.setDueDate(new Date());
+        task.setDueDate(LocalDate.now());
         assertFalse(task.isOverdue());
     }
 
@@ -72,10 +68,9 @@ public class TaskTest {
         final Calendar cal = Calendar.getInstance();
 
         final Task task = new Task();
-        task.setDueDate(cal.getTime());
+        task.setDueDate(LocalDate.now());
         task.setDescription("A description");
         task.setStatus(Status.OPEN);
-        task.setPriority(Priority.LOW);
 
         assertTrue(task.isNew());
     }

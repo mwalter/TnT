@@ -19,14 +19,9 @@
 package org.newinstance.tnt.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.model.SelectItem;
 
-import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.service.TaskService;
-import org.newinstance.tnt.utility.ResourceLoader;
 import org.newinstance.tnt.view.TaskView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -61,27 +56,6 @@ public class EditTaskBean implements Serializable {
         taskService.saveTask(taskView.getTask());
         updateTasks();
         return "tasks";
-    }
-
-    /**
-     * Returns the list of priorities.
-     *
-     * @return the list of priorities
-     */
-    public List<SelectItem> getPriorities() {
-        final List<SelectItem> priorityList = new ArrayList<>();
-
-        // get all priorities
-        for (final Priority priority : Priority.values()) {
-            // create select item for every priority
-            final SelectItem item = new SelectItem();
-            item.setLabel(ResourceLoader.getResource("priority." + priority.name()));
-            item.setValue(priority);
-
-            // add item to list
-            priorityList.add(item);
-        }
-        return priorityList;
     }
 
     /**

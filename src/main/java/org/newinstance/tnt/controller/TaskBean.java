@@ -20,7 +20,7 @@
 package org.newinstance.tnt.controller;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.newinstance.tnt.model.Task;
@@ -60,7 +60,7 @@ public class TaskBean implements Serializable {
     public void createTask() {
         final Task task = taskService.createTask();
         task.setDescription(taskView.getDescription());
-        task.setDueDate(new Date());
+        task.setDueDate(LocalDate.now());
         taskService.saveTask(task);
         taskView.setDescription(null);
         updateTasks();

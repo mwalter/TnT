@@ -28,7 +28,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.newinstance.tnt.base.BaseTest;
-import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 
@@ -43,7 +42,6 @@ public class TaskServiceTest extends BaseTest {
     public void crudTask() {
         final Task newTask = taskService.createTask();
         newTask.setDescription(JUNIT);
-        newTask.setPriority(Priority.LOW);
         assertTrue(newTask.isNew());
 
         // create
@@ -58,7 +56,6 @@ public class TaskServiceTest extends BaseTest {
         final Task taskToUpdate = result.get(0);
 
         assertEquals(JUNIT, taskToUpdate.getDescription());
-        assertEquals(Priority.LOW, taskToUpdate.getPriority());
         assertEquals(Status.OPEN, taskToUpdate.getStatus());
 
         taskToUpdate.setDescription("Something different");
@@ -95,7 +92,6 @@ public class TaskServiceTest extends BaseTest {
 
         final Task newTask = taskService.createTask();
         newTask.setDescription(JUNIT);
-        newTask.setPriority(Priority.LOW);
         newTask.setStatus(Status.DONE);
 
         // create

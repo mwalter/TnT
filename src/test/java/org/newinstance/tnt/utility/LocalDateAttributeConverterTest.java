@@ -1,6 +1,6 @@
 /*
  * Licensed under General Public Licence v3 (GPLv3)
- * newInstance.org, 2014
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +18,33 @@
 
 package org.newinstance.tnt.utility;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.Date;
 import java.time.LocalDate;
-import javax.faces.validator.ValidatorException;
 
 import org.junit.Test;
 
 /**
- * Tests methods of class {@link DueDateValidator}.
+ * Tests methods of class {@link LocalDateAttributeConverter}.
  *
  * @author mwalter
  */
-public class DueDateValidatorTest {
+public class LocalDateAttributeConverterTest {
 
     @Test
-    public void validateDueDate() {
-        final FacesContextMock facesContextMock = new FacesContextMock();
-        final DueDateValidator validator = new DueDateValidator();
-        validator.validate(facesContextMock, null, LocalDate.now());
+    public void testConvertToDatabaseColumn() {
+        final LocalDateAttributeConverter converter = new LocalDateAttributeConverter();
+        final Date result = converter.convertToDatabaseColumn(LocalDate.now());
+
+        assertNotNull(result);
     }
 
-    @Test(expected = ValidatorException.class)
-    public void validateInvalidDueDate() {
-        final FacesContextMock facesContextMock = new FacesContextMock();
-        final DueDateValidator validator = new DueDateValidator();
-        validator.validate(facesContextMock, null, LocalDate.now().minusDays(1));
-    }
+    @Test
+    public void testConvertToEntityAttribute() {
+        final LocalDateAttributeConverter converter = new LocalDateAttributeConverter();
+        final LocalDate result = converter.convertToEntityAttribute(new Date(LocalDate.now().toEpochDay()));
 
+        assertNotNull(result);
+    }
 }

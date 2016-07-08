@@ -19,7 +19,7 @@
 
 package org.newinstance.tnt.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,8 +29,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.newinstance.tnt.utility.ResourceLoader;
@@ -52,12 +50,8 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Enumerated(EnumType.STRING)
-    private Priority priority;
-
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "due_date")
-    private Date dueDate;
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "task_list_id")
@@ -67,20 +61,12 @@ public class Task {
         return description;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public String getPriorityLocalized() {
-        return ResourceLoader.getResource("priority." + priority.name());
     }
 
     public Status getStatus() {
@@ -99,12 +85,8 @@ public class Task {
         this.description = description;
     }
 
-    public void setDueDate(final Date dueDate) {
+    public void setDueDate(final LocalDate dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public void setPriority(final Priority priority) {
-        this.priority = priority;
     }
 
     public void setStatus(final Status status) {
@@ -124,7 +106,7 @@ public class Task {
     }
 
     public boolean isOverdue() {
-        return new Date().after(dueDate);
+        return LocalDate.now().isAfter(dueDate);
     }
 
     @Override

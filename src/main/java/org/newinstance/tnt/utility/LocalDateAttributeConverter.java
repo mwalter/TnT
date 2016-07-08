@@ -1,6 +1,6 @@
 /*
  * Licensed under General Public Licence v3 (GPLv3)
- * newInstance.org, 2014
+ * newInstance.org, 2015
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +18,26 @@
 
 package org.newinstance.tnt.utility;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import javax.faces.validator.ValidatorException;
-
-import org.junit.Test;
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 /**
- * Tests methods of class {@link DueDateValidator}.
+ * Converts the new Java 8 Date API to java.sql.Date and vice versa. Will hopefully be obsolete with JPA 2.2.
  *
  * @author mwalter
  */
-public class DueDateValidatorTest {
+@Converter(autoApply = true)
+public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {
 
-    @Test
-    public void validateDueDate() {
-        final FacesContextMock facesContextMock = new FacesContextMock();
-        final DueDateValidator validator = new DueDateValidator();
-        validator.validate(facesContextMock, null, LocalDate.now());
+    @Override
+    public Date convertToDatabaseColumn(final LocalDate localDate) {
+        return (localDate == null ? null : Date.valueOf(localDate));
     }
 
-    @Test(expected = ValidatorException.class)
-    public void validateInvalidDueDate() {
-        final FacesContextMock facesContextMock = new FacesContextMock();
-        final DueDateValidator validator = new DueDateValidator();
-        validator.validate(facesContextMock, null, LocalDate.now().minusDays(1));
+    @Override
+    public LocalDate convertToEntityAttribute(final Date sqlDate) {
+        return (sqlDate == null ? null : sqlDate.toLocalDate());
     }
-
 }

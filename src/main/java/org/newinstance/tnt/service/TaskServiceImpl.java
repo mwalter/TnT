@@ -24,7 +24,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.newinstance.tnt.model.Priority;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
@@ -53,7 +52,6 @@ public class TaskServiceImpl implements TaskService {
     public Task createTask() {
         final Task task = new Task();
         task.setStatus(Status.OPEN);
-        task.setPriority(Priority.MEDIUM);
         task.setTaskList(taskListRepository.findByName("New"));
         return task;
     }

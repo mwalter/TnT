@@ -19,7 +19,7 @@
 -->
 
 <ui:composition template="WEB-INF/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:tnt="http://newinstance.org/tnt">
 
     <ui:define name="content">
         <h:form id="tasksForm">
@@ -29,30 +29,33 @@
                              update="taskDataTable,createTaskInputText,:taskListsForm" styleClass="marginLeft"/>
             <p/>
 
-            <h:outputText value="#{texts.infoTaskListIsEmpty}" rendered="#{empty taskBean.tasks}" styleClass="ui-inputtext ui-widget"/>
+            <!--
+            <ui:fragment rendered="#{not empty taskBean.tasks}">
+                <ui:repeat value="#{taskBean.tasks}" var="taskos">
+                    <h:outputText value="#{taskos.description}"/>
+                </ui:repeat>
+            </ui:fragment>
+            -->
 
             <p:dataTable id="taskDataTable" var="task" value="#{taskBean.tasks}" rendered="#{not empty taskBean.tasks}" width="100%">
-                <p:column width="100" sortBy="#{task.priorityLocalized}" headerText="#{texts.labelTaskPriority}">
-                    <h:outputText value="#{task.priorityLocalized}"/>
-                </p:column>
-                <p:column width="300" headerText="#{texts.labelTaskDescription}">
+                <p:column width="300">
                     <h:outputText value="#{task.description}"/>
                 </p:column>
-                <p:column width="100" sortBy="#{task.dueDate}" style="#{task.open and task.overdue ? 'color:red' : ''}"
-                          headerText="#{texts.labelTaskDueDate}">
+                <p:column width="100" style="#{task.open and task.overdue ? 'color:red' : ''}">
                     <h:outputText value="#{task.dueDate}">
-                        <f:convertDateTime type="date" dateStyle="medium"/>
+                        <tnt:convertLocalDate type="date" dateStyle="medium"/>
                     </h:outputText>
                 </p:column>
-                <p:column width="100" sortBy="#{task.statusLocalized}" headerText="#{texts.labelTaskStatus}">
+                <p:column width="100">
                     <h:outputText value="#{task.statusLocalized}"/>
                 </p:column>
                 <p:column width="200">
+                    <!--
                     <p:commandButton action="#{taskBean.editTask(task)}" immediate="true" rendered="#{task.open}" icon="ui-icon-pencil"
-                                     title="#{texts.buttonEditTask}" ajax="false"/>
-                    <p:commandButton action="#{taskBean.deleteTask(task)}" immediate="true" update="taskDataTable,:taskListsForm" icon="ui-icon-trash"
+                                     title="#{texts.buttonEditTask}" ajax="false"/>-->
+                    <p:commandButton action="#{taskBean.deleteTask(task)}" immediate="true" update="tasksForm,:taskListsForm" icon="ui-icon-trash"
                                      title="#{texts.buttonDeleteTask}"/>
-                    <p:commandButton action="#{taskBean.finishTask(task)}" immediate="true" update="taskDataTable,:taskListsForm" rendered="#{task.open}"
+                    <p:commandButton action="#{taskBean.finishTask(task)}" immediate="true" update="tasksForm,:taskListsForm" rendered="#{task.open}"
                                      icon="ui-icon-check" title="#{texts.buttonFinishTask}"/>
                 </p:column>
             </p:dataTable>
