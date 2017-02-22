@@ -64,21 +64,21 @@ public interface TaskService {
      *
      * @return all tasks
      */
-    List<Task> searchAllTask();
+    List<Task> searchAllTasks();
 
     /**
      * Searches all tasks which are open.
      *
      * @return all tasks with status open
      */
-    List<Task> searchAllTaskWithStatusOpen();
+    List<Task> searchAllTasksWithStatusOpen();
 
     /**
      * Searches all tasks which are done.
      *
      * @return all tasks with status done
      */
-    List<Task> searchAllTaskWithStatusDone();
+    List<Task> searchAllTasksWithStatusDone();
 
     /**
      * Searches all tasks by a task list.

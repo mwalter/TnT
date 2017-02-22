@@ -53,7 +53,7 @@ public class TaskRepositoryTest extends BaseTest {
         assertFalse(task2.isNew());
 
         // fetch all tasks
-        final List<Task> result = taskService.searchAllTask();
+        final List<Task> result = taskService.searchAllTasks();
         assertEquals(2, result.size());
     }
 }

@@ -49,7 +49,7 @@ public class TaskBeanTest extends BaseTest {
 
     @After
     public void tearDown() {
-        final List<Task> tasks = taskService.searchAllTask();
+        final List<Task> tasks = taskService.searchAllTasks();
         for (final Task task : tasks) {
             taskService.deleteTask(task);
         }

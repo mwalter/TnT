@@ -62,6 +62,6 @@ public class EditTaskBean implements Serializable {
      * Updates the task list in the view.
      */
     private void updateTasks() {
-        taskView.setTasks(taskService.searchAllTask());
+        taskView.setTasks(taskService.searchAllTasks());
     }
 }
