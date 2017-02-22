@@ -57,6 +57,9 @@ public class TaskBean implements Serializable {
         return taskView.getTasks();
     }
 
+    /**
+     * Creates, initializes and saves a new task. After creation makes sure the list of tasks in the view is updated.
+     */
     public void createTask() {
         final Task task = taskService.createTask();
         task.setDescription(taskView.getDescription());
