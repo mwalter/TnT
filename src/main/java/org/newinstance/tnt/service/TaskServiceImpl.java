@@ -81,18 +81,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> searchAllTasksWithStatusOpen() {
-        LOG.log(Level.INFO, "Searching all tasks with status open.");
-        return IteratorUtils.toList(taskRepository.findByStatus(Status.OPEN).iterator());
-    }
-
-    @Override
-    public List<Task> searchAllTasksWithStatusDone() {
-        LOG.log(Level.INFO, "Searching all tasks with status done.");
-        return IteratorUtils.toList(taskRepository.findByStatus(Status.DONE).iterator());
-    }
-
-    @Override
     public List<Task> searchAllTasksBy(TaskList taskList) {
         LOG.log(Level.INFO, "Searching all tasks by task list " + taskList.getName());
         return IteratorUtils.toList(taskRepository.findByTaskList(taskList).iterator());

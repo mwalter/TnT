@@ -19,8 +19,10 @@
 package org.newinstance.tnt.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
 import org.newinstance.tnt.service.TaskListService;
 import org.newinstance.tnt.service.TaskService;
@@ -67,12 +69,44 @@ public class TaskListBean implements Serializable {
         return taskListService.getTasksCount(taskList);
     }
 
-    public int getTasksCountWithStatusDone() {
-        return taskService.searchAllTasksWithStatusDone().size();
+    private List<Task> getTasksWithStatusDone() {
+        final List<Task> tasks = taskView.getTasks();
+        final List<Task> tasksWithStatusDone = new ArrayList<>();
+        for (final Task task : tasks) {
+            if (task.isDone()) {
+                tasksWithStatusDone.add(task);
+            }
+        }
+        return tasksWithStatusDone;
     }
 
+    /**
+     * Returns the number of all tasks with status done.
+     *
+     * @return the number of all tasks with status done
+     */
+    public int getTasksCountWithStatusDone() {
+        return getTasksWithStatusDone().size();
+    }
+
+    private List<Task> getTasksWithStatusOpen() {
+        final List<Task> tasks = taskView.getTasks();
+        final List<Task> tasksWithStatusOpen = new ArrayList<>();
+        for (final Task task : tasks) {
+            if (task.isOpen()) {
+                tasksWithStatusOpen.add(task);
+            }
+        }
+        return tasksWithStatusOpen;
+    }
+
+    /**
+     * Returns the number of all tasks with status open.
+     *
+     * @return the number of all tasks with status open
+     */
     public int getTasksCountWithStatusOpen() {
-        return taskService.searchAllTasksWithStatusOpen().size();
+        return getTasksWithStatusOpen().size();
     }
 
     /**
@@ -93,14 +127,14 @@ public class TaskListBean implements Serializable {
      * Shows all tasks with status open.
      */
     public void showTasksWithStatusOpen() {
-        taskView.setTasks(taskService.searchAllTasksWithStatusOpen());
+        taskView.setTasks(getTasksWithStatusOpen());
     }
 
     /**
      * Shows all tasks with status done.
      */
     public void showTasksWithStatusDone() {
-        taskView.setTasks(taskService.searchAllTasksWithStatusDone());
+        taskView.setTasks(getTasksWithStatusDone());
     }
 
 }

@@ -109,6 +109,10 @@ public class Task {
         return LocalDate.now().isAfter(dueDate);
     }
 
+    public boolean isDone() {
+        return Status.DONE.equals(status);
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

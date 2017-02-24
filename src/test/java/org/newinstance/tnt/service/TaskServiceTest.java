@@ -86,17 +86,4 @@ public class TaskServiceTest extends BaseTest {
         assertTrue(taskService.searchAllTasks().isEmpty());
     }
 
-    @Test
-    public void findAllTaskWithStatusDone() {
-        assertTrue(taskService.searchAllTasksWithStatusDone().isEmpty());
-
-        final Task newTask = taskService.createTask();
-        newTask.setDescription(JUNIT);
-        newTask.setStatus(Status.DONE);
-
-        // create
-        taskRepository.save(newTask);
-
-        assertEquals(1, taskService.searchAllTasksWithStatusDone().size());
-    }
 }

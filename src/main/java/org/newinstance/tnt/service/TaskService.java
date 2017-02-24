@@ -67,20 +67,6 @@ public interface TaskService {
     List<Task> searchAllTasks();
 
     /**
-     * Searches all tasks which are open.
-     *
-     * @return all tasks with status open
-     */
-    List<Task> searchAllTasksWithStatusOpen();
-
-    /**
-     * Searches all tasks which are done.
-     *
-     * @return all tasks with status done
-     */
-    List<Task> searchAllTasksWithStatusDone();
-
-    /**
      * Searches all tasks by a task list.
      *
      * @return all tasks by a task list
