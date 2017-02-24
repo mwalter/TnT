@@ -33,19 +33,21 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.3.1.RELEASE</spring.version>
-        <spring.data.jpa.version>1.10.2.RELEASE</spring.data.jpa.version>
-        <myfaces.version>2.2.8</myfaces.version>
+        <spring.version>4.3.6.RELEASE</spring.version>
+        <spring.data.jpa.version>1.11.0.RELEASE</spring.data.jpa.version>
+        <myfaces.version>2.2.9</myfaces.version>
         <!--<mojarra.version>2.2.10</mojarra.version>-->
         <primefaces.version>6.0</primefaces.version>
         <hibernate.entitymanager.version>5.0.2.Final</hibernate.entitymanager.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-        <log4j.version>2.6.1</log4j.version>
-        <junit.version>4.12</junit.version>
-        <h2.version>1.4.192</h2.version>
+        <log4j.version>2.7</log4j.version>
         <collections.version>4.1</collections.version>
-        <lang3.version>3.4</lang3.version>
-        <mockito.version>1.10.19</mockito.version>
+        <lang3.version>3.5</lang3.version>
+
+        <junit.version>4.12</junit.version>
+        <h2.version>1.4.193</h2.version>
+        <mockito.version>2.7.11</mockito.version>
+
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
