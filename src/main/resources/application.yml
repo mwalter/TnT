@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:tntdb
+    username: sa
+    password:
+    name: tntdb
+    driver-class-name: org.h2.Driver
+
+logging:
+  level:
+    org:
+      hibernate: info

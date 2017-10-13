@@ -36,7 +36,7 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = LocalDateConverter.ID)
 public class LocalDateConverter extends DateTimeConverter {
 
-    public static final String ID = "org.newinstance.tnt.utility.LocalDateConverter";
+    static final String ID = "org.newinstance.tnt.utility.LocalDateConverter";
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

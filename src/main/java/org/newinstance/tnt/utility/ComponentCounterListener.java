@@ -25,8 +25,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * Logs some information about the component tree before rendering the current view.
@@ -35,7 +34,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class ComponentCounterListener implements PhaseListener {
 
-    private static final Logger LOGGER = LogManager.getLogger(ComponentCounterListener.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ComponentCounterListener.class.getName());
 
     @Override
     public void afterPhase(final PhaseEvent event) {

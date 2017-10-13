@@ -24,6 +24,7 @@
     <ui:define name="content">
         <h:form id="tasksForm">
 
+            <p:messages for="createTaskInputText" />
             <p:inputText id="createTaskInputText" value="#{taskView.description}" required="true" styleClass="inputTextTask" placeholder="#{texts.placeholderCreateNewTask}"/>
             <p:commandButton action="#{taskBean.createTask}" icon="ui-icon-plus" title="#{texts.buttonAddTask}" ajax="false"
                              update="taskDataTable,createTaskInputText,:taskListsForm" styleClass="marginLeft"/>
