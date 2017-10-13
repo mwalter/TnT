@@ -49,7 +49,7 @@ public class TaskServiceTest extends BaseTest {
         assertFalse(newTask.isNew());
 
         // read
-        List<Task> result = taskService.searchAllTask();
+        List<Task> result = taskService.searchAllTasks();
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
 
@@ -63,40 +63,27 @@ public class TaskServiceTest extends BaseTest {
         // update
         taskRepository.save(taskToUpdate);
 
-        result = taskService.searchAllTask();
+        result = taskService.searchAllTasks();
         final Task updatedTask = result.get(0);
         assertNotEquals(JUNIT, updatedTask.getDescription());
 
         // finish
         taskService.finishTask(updatedTask);
 
-        result = taskService.searchAllTask();
+        result = taskService.searchAllTasks();
         final Task finishedTask = result.get(0);
         assertFalse(finishedTask.isOpen());
         assertEquals(Status.DONE, finishedTask.getStatus());
 
         // delete
         taskService.deleteTask(updatedTask);
-        result = taskService.searchAllTask();
+        result = taskService.searchAllTasks();
         assertTrue(result.isEmpty());
     }
 
     @Test
     public void findAllNothing() {
-        assertTrue(taskService.searchAllTask().isEmpty());
+        assertTrue(taskService.searchAllTasks().isEmpty());
     }
 
-    @Test
-    public void findAllTaskWithStatusDone() {
-        assertTrue(taskService.searchAllTaskWithStatusDone().isEmpty());
-
-        final Task newTask = taskService.createTask();
-        newTask.setDescription(JUNIT);
-        newTask.setStatus(Status.DONE);
-
-        // create
-        taskRepository.save(newTask);
-
-        assertEquals(1, taskService.searchAllTaskWithStatusDone().size());
-    }
 }

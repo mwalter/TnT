@@ -52,11 +52,14 @@ public class TaskBean implements Serializable {
      */
     public List<Task> getTasks() {
         if (taskView.getTasks() == null) {
-            taskView.setTasks(taskService.searchAllTask());
+            taskView.setTasks(taskService.searchAllTasks());
         }
         return taskView.getTasks();
     }
 
+    /**
+     * Creates, initializes and saves a new task. After creation makes sure the list of tasks in the view is updated.
+     */
     public void createTask() {
         final Task task = taskService.createTask();
         task.setDescription(taskView.getDescription());
@@ -102,6 +105,6 @@ public class TaskBean implements Serializable {
      * Updates the task list in the view.
      */
     private void updateTasks() {
-        taskView.setTasks(taskService.searchAllTask());
+        taskView.setTasks(taskService.searchAllTasks());
     }
 }

@@ -21,6 +21,7 @@ package org.newinstance.tnt.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -30,6 +31,7 @@ import org.newinstance.tnt.base.BaseTest;
 import org.newinstance.tnt.model.Status;
 import org.newinstance.tnt.model.Task;
 import org.newinstance.tnt.model.TaskList;
+import org.newinstance.tnt.view.TaskView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -42,6 +44,9 @@ public class TaskListBeanTest extends BaseTest {
     @Autowired
     private TaskListBean taskListBean;
 
+    @Autowired
+    private TaskView taskView;
+
     private TaskList taskList;
 
     @Before
@@ -51,7 +56,7 @@ public class TaskListBeanTest extends BaseTest {
 
     @After
     public void tearDown() {
-        final List<Task> tasks = taskService.searchAllTask();
+        final List<Task> tasks = taskService.searchAllTasks();
         for (final Task task : tasks) {
             taskService.deleteTask(task);
         }
@@ -79,6 +84,11 @@ public class TaskListBeanTest extends BaseTest {
         assertEquals(1, taskListBean.getTasksCountWithStatusDone());
     }
 
+    @Test
+    public void testGetTasksCountWithStatusOpen() {
+        assertEquals(1, taskListBean.getTasksCountWithStatusOpen());
+    }
+
     private void addTaskList() {
         // there is always a task list named 'new'
         taskList = taskListRepository.findByName("New");
@@ -97,5 +107,12 @@ public class TaskListBeanTest extends BaseTest {
 
         taskRepository.save(task1);
         taskRepository.save(task2);
+
+        // set new tasks in TaskView
+        final List<Task> tasks = new ArrayList<>();
+        tasks.add(task1);
+        tasks.add(task2);
+
+        taskView.setTasks(tasks);
     }
 }
